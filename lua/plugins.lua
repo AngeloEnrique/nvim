@@ -9,16 +9,34 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'themercorp/themer.lua'
   use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'L3MON4D3/LuaSnip' -- Snippet
+
+
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'WhoIsSethDaniel/lualine-lsp-progress.nvim' -- LSP progress for lualine
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
+
+  use 'neovim/nvim-lspconfig' -- LSP
   use 'glepnir/lspsaga.nvim' -- LSP UIs
+
+  use {
+    'rafamadriz/friendly-snippets',
+    module = { "cmp", "cmp_nvim_lsp" },
+    event = "InsertEnter",
+  }
+  use {
+    'L3MON4D3/LuaSnip', -- Snippets
+    wants = "friendly-snippets",
+    after = 'nvim-cmp',
+    config = function() require('config.snippets') end,
+  }
+  use "saadparwaiz1/cmp_luasnip" --cmp luasnip
+  use 'hrsh7th/cmp-path' -- nvim-cmp buffer for paths
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/cmp-nvim-lua' -- nvim-cmp for luasnip
   use 'hrsh7th/nvim-cmp' -- Completion
   use 'github/copilot.vim' -- Github Copilot
-  use 'neovim/nvim-lspconfig' -- LSP
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
