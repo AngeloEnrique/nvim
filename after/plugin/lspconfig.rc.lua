@@ -20,7 +20,18 @@ local on_attach = function(client, bufnr)
   -- end
 end
 
-
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = 'off',
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      }
+    }
+  }
+}
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,

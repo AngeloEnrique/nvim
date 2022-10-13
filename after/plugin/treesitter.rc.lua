@@ -16,7 +16,8 @@ ts.setup {
     'json',
     'javascript',
     'html',
-    'css'
+    'css',
+    'python'
   },
   autotag = {
     enable = true
