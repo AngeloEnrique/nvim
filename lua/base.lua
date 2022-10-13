@@ -23,6 +23,7 @@ vim.opt.ignorecase = true
 vim.opt.smarttab = true
 vim.opt.breakindent = true
 vim.opt.shiftwidth = 2
+vim.opt.mouse = 'a'
 vim.opt.tabstop = 2
 vim.opt.ai = true -- Auto Indent
 vim.opt.si = true -- Smart Indent

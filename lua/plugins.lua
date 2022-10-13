@@ -54,6 +54,7 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
 
   use 'akinsho/nvim-bufferline.lua'
+  use 'SmiteshP/nvim-navic' -- Breadcrumb
   use 'norcalli/nvim-colorizer.lua'
   use 'numToStr/Comment.nvim' -- For comments
   use 'lukas-reineke/indent-blankline.nvim'

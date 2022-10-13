@@ -1,5 +1,6 @@
 local status, nvim_lsp = pcall(require, 'lspconfig')
 if (not status) then return end
+local status2, navic = pcall(require, 'nvim-navic')
 
 local protocol = require('vim.lsp.protocol')
 
@@ -11,10 +12,15 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
+  if client.server_capabilities.documentSymbolProvider and status2 then
+    navic.attach(client, bufnr)
+  end
   -- if client.name == 'tsserver' then
   --   client.resolved_capabilities.document_formatting = false
   -- end
 end
+
+
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
