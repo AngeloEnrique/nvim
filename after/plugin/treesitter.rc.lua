@@ -15,6 +15,7 @@ ts.setup {
     'lua',
     'json',
     'javascript',
+    'typescript',
     'html',
     'css',
     'python'
