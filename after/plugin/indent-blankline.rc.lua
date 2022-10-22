@@ -1,8 +1,6 @@
 local status, indent = pcall(require, 'indent_blankline')
 if (not status) then return end
 
-
-
 indent.setup {
   buftype_exclude = { "terminal" },
   show_trailing_blankline_indent = false,
