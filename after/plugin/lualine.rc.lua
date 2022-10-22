@@ -13,7 +13,6 @@ local colors = {
   red = '#ec5f67',
   white = '#ffffff'
 }
-
 local window_width_limit = 100
 
 local conditions = {
@@ -153,7 +152,8 @@ lualine.setup {
 
           if copilot_active then
             -- language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
-            language_servers = language_servers .. " " .. icons.git.Octoface .. " "
+            language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. " "
+            -- language_servers = language_servers .. "  " .. icons.git.Octoface .. ""
           end
 
           return language_servers

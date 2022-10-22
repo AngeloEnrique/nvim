@@ -9,6 +9,7 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'themercorp/themer.lua'
   use 'kyazdani42/nvim-web-devicons' -- File icons
+  use 'lewis6991/impatient.nvim'
 
 
   use 'nvim-lualine/lualine.nvim' -- Statusline
