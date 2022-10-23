@@ -69,7 +69,7 @@ local icons = require('icons')
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'dracula',
+    theme = 'tokyonight',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {}
@@ -77,11 +77,18 @@ lualine.setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
-    lualine_c = { {
-      'filename',
-      file_status = true, -- displays file status
-      path = 0 -- 0 = just filename
-    } },
+    lualine_c = {
+      {
+        'filename',
+        file_status = true, -- displays file status
+        path = 1 -- 0 = just filename
+      },
+      {
+        'diff',
+        -- Is it me or the symbol for modified us really weird
+        symbols = { added = ' ', modified = '柳', removed = ' ' },
+      }
+    },
     lualine_x = {
       { 'diagnostics', sources = { 'nvim_diagnostic' }, symbols = { error = '', warn = '', info = '', hint = '' } },
       {
@@ -105,11 +112,8 @@ lualine.setup {
           title = { pre = '', post = ': ' },
           lsp_client_name = { pre = '  [', post = ']' },
           spinner = { pre = '', post = '' },
-          -- message = { commenced = 'In Progress', completed = 'Completed' },
         },
-        -- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
         timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
-        -- spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
         max_message_length = 30,
       },
       { -- LSP
@@ -162,13 +166,15 @@ lualine.setup {
         color = { gui = "bold" },
         cond = conditions.hide_in_width,
       },
-      'encoding',
       'filetype',
+      'encoding',
     },
     lualine_y = {
       'progress',
     },
-    lualine_z = { 'location' }
+    lualine_z = {
+      'location',
+    }
   },
   inactive_sections = {
     lualine_a = {},
