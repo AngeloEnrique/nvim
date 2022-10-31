@@ -85,9 +85,9 @@ local get_filename = function()
       file_icon = icons.ui.Watches
     end
 
-    -- if buf_ft == "dapui_console" then
-    --   file_icon = lvim.icons.ui.DebugConsole
-    -- end
+    if buf_ft == "dapui_console" then
+      file_icon = icons.ui.DebugConsole
+    end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
     vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground })

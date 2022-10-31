@@ -7,6 +7,7 @@ vim.opt.fileencoding = 'utf-8'
 vim.wo.number = true
 vim.opt.relativenumber = true
 
+vim.opt.guifont = 'monospace:h14'
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.hlsearch = true
@@ -25,6 +26,7 @@ vim.opt.breakindent = true
 vim.opt.shiftwidth = 2
 vim.opt.mouse = 'a'
 vim.opt.tabstop = 2
+vim.opt.laststatus = 3 -- always show status line
 vim.opt.ai = true -- Auto Indent
 vim.opt.si = true -- Smart Indent
 vim.opt.wrap = false -- No Wrap Lines

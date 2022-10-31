@@ -18,6 +18,10 @@ packer.startup(function(use)
 
   use 'neovim/nvim-lspconfig' -- LSP
   use 'glepnir/lspsaga.nvim' -- LSP UIs
+  use 'mfussenegger/nvim-jdtls' -- Java stuffs
+
+  use 'mfussenegger/nvim-dap' -- Debugger
+  use 'rcarriga/nvim-dap-ui' -- Debugger UIs
 
   use {
     'rafamadriz/friendly-snippets',

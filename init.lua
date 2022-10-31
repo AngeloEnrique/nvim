@@ -4,6 +4,7 @@ require('highlights')
 require('maps')
 require('plugins')
 require('colorscheme')
+require('winbar')
 
 local has = function(x)
   return vim.fn.has(x) == 1

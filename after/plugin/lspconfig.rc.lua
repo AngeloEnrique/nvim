@@ -2,6 +2,7 @@ local status, nvim_lsp = pcall(require, 'lspconfig')
 if (not status) then return end
 local status2, navic = pcall(require, 'nvim-navic')
 
+local JAVA_DAP_ACTIVE = true
 local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
@@ -15,9 +16,16 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider and status2 then
     navic.attach(client, bufnr)
   end
-  -- if client.name == 'tsserver' then
-  --   client.resolved_capabilities.document_formatting = false
-  -- end
+  if client.name == 'tsserver' then
+    client.resolved_capabilities.document_formatting = false
+  end
+  if client.name == 'jdt.ls' then
+    if JAVA_DAP_ACTIVE then
+      require('jdtls').setup_dap()
+      require('jdtls.dap').setup_dap_main_class_configs()
+    end
+    client.resolved_capabilities.document_formatting = false
+  end
 end
 
 nvim_lsp.pyright.setup {
