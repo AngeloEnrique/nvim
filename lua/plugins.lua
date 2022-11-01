@@ -62,6 +62,7 @@ packer.startup(function(use)
   use 'SmiteshP/nvim-navic' -- Breadcrumb
   use 'norcalli/nvim-colorizer.lua'
   use 'numToStr/Comment.nvim' -- For comments
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- Comments for jsx
   use 'lukas-reineke/indent-blankline.nvim'
 
   use 'lewis6991/gitsigns.nvim'
