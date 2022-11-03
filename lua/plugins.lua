@@ -64,6 +64,7 @@ packer.startup(function(use)
   use 'numToStr/Comment.nvim' -- For comments
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Comments for jsx
   use 'lukas-reineke/indent-blankline.nvim'
+  use "akinsho/toggleterm.nvim"
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame and browse
