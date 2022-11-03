@@ -5,6 +5,33 @@ end
 
 local icons = require('icons')
 
+local winbar_filetype_exclude = {
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+  "neo-tree",
+  "neogitstatus",
+  "NvimTree",
+  "Trouble",
+  "alpha",
+  "lir",
+  "Outline",
+  "spectre_panel",
+  "toggleterm",
+  "DressingSelect",
+  "Jaq",
+  "harpoon",
+  "dap-repl",
+  "dap-terminal",
+  "dapui_console",
+  "lab",
+  "Markdown",
+  "notify",
+  "noice",
+  "",
+}
+
 navic.setup {
   icons = {
     Array = icons.kind.Array .. " ",
@@ -96,8 +123,15 @@ local get_filename = function()
   end
 end
 
-local get_winbar = function()
+local excludes = function()
+  return vim.tbl_contains(winbar_filetype_exclude or {}, vim.bo.filetype)
+end
 
+
+local get_winbar = function()
+  if excludes() then
+    return
+  end
   local value = get_filename()
   local location = navic.get_location()
 
@@ -108,6 +142,7 @@ local get_winbar = function()
   return value
 
 end
+
 
 vim.api.nvim_create_augroup("_winbar", {})
 if vim.fn.has "nvim-0.8" == 1 then

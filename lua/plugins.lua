@@ -54,9 +54,13 @@ packer.startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
 
+  use 'nvim-tree/nvim-tree.lua'
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
 
   use 'akinsho/nvim-bufferline.lua'
   use 'SmiteshP/nvim-navic' -- Breadcrumb

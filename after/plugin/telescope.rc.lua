@@ -2,11 +2,9 @@ local status, telescope = pcall(require, 'telescope')
 if (not status) then return end
 local actions = require('telescope.actions')
 
-function telescope_buffer_dir()
-  return vim.fn.expand('%:p:h')
-end
-
-local fb_actions = require 'telescope'.extensions.file_browser.actions
+-- function telescope_buffer_dir()
+--   return vim.fn.expand('%:p:h')
+-- end
 
 telescope.setup {
   defaults = {
@@ -17,26 +15,17 @@ telescope.setup {
     }
   },
   extensions = {
-    file_browser = {
-      theme = 'dropdown',
-      -- disables netrw add use telescope-file-browser in its place
-      hijack_netrw = true,
-      mappings = {
-        -- your custom inset mode mappings
-        ['i'] = {
-          ['<C-w>'] = function() vim.cmd('normal vbd') end,
-        },
-        ['n'] = {
-          ['N'] = fb_actions.create,
-          ['h'] = fb_actions.goto_parent_dir,
-          ['/'] = function() vim.cmd('startinsert') end
-        }
-      }
+    fzf = {
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "ignore_case", -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
     }
   }
 }
 
-telescope.load_extension('file_browser')
+telescope.load_extension('fzf')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', ';f', '<cmd>lua require("telescope.builtin").find_files({ no_ignore = false, hidden = true })<cr>',
@@ -50,8 +39,4 @@ vim.keymap.set('n', ';t', '<cmd>lua require("telescope.builtin").help_tags()<cr>
 vim.keymap.set('n', ';;', '<cmd>lua require("telescope.builtin").resume()<cr>',
   opts)
 vim.keymap.set('n', ';e', '<cmd>lua require("telescope.builtin").diagnostics()<cr>',
-  opts)
-vim.keymap.set('n', 'sf',
-  '<cmd>lua require("telescope").extensions.file_browser.file_browser({ path = "%:p:h", cwd = telescope_buffer_dir(), respect_git_ignore = false, hidden = true, grouped = true, previewer = false, initial_mode = "normal", layout_config = { height = 40 } })<cr>'
-  ,
   opts)
