@@ -42,10 +42,12 @@ tree.setup {
   view = {
     width = 30,
     hide_root_folder = false,
-    side = "left",
+    side = "right",
     mappings = {
       custom_only = false,
-      list = {},
+      list = {
+        { key = "h", action = "dir_up" },
+      }
     },
     number = false,
     relativenumber = false,
