@@ -70,6 +70,9 @@ packer.startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use "akinsho/toggleterm.nvim"
 
+  use { "NTBBloodbath/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" } }
+
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame and browse
 end)

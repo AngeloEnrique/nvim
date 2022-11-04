@@ -40,7 +40,8 @@ tree.setup {
     timeout = 200,
   },
   view = {
-    width = 30,
+    -- width = 40,
+    adaptive_size = true,
     hide_root_folder = false,
     side = "right",
     mappings = {
