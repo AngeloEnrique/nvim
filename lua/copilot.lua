@@ -2,7 +2,7 @@
 vim.g.copilot_node_command = "~/.nvm/versions/node/v16.17.1/bin/node"
 
 -- remapping
-vim.keymap.set('i', '<S-right>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set('i', '<C-Return>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.g.copilot_no_tab_map = true
 vim.keymap.set('i', '<M-.>', '<Plug>(copilot-next)')
 vim.keymap.set('i', '<M-,>', '<Plug>(copilot-previous)')
