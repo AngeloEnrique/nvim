@@ -2,7 +2,16 @@ local status, saga = pcall(require, 'lspsaga')
 if (not status) then return end
 
 saga.init_lsp_saga {
-  server_filetype_map = {}
+  server_filetype_map = {},
+  code_action_lightbulb = {
+    enable = true,
+    enable_in_insert = true,
+    cache_code_action = true,
+    sign = false,
+    update_time = 150,
+    sign_priority = 20,
+    virtual_text = true,
+  },
 }
 
 local opts = { noremap = true, silent = true }

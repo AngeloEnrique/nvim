@@ -1,5 +1,5 @@
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4
 -- vim.opt_local.cmdheight = 2 -- more space in the neovim command line for displaying messages
 
 local capabilities
@@ -128,6 +128,10 @@ local config = {
           {
             name = "JavaSE-18",
             path = "~/.sdkman/candidates/java/18.0.1.1-open",
+          },
+          {
+            name = "JavaSE-19",
+            path = "~/.sdkman/candidates/java/19-open",
           },
         },
       },

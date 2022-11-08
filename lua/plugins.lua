@@ -11,7 +11,6 @@ packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'lewis6991/impatient.nvim'
 
-
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'WhoIsSethDaniel/lualine-lsp-progress.nvim' -- LSP progress for lualine
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
