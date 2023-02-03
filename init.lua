@@ -1,7 +1,7 @@
 require('base')
 require('highlights')
 require('maps')
-require('plugins')
+require('initPlugins')
 require('colorscheme')
 require('winbar')
 require('copilot')
