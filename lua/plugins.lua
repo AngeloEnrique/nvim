@@ -1,77 +1,89 @@
-local status, packer = pcall(require, 'packer')
-if (not status) then
-  print("Packer is not installed")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd [[packadd packer.nvim]]
+require('lazy').setup({
+  'folke/tokyonight.nvim',
+  'kyazdani42/nvim-web-devicons', -- File icons
 
-packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim'
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'lewis6991/impatient.nvim'
+  'nvim-lualine/lualine.nvim', -- Statusline
+  'WhoIsSethDaniel/lualine-lsp-progress.nvim', -- LSP progress for lualine
+  'onsails/lspkind-nvim', -- vscode-like pictograms
 
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'WhoIsSethDaniel/lualine-lsp-progress.nvim' -- LSP progress for lualine
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
+  'neovim/nvim-lspconfig', -- LSP
+  'glepnir/lspsaga.nvim', -- LSP UIs
+  'mfussenegger/nvim-jdtls', -- Java stuffs
 
-  use 'neovim/nvim-lspconfig' -- LSP
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use 'mfussenegger/nvim-jdtls' -- Java stuffs
+  -- 'mfussenegger/nvim-dap', -- Debugger
+  -- 'rcarriga/nvim-dap-ui', -- Debugger UIs
 
-  use 'mfussenegger/nvim-dap' -- Debugger
-  use 'rcarriga/nvim-dap-ui' -- Debugger UIs
-
-  use {
+  {
     'rafamadriz/friendly-snippets',
     module = { "cmp", "cmp_nvim_lsp" },
     event = "InsertEnter",
-  }
-  use {
+    dependencies = {
+      'L3MON4D3/LuaSnip', -- Snippets
+    }
+  },
+  {
     'L3MON4D3/LuaSnip', -- Snippets
-    wants = "friendly-snippets",
-    after = 'nvim-cmp',
     config = function() require('config.snippets') end,
-  }
-  use "saadparwaiz1/cmp_luasnip" --cmp luasnip
-  use 'hrsh7th/cmp-path' -- nvim-cmp buffer for paths
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/cmp-nvim-lua' -- nvim-cmp for luasnip
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'github/copilot.vim' -- Github Copilot
+  },
+  'saadparwaiz1/cmp_luasnip', --cmp luasnip
+  'hrsh7th/cmp-path', -- nvim-cmp buffer for paths
+  'hrsh7th/cmp-buffer', -- nvim-cmp source for buffer words
+  'hrsh7th/cmp-nvim-lsp', -- nvim-cmp source for neovim',s built-in LSP
+  'hrsh7th/cmp-nvim-lua', -- nvim-cmp for luasnip
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'L3MON4D3/LuaSnip', -- Snippets
+    }
+  }, -- Completion
+  'github/copilot.vim', -- Github Copilot
 
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-  use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client.
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+    build = ':TSUpdate'
+  },
+  'jose-elias-alvarez/null-ls.nvim', -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+  'MunifTanjim/prettier.nvim', -- Prettier plugin for Neovim',s built-in LSP client.
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
 
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
+  'windwp/nvim-autopairs',
+  'windwp/nvim-ts-autotag',
 
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-lua/plenary.nvim' -- Common utilities
-  use 'nvim-telescope/telescope.nvim'
-  use {
+  'nvim-tree/nvim-tree.lua',
+  'nvim-lua/plenary.nvim', -- Common utilities
+  'nvim-telescope/telescope.nvim',
+  {
     'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
-  }
+    build = 'make'
+  },
 
-  use 'akinsho/nvim-bufferline.lua'
-  use 'SmiteshP/nvim-navic' -- Breadcrumb
-  use 'norcalli/nvim-colorizer.lua'
-  use 'numToStr/Comment.nvim' -- For comments
-  use 'JoosepAlviste/nvim-ts-context-commentstring' -- Comments for jsx
-  use 'lukas-reineke/indent-blankline.nvim'
-  use "akinsho/toggleterm.nvim"
+  { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
+  'akinsho/nvim-bufferline.lua',
+  'SmiteshP/nvim-navic', -- Breadcrumb
+  'norcalli/nvim-colorizer.lua',
+  'numToStr/Comment.nvim', -- For comments
+  'JoosepAlviste/nvim-ts-context-commentstring', -- Comments for jsx
+  'lukas-reineke/indent-blankline.nvim',
+  'RRethy/vim-illuminate', -- Highlight all occurrences of the word under the cursor
+  "akinsho/toggleterm.nvim",
 
-  use { "NTBBloodbath/rest.nvim",
-    requires = { "nvim-lua/plenary.nvim" } }
+  { 'NTBBloodbath/rest.nvim',
+    dependencies = { "nvim-lua/plenary.nvim" } },
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame and browse
-end)
+  'lewis6991/gitsigns.nvim',
+  'dinhhuy258/git.nvim', -- For git blame and browse
+})

@@ -126,6 +126,10 @@ local config = {
             path = "~/.sdkman/candidates/java/11.0.2-open",
           },
           {
+            name = "JavaSE-17",
+            path = "~/.sdkman/candidates/java/17-open",
+          },
+          {
             name = "JavaSE-18",
             path = "~/.sdkman/candidates/java/18.0.1.1-open",
           },

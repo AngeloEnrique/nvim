@@ -11,9 +11,9 @@ null_ls.setup {
     end
   end,
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with({
-      disgnostics_format = '[eslint] #{m}\n(#{c})'
-    }),
+    -- null_ls.builtins.diagnostics.eslint_d.with({
+    --   disgnostics_format = '[eslint] #{m}\n(#{c})'
+    -- }),
     null_ls.builtins.formatting.eslint_d,
     -- null_ls.builtins.formatting.google_java_format,
     null_ls.builtins.diagnostics.zsh

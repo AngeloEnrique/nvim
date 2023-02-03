@@ -1,4 +1,3 @@
-require('user_impatient') -- Impatient plugin with pcall
 require('base')
 require('highlights')
 require('maps')
@@ -6,7 +5,6 @@ require('plugins')
 require('colorscheme')
 require('winbar')
 require('copilot')
-
 local has = function(x)
   return vim.fn.has(x) == 1
 end
