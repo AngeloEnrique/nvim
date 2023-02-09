@@ -1,8 +1,15 @@
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
+		"saadparwaiz1/cmp_luasnip", --cmp luasnip
+		"hrsh7th/cmp-path", -- nvim-cmp buffer for paths
+		"hrsh7th/cmp-buffer", -- nvim-cmp source for buffer words
+		"hrsh7th/cmp-nvim-lsp", -- nvim-cmp source for neovim',s built-in LSP
+		"hrsh7th/cmp-nvim-lua", -- nvim-cmp for lua
+		"onsails/lspkind-nvim", -- vscode-like pictograms
 		"L3MON4D3/LuaSnip", -- Snippets
 	},
+	event = "VeryLazy",
 	config = function()
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
@@ -16,8 +23,8 @@ return {
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-				["<C-d>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.close(),
 				["<CR>"] = cmp.mapping.confirm({

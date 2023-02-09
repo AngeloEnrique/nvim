@@ -1,8 +1,9 @@
 return {
-	"rcarriga/nvim-dap-ui", -- Debugger UIs
+	"mfussenegger/nvim-dap", -- Debugger
 	dependencies = {
-		"mfussenegger/nvim-dap", -- Debugger
+		"rcarriga/nvim-dap-ui", -- Debugger UIs
 	},
+	keys = { { "<leader>d" } },
 	config = function()
 		local icons = require("icons")
 
