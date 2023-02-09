@@ -1,11 +1,9 @@
 return {
 	"NTBBloodbath/rest.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
+	ft = "http",
 	config = function()
-		local status, rest = pcall(require, "rest-nvim")
-		if not status then
-			return
-		end
+		local rest = require("rest-nvim")
 
 		rest.setup({
 			-- Open request results in a horizontal split

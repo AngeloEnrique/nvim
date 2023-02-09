@@ -1,9 +1,5 @@
 return {
 	"numToStr/Comment.nvim",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-		"JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
-	},
 	config = function()
 		local comment = require("Comment")
 		local pre_hook

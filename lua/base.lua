@@ -33,6 +33,8 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.shell = "zsh"
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.incsearch = true
 vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
 vim.opt.tabstop = 2
@@ -48,6 +50,8 @@ vim.opt.spelllang:append("cjk") -- disable spellchecking for asian characters (V
 vim.opt.shortmess:append("c") -- don't show redundant messages from ins-completion-menu
 vim.opt.shortmess:append("I") -- don't show the default intro message
 vim.opt.whichwrap:append("<,>,[,],h,l")
+
+vim.g.snippets = "luasnip"
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
