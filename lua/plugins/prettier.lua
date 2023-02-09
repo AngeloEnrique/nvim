@@ -1,6 +1,6 @@
 return {
 	"MunifTanjim/prettier.nvim",
-	config = {
+	opts = {
 		bin = "prettierd",
 		filetypes = {
 			"css",

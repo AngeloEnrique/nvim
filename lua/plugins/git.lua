@@ -2,7 +2,7 @@ return {
 	{ "lewis6991/gitsigns.nvim", config = true },
 	{
 		"dinhhuy258/git.nvim",
-		config = {
+		opts = {
 			keymaps = {
 				-- Open blame window
 				blame = "<Leader>gb",
