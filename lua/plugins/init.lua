@@ -12,6 +12,7 @@ return {
 	"tpope/vim-rhubarb",
 	"tpope/vim-dotenv",
 	"tpope/vim-eunuch",
+	"tpope/vim-sleuth",
 
 	"github/copilot.vim", -- Github Copilot
 
