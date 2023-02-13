@@ -34,6 +34,8 @@ return {
 				"c",
 				"cpp",
 				"java",
+				"markdown",
+				"markdown_inline",
 			},
 			autotag = {
 				enable = true,
