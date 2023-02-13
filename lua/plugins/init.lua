@@ -13,13 +13,23 @@ return {
 	"tpope/vim-dotenv",
 	"tpope/vim-eunuch",
 	"tpope/vim-sleuth",
+	{
+		"axelvc/template-string.nvim",
+		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
+		opts = {
+			filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" }, -- filetypes where the plugin is active
+			jsx_brackets = true, -- must add brackets to jsx attributes
+			remove_template_string = false, -- remove backticks when there are no template string
+			restore_quotes = {
+				-- quotes used when "remove_template_string" option is enabled
+				normal = [[']],
+				jsx = [["]],
+			},
+		},
+	},
+	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
 
 	"github/copilot.vim", -- Github Copilot
-
-	{ "windwp/nvim-autopairs", opts = {
-		disable_filetype = { "TelescopePrompt", "vim" },
-	} },
-	{ "windwp/nvim-ts-autotag", config = true },
 
 	"SmiteshP/nvim-navic", -- Breadcrumb
 	{ "norcalli/nvim-colorizer.lua", opts = {

@@ -38,6 +38,7 @@ vim.opt.incsearch = true
 vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
 vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.laststatus = 3 -- always show status line
 vim.opt.ai = true -- Auto Indent
 vim.opt.si = true -- Smart Indent
@@ -62,6 +63,12 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 vim.api.nvim_create_autocmd("InsertLeave", {
 	pattern = "*",
 	command = "set nopaste",
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+	end,
 })
 
 vim.opt.formatoptions:append({ "r" })

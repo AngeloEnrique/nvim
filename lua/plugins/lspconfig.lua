@@ -8,16 +8,16 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 		},
-		{
-			"j-hui/fidget.nvim", -- LSP progress
-			opts = {
-				sources = {
-					["null-ls"] = {
-						ignore = true,
-					},
-				},
-			},
-		},
+		-- {
+		-- 	"j-hui/fidget.nvim", -- LSP progress
+		-- 	opts = {
+		-- 		sources = {
+		-- 			["null-ls"] = {
+		-- 				ignore = true,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 	},
 	config = function()
 		local status, nvim_lsp = pcall(require, "lspconfig")
@@ -121,7 +121,7 @@ return {
 			cmd = { "typescript-language-server", "--stdio" },
 		})
 
-		nvim_lsp.sumneko_lua.setup({
+		nvim_lsp.lua_ls.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {

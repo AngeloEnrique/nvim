@@ -9,7 +9,13 @@ return {
 
 		mason.setup({})
 		lspconfig.setup({
-			ensure_installed = {},
+			ensure_installed = {
+				"lua_ls",
+				"tsserver",
+				"jdtls",
+				"pyright",
+				"clangd",
+			},
 		})
 	end,
 }

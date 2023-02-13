@@ -3,6 +3,11 @@ local keymap = vim.keymap
 keymap.set("n", "<Space>", "", {})
 vim.g.mapleader = " "
 
+-- Exit and save
+keymap.set("n", "<leader>q", ":q<Return>", { silent = true })
+keymap.set("n", "<leader>Q", ":q!<Return>", { silent = true })
+keymap.set("n", "<leader>w", ":w<Return>", { silent = true })
+
 -- Do not yank with x
 keymap.set("n", "x", '"_x')
 

@@ -1,5 +1,5 @@
 -- Change Github Copilot nodejs version to work
-vim.g.copilot_node_command = "~/.nvm/versions/node/v16.17.1/bin/node"
+-- vim.g.copilot_node_command = "~/.nvm/versions/node/v16.17.1/bin/node"
 
 -- remapping
 vim.keymap.set("i", "<C-Return>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
