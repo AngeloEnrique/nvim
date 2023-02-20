@@ -28,6 +28,17 @@ return {
 		},
 	},
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
+	"mg979/vim-visual-multi",
+	{
+		"rmagatti/alternate-toggler",
+		config = function()
+			vim.keymap.set("n", "<leader>ta", "<cmd>ToggleAlternate<cr>")
+		end,
+	},
+	{
+		"folke/neodev.nvim",
+		lazy = true,
+	},
 
 	"github/copilot.vim", -- Github Copilot
 
