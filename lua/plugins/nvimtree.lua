@@ -1,5 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
+	keys = {"<leader>e"},
 	config = function()
 		local tree = require("nvim-tree")
 

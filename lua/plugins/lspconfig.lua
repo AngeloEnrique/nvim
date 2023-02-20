@@ -8,16 +8,16 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 		},
-		-- {
-		-- 	"j-hui/fidget.nvim", -- LSP progress
-		-- 	opts = {
-		-- 		sources = {
-		-- 			["null-ls"] = {
-		-- 				ignore = true,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- },
+		{
+			"j-hui/fidget.nvim", -- LSP progress
+			opts = {
+				sources = {
+					["null-ls"] = {
+						ignore = true,
+					},
+				},
+			},
+		},
 	},
 	config = function()
 		local status, nvim_lsp = pcall(require, "lspconfig")

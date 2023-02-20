@@ -1,5 +1,6 @@
 return {
 	"akinsho/toggleterm.nvim",
+  keys = {{[[<c-\>]]}},
 	opts = {
 		-- size can be a number or function which is passed the current terminal
 		size = 20,

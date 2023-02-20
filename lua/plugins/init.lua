@@ -37,12 +37,9 @@ return {
 	},
 	{
 		"folke/neodev.nvim",
-		lazy = true,
 	},
 
-	"github/copilot.vim", -- Github Copilot
-
-	"SmiteshP/nvim-navic", -- Breadcrumb
+  {"SmiteshP/nvim-navic", lazy = true}, -- Breadcrumb
 	{ "norcalli/nvim-colorizer.lua", opts = {
 		"*",
 	} },
