@@ -1,5 +1,5 @@
 return {
-	{ "kyazdani42/nvim-web-devicons", opts = {
+	{ "kyazdani42/nvim-web-devicons", event = "BufRead", opts = {
 		override = {},
 		default = true,
 	} }, -- File icons
@@ -7,12 +7,12 @@ return {
 		"tpope/vim-dispatch",
 		cmd = { "Make", "Dispatch" },
 	},
-	"tpope/vim-surround",
-	"tpope/vim-repeat",
-	"tpope/vim-rhubarb",
-	"tpope/vim-dotenv",
-	"tpope/vim-eunuch",
-	"tpope/vim-sleuth",
+	{ "tpope/vim-surround", event = "BufRead" },
+	{ "tpope/vim-repeat", event = "BufRead" },
+	{ "tpope/vim-rhubarb", event = "BufRead" },
+	{ "tpope/vim-dotenv", event = "BufRead" },
+	{ "tpope/vim-eunuch", event = "BufRead" },
+	{ "tpope/vim-sleuth", event = "BufRead" },
 	{
 		"axelvc/template-string.nvim",
 		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
@@ -27,20 +27,22 @@ return {
 			},
 		},
 	},
-	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
-	"mg979/vim-visual-multi",
+	{ "folke/todo-comments.nvim", event = "BufRead", dependencies = "nvim-lua/plenary.nvim", config = true },
+	{ "mg979/vim-visual-multi", event = "BufRead" },
 	{
 		"rmagatti/alternate-toggler",
+		keys = "<leader>ta",
 		config = function()
 			vim.keymap.set("n", "<leader>ta", "<cmd>ToggleAlternate<cr>")
 		end,
 	},
 	{
 		"folke/neodev.nvim",
+		event = "BufRead",
 	},
 
-  {"SmiteshP/nvim-navic", lazy = true}, -- Breadcrumb
-	{ "norcalli/nvim-colorizer.lua", opts = {
+	{ "SmiteshP/nvim-navic", lazy = true }, -- Breadcrumb
+	{ "norcalli/nvim-colorizer.lua", event = "BufRead", opts = {
 		"*",
 	} },
 }

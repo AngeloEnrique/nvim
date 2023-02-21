@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"kyazdani42/nvim-web-devicons",
 	},
+	event = "BufRead",
 	config = function()
 		local bufferline = require("bufferline")
 		local icons = require("icons")

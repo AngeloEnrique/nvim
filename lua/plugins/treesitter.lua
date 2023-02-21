@@ -1,5 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	event = "BufRead",
 	build = ":TSUpdate",
 	dependencies = {
 		"numToStr/Comment.nvim",

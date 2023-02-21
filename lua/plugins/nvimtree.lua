@@ -1,6 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
-	keys = {"<leader>e"},
+	cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
 	config = function()
 		local tree = require("nvim-tree")
 
@@ -142,7 +142,5 @@ return {
 				},
 			},
 		})
-
-		vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 	end,
 }

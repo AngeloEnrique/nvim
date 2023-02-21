@@ -1,7 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	keys = {{";"}},
-  dependencies = {
+	keys = { { ";" } },
+	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},

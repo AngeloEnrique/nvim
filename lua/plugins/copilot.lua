@@ -1,5 +1,6 @@
 return {
 	"zbirenbaum/copilot.lua",
+	event = "BufRead",
 	dependencies = {
 		{
 			"zbirenbaum/copilot-cmp",

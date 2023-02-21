@@ -1,7 +1,8 @@
 return {
-	{ "lewis6991/gitsigns.nvim", config = true },
+	{ "lewis6991/gitsigns.nvim", event = "BufRead", config = true },
 	{
 		"dinhhuy258/git.nvim",
+		event = "BufRead",
 		opts = {
 			default_mappings = false,
 			keymaps = {

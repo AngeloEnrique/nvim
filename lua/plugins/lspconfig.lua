@@ -1,5 +1,6 @@
 return {
 	"neovim/nvim-lspconfig", -- LSP
+	event = "BufRead",
 	dependencies = {
 		"SmiteshP/nvim-navic", -- Breadcrumb
 		"mfussenegger/nvim-jdtls", -- Java stuffs

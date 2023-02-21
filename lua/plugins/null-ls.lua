@@ -1,5 +1,6 @@
 return {
 	"jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+	event = "BufRead",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"neovim/nvim-lspconfig",

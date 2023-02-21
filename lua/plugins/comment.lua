@@ -1,5 +1,6 @@
 return {
 	"numToStr/Comment.nvim",
+	event = "BufRead",
 	config = function()
 		local comment = require("Comment")
 		local pre_hook
