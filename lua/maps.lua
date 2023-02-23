@@ -51,3 +51,6 @@ keymap.set("n", "<leader>x", ":lua require'utils'.buf_kill('bd', 0, false) <CR>"
 
 -- NvimTree
 keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+
+-- Neogit
+keymap.set("n", "<leader><leader>ng", "<cmd>Neogit<CR>")

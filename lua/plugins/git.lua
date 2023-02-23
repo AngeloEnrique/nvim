@@ -29,6 +29,7 @@ return {
 	}, -- For git blame and browse
 	{
 		"TimUntersberger/neogit",
+		event = "BufRead",
 		dependencies = {
 			{
 				"sindrets/diffview.nvim",
