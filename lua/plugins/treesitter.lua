@@ -42,7 +42,7 @@ return {
 			highlight = {
 				enable = true,
 				aditional_vim_regex_highlighting = false,
-				disable = {},
+				disable = { "html" },
 			},
 			indent = {
 				enable = true,
