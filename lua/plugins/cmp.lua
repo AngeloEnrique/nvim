@@ -6,6 +6,9 @@ return {
 		"hrsh7th/cmp-buffer", -- nvim-cmp source for buffer words
 		"hrsh7th/cmp-nvim-lsp", -- nvim-cmp source for neovim',s built-in LSP
 		"hrsh7th/cmp-nvim-lua", -- nvim-cmp for lua
+		"hrsh7th/cmp-git", -- nvim-cmp for git
+		"hrsh7th/cmp-cmdline", -- nvim-cmp for cmdline
+		"hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
 		"L3MON4D3/LuaSnip", -- Snippets
 		"zbirenbaum/copilot-cmp", -- Copilot
 	},
@@ -193,35 +196,49 @@ return {
 					name = "copilot",
 					-- keyword_length = 0,
 					max_item_count = 3,
-					-- trigger_characters = {
-					-- 	{
-					-- 		".",
-					-- 		":",
-					-- 		"(",
-					-- 		"'",
-					-- 		'"',
-					-- 		"[",
-					-- 		",",
-					-- 		"#",
-					-- 		"*",
-					-- 		"@",
-					-- 		"|",
-					-- 		"=",
-					-- 		"-",
-					-- 		"{",
-					-- 		"/",
-					-- 		"\\",
-					-- 		"+",
-					-- 		"?",
-					-- 		" ",
-					-- 		-- "\t",
-					-- 		-- "\n",
-					-- 	},
-					-- },
+					trigger_characters = {
+						{
+							".",
+							":",
+							"(",
+							"'",
+							'"',
+							"[",
+							",",
+							"#",
+							"*",
+							"@",
+							"|",
+							"=",
+							"-",
+							"{",
+							"/",
+							"\\",
+							"+",
+							"?",
+							" ",
+							-- "\t",
+							-- "\n",
+						},
+					},
 				},
 				{ name = "luasnip" },
+				{ name = "nvim_lua" },
 				{ name = "nvim_lsp" },
-				{ name = "buffer" },
+				{ name = "nvim_lsp_signature_help" },
+				{
+					name = "buffer",
+					keyword_length = 4,
+					option = {
+						get_bufnrs = function()
+							local bufs = {}
+							for _, win in ipairs(vim.api.nvim_list_wins()) do
+								bufs[vim.api.nvim_win_get_buf(win)] = true
+							end
+							return vim.tbl_keys(bufs)
+						end,
+					},
+				},
 				{ name = "path" },
 			}),
 			formatting = {
@@ -303,7 +320,46 @@ return {
 					vim_item.dup = duplicates[entry.source.name] or 0
 					return vim_item
 				end,
+				experimental = {
+					native_menu = false,
+					ghost_text = true,
+				},
 			},
+		})
+
+		-- Set configuration for specific filetype.
+		cmp.setup.filetype("gitcommit", {
+			sources = cmp.config.sources({
+				{ name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+			}, {
+				{ name = "buffer" },
+			}),
+		})
+
+		-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline("/", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
+		})
+
+		cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+			sources = cmp.config.sources({
+				{ name = "vim-dadbod-completion" },
+			}, {
+				{ name = "buffer" },
+			}),
 		})
 
 		vim.cmd([[
