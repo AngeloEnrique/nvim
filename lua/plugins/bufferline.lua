@@ -1,7 +1,7 @@
 return {
 	"akinsho/nvim-bufferline.lua",
 	dependencies = {
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 	},
 	event = "BufRead",
 	config = function()

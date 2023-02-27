@@ -1,65 +1,65 @@
 return {
 	"nvim-tree/nvim-tree.lua",
-	cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
 	config = function()
 		local tree = require("nvim-tree")
 
 		local icons = require("icons")
 
 		tree.setup({
-			disable_netrw = true,
-			-- ignore_ft_on_setup = {
-			--   "startify",
-			--   "dashboard",
-			--   "alpha",
-			-- },
 			auto_reload_on_write = false,
-			hijack_directories = {
-				enable = false,
-			},
-			update_cwd = true,
-			diagnostics = {
-				enable = true,
-				show_on_dirs = false,
-				icons = {
-					hint = icons.diagnostics.BoldHint,
-					info = icons.diagnostics.BoldInformation,
-					warning = icons.diagnostics.BoldWarning,
-					error = icons.diagnostics.BoldError,
-				},
-			},
-			update_focused_file = {
-				enable = true,
-				update_cwd = true,
-				ignore_list = {},
-			},
-			system_open = {
-				cmd = nil,
-				args = {},
-			},
-			git = {
-				enable = true,
-				ignore = false,
-				timeout = 200,
-			},
+			disable_netrw = false,
+			hijack_cursor = false,
+			hijack_netrw = true,
+			hijack_unnamed_buffer_when_opening = false,
+			ignore_buffer_on_setup = false,
+			sort_by = "name",
+			root_dirs = {},
+			prefer_startup_root = false,
+			sync_root_with_cwd = true,
+			reload_on_bufenter = false,
+			respect_buf_cwd = false,
+			on_attach = "disable",
+			remove_keymaps = false,
+			select_prompts = false,
 			view = {
-				-- width = 40,
 				adaptive_size = true,
+				centralize_selection = false,
+				-- width = 30,
 				hide_root_folder = false,
 				side = "right",
-				mappings = {
-					custom_only = false,
-					list = {
-						{ key = "h", action = "dir_up" },
-					},
-				},
+				preserve_window_proportions = false,
 				number = false,
 				relativenumber = false,
 				signcolumn = "yes",
+				mappings = {
+					custom_only = false,
+					list = {},
+				},
+				float = {
+					enable = false,
+					quit_on_focus_loss = true,
+					open_win_config = {
+						relative = "editor",
+						border = "rounded",
+						width = 30,
+						height = 30,
+						row = 1,
+						col = 1,
+					},
+				},
 			},
 			renderer = {
+				add_trailing = false,
+				group_empty = false,
+				highlight_git = true,
+				full_name = false,
+				highlight_opened_files = "none",
+				root_folder_label = ":t",
+				indent_width = 2,
 				indent_markers = {
-					enable = false,
+					enable = true,
+					inline_arrows = true,
 					icons = {
 						corner = "└",
 						edge = "│",
@@ -69,57 +69,87 @@ return {
 				},
 				icons = {
 					webdev_colors = true,
+					git_placement = "before",
+					padding = " ",
+					symlink_arrow = " ➛ ",
 					show = {
-						git = true,
-						folder = true,
 						file = true,
+						folder = true,
 						folder_arrow = true,
+						git = true,
 					},
 					glyphs = {
 						default = icons.ui.Text,
 						symlink = icons.ui.FileSymlink,
-						git = {
-							deleted = icons.git.FileDeleted,
-							ignored = icons.git.FileIgnored,
-							renamed = icons.git.FileRenamed,
-							staged = icons.git.FileStaged,
-							unmerged = icons.git.FileUnmerged,
-							unstaged = icons.git.FileUnstaged,
-							untracked = icons.git.FileUntracked,
-						},
+						bookmark = icons.ui.BookMark,
 						folder = {
+							arrow_closed = icons.ui.TriangleShortArrowRight,
+							arrow_open = icons.ui.TriangleShortArrowDown,
 							default = icons.ui.Folder,
+							open = icons.ui.FolderOpen,
 							empty = icons.ui.EmptyFolder,
 							empty_open = icons.ui.EmptyFolderOpen,
-							open = icons.ui.FolderOpen,
 							symlink = icons.ui.FolderSymlink,
+							symlink_open = icons.ui.FolderOpen,
+						},
+						git = {
+							unstaged = icons.git.FileUnstaged,
+							staged = icons.git.FileStaged,
+							unmerged = icons.git.FileUnmerged,
+							renamed = icons.git.FileRenamed,
+							untracked = icons.git.FileUntracked,
+							deleted = icons.git.FileDeleted,
+							ignored = icons.git.FileIgnored,
 						},
 					},
 				},
-				highlight_git = true,
-				group_empty = false,
-				root_folder_modifier = ":t",
+				special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+				symlink_destination = true,
+			},
+			hijack_directories = {
+				enable = false,
+				auto_open = true,
+			},
+			update_focused_file = {
+				enable = true,
+				debounce_delay = 15,
+				update_root = true,
+				ignore_list = {},
+			},
+			diagnostics = {
+				enable = true,
+				show_on_dirs = false,
+				show_on_open_dirs = true,
+				debounce_delay = 50,
+				severity = {
+					min = vim.diagnostic.severity.HINT,
+					max = vim.diagnostic.severity.ERROR,
+				},
+				icons = {
+					hint = icons.diagnostics.BoldHint,
+					info = icons.diagnostics.BoldInformation,
+					warning = icons.diagnostics.BoldWarning,
+					error = icons.diagnostics.BoldError,
+				},
 			},
 			filters = {
 				dotfiles = false,
+				git_clean = false,
+				no_buffer = false,
 				custom = { "node_modules", "\\.cache" },
 				exclude = {},
 			},
-			trash = {
-				cmd = "trash",
-				require_confirm = true,
+			filesystem_watchers = {
+				enable = true,
+				debounce_delay = 50,
+				ignore_dirs = {},
 			},
-			log = {
-				enable = false,
-				truncate = false,
-				types = {
-					all = false,
-					config = false,
-					copy_paste = false,
-					diagnostics = false,
-					git = false,
-					profile = false,
-				},
+			git = {
+				enable = true,
+				ignore = false,
+				show_on_dirs = true,
+				show_on_open_dirs = true,
+				timeout = 200,
 			},
 			actions = {
 				use_system_clipboard = true,
@@ -128,18 +158,71 @@ return {
 					global = false,
 					restrict_above_cwd = false,
 				},
+				expand_all = {
+					max_folder_discovery = 300,
+					exclude = {},
+				},
+				file_popup = {
+					open_win_config = {
+						col = 1,
+						row = 1,
+						relative = "cursor",
+						border = "shadow",
+						style = "minimal",
+					},
+				},
 				open_file = {
 					quit_on_open = false,
 					resize_window = false,
 					window_picker = {
 						enable = true,
+						picker = "default",
 						chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 						exclude = {
-							filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+							filetype = { "notify", "lazy", "qf", "diff", "fugitive", "fugitiveblame" },
 							buftype = { "nofile", "terminal", "help" },
 						},
 					},
 				},
+				remove_file = {
+					close_window = true,
+				},
+			},
+			trash = {
+				cmd = "trash",
+				require_confirm = true,
+			},
+			live_filter = {
+				prefix = "[FILTER]: ",
+				always_show_folders = true,
+			},
+			tab = {
+				sync = {
+					open = false,
+					close = false,
+					ignore = {},
+				},
+			},
+			notify = {
+				threshold = vim.log.levels.INFO,
+			},
+			log = {
+				enable = false,
+				truncate = false,
+				types = {
+					all = false,
+					config = false,
+					copy_paste = false,
+					dev = false,
+					diagnostics = false,
+					git = false,
+					profile = false,
+					watcher = false,
+				},
+			},
+			system_open = {
+				cmd = nil,
+				args = {},
 			},
 		})
 	end,

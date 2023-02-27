@@ -1,6 +1,6 @@
 return {
 	"folke/noice.nvim",
-	enable = false,
+	enabled = false,
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		{
@@ -16,7 +16,7 @@ return {
 			end,
 		},
 	},
-	config = {
+	opts = {
 		lsp = {
 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 			override = {

@@ -12,7 +12,7 @@ return {
 		"L3MON4D3/LuaSnip", -- Snippets
 		"zbirenbaum/copilot-cmp", -- Copilot
 	},
-	event = "VeryLazy",
+	event = { "InsertEnter", "CmdlineEnter" },
 	config = function()
 		local cmp = require("cmp")
 		local cmp_window = require("cmp.config.window")

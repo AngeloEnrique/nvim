@@ -1,5 +1,5 @@
 return {
-	{ "kyazdani42/nvim-web-devicons", event = "BufRead", opts = {
+	{ "nvim-tree/nvim-web-devicons", event = "BufRead", opts = {
 		override = {},
 		default = true,
 	} }, -- File icons
