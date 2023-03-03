@@ -59,7 +59,7 @@ return {
 			type = "text",
 			val = align_center({ width = 0 }, {
 				"",
-				"NeoVim Rocks",
+				"https://github.com/AngeloEnrique",
 			}, 0.5),
 			opts = {
 				position = "center",

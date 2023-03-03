@@ -2,6 +2,7 @@ local keymap = vim.keymap
 
 keymap.set("n", "<Space>", "", {})
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Exit and save
 keymap.set("n", "<leader>q", ":q<Return>", { silent = true })
@@ -16,7 +17,7 @@ keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
 -- Delete a word backwards
-keymap.set("n", "dw", 'vb"_d')
+-- keymap.set("n", "dw", 'vb"_d')
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")

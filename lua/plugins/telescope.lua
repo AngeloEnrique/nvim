@@ -63,7 +63,7 @@ return {
 					-- },
 					hidden_files = true, -- default: false
 					theme = "dropdown",
-					order_by = "asc",
+					order_by = "recent",
 					search_by = "title",
 					sync_with_nvim_tree = true, -- default false
 				},
@@ -81,12 +81,21 @@ return {
 			'<cmd>lua require("telescope.builtin").find_files({ no_ignore = false, hidden = true })<cr>',
 			opts
 		)
-		vim.api.nvim_set_keymap("n", ";p", "<cmd>lua require'telescope'.extensions.project.project{}<CR>", opts)
+		vim.keymap.set("n", ";p", "<cmd>lua require'telescope'.extensions.project.project{}<CR>", opts)
 		vim.keymap.set("n", ";r", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
 		vim.keymap.set("n", ";b", '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
 		vim.keymap.set("n", ";t", '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 		vim.keymap.set("n", ";;", '<cmd>lua require("telescope.builtin").resume()<cr>', opts)
 		vim.keymap.set("n", ";e", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
 		vim.keymap.set("n", ";gb", '<cmd>lua require("telescope.builtin").git_branches()<cr>', opts)
+		vim.keymap.set("n", ";gf", '<cmd>lua require("telescope.builtin").git_files()<cr>', opts)
+		vim.keymap.set("n", ";gcc", '<cmd>lua require("telescope.builtin").git_commits()<cr>', opts)
+		vim.keymap.set("n", ";gcf", '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', opts)
+		vim.keymap.set(
+			"n",
+			";c",
+			'<cmd>lua require("telescope.builtin").find_files({ prompt_title = "< Neovim >", cwd = "$HOME/.config/nvim/", cwd_to_path = true }) <CR>',
+			opts
+		)
 	end,
 }

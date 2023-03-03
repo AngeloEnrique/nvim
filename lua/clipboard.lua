@@ -9,6 +9,7 @@ local is_wsl = has("wsl")
 
 if is_wsl then
 	require("wsl")
+	return
 end
 
 if is_mac or is_linux then
