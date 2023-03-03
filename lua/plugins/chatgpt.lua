@@ -1,6 +1,6 @@
 return {
 	"jackMort/ChatGPT.nvim",
-	key = { "<leader>c" },
+	keys = { { "<leader>c", "<cmd>ChatGPT<cr>" } },
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
@@ -76,11 +76,5 @@ return {
 				cycle_windows = "<C-]>",
 			},
 		})
-
-		local opts = { noremap = true, silent = true }
-
-		local keymap = vim.keymap.set
-
-		keymap("n", "<leader>c", "<cmd>ChatGPT<cr>", opts)
 	end,
 }
