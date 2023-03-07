@@ -6,13 +6,11 @@ return {
 
 		saga.setup({
 			server_filetype_map = {},
-			code_action_lightbulb = {
+			lightbulb = {
 				enable = true,
-				enable_in_insert = false,
-				cache_code_action = true,
+				enable_in_insert = true,
 				sign = true,
-				update_time = 150,
-				sign_priority = 20,
+				sign_priority = 40,
 				virtual_text = false,
 			},
 			symbol_in_winbar = {
@@ -28,7 +26,7 @@ return {
 
 		local opts = { noremap = true, silent = true }
 
-		vim.keymap.set("n", "<C-j>", "<Cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+		vim.keymap.set("n", "<leader>j", "<Cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 		vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<cr>", opts)
 		vim.keymap.set("n", "<leader>gd", "<Cmd>Lspsaga lsp_finder<cr>", opts)
 		vim.keymap.set("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<cr>", opts)

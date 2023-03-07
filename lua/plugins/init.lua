@@ -13,6 +13,7 @@ return {
 	{ "tpope/vim-dotenv", event = "BufRead" },
 	{ "tpope/vim-eunuch", event = "BufRead" },
 	{ "tpope/vim-sleuth", event = "BufRead" },
+	"christoomey/vim-tmux-navigator",
 	{
 		"axelvc/template-string.nvim",
 		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
