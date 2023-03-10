@@ -1,6 +1,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
+	keys = { { "<leader>e", "<cmd>NvimTreeToggle<CR>" } },
 	config = function()
 		local tree = require("nvim-tree")
 

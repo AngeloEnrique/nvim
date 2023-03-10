@@ -84,7 +84,7 @@ return {
 		vim.keymap.set("n", ";p", "<cmd>lua require'telescope'.extensions.project.project{}<CR>", opts)
 		vim.keymap.set("n", ";r", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
 		vim.keymap.set("n", ";b", '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-		vim.keymap.set("n", ";t", '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+		vim.keymap.set("n", ";h", '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 		vim.keymap.set("n", ";;", '<cmd>lua require("telescope.builtin").resume()<cr>', opts)
 		vim.keymap.set("n", ";e", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
 		vim.keymap.set("n", ";gb", '<cmd>lua require("telescope.builtin").git_branches()<cr>', opts)
