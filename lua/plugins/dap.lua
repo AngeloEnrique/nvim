@@ -2,6 +2,9 @@ return {
 	"mfussenegger/nvim-dap", -- Debugger
 	dependencies = {
 		"rcarriga/nvim-dap-ui", -- Debugger UIs
+		"theHamsta/nvim-dap-virtual-text",
+		"nvim-telescope/telescope-dap.nvim",
+		"rcarriga/cmp-dap",
 	},
 	keys = { { "<leader>d" } },
 	config = function()
@@ -9,8 +12,6 @@ return {
 
 		local config = {
 			builtinDap = {
-				active = true,
-				on_config_done = nil,
 				breakpoint = {
 					text = icons.ui.Bug,
 					texthl = "DiagnosticSignError",
@@ -98,5 +99,23 @@ return {
 				},
 			},
 		})
+
+		require("nvim-dap-virtual-text").setup({})
+
+		local ok_telescope, telescope = pcall(require, "telescope")
+		if ok_telescope then
+			telescope.load_extension("dap")
+		end
+
+		local ok_cmp, cmp = pcall(require, "cmp")
+		if ok_cmp then
+			cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
+				sources = cmp.config.sources({
+					{ name = "dap" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
+		end
 	end,
 }
