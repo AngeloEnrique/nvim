@@ -67,13 +67,18 @@ return {
 			--     n = 1,
 			--   },
 			keymaps = {
-				close = { "<C-c>", "<Esc>" },
+				close = { "<C-q>" },
+				submit = "<C-e>",
 				yank_last = "<C-y>",
 				scroll_up = "<C-k>",
 				scroll_down = "<C-j>",
 				toggle_settings = "<C-o>",
 				new_session = "<C-n>",
-				cycle_windows = "<C-]>",
+				cycle_windows = "<C-c>",
+				-- in the Sessions pane
+				select_session = "<S-s>",
+				rename_session = "<S-r>",
+				delete_session = "<S-d>",
 			},
 		})
 	end,
