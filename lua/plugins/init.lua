@@ -12,7 +12,7 @@ return {
 	{ "tpope/vim-rhubarb", event = "BufRead" },
 	{ "tpope/vim-dotenv", event = "BufRead" },
 	{ "tpope/vim-eunuch", event = "BufRead" },
-	{ "tpope/vim-sleuth", event = "BufRead" },
+	{ "tpope/vim-sleuth", enabled = false, event = "BufRead" },
 	"christoomey/vim-tmux-navigator",
 	{
 		"axelvc/template-string.nvim",

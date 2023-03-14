@@ -5,9 +5,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 -- Exit and save
-keymap.set("n", "<leader>q", ":q<Return>", { silent = true })
-keymap.set("n", "<leader>Q", ":q!<Return>", { silent = true })
-keymap.set("n", "<leader>w", ":w<Return>", { silent = true })
+-- keymap.set("n", "<leader>q", ":q<Return>", { silent = true })
+-- keymap.set("n", "<leader>Q", ":q!<Return>", { silent = true })
+-- keymap.set("n", "<leader>w", ":w<Return>", { silent = true })
 
 -- Do not yank with x
 keymap.set("n", "x", '"_x')
