@@ -3,6 +3,7 @@ return {
 		override = {},
 		default = true,
 	} }, -- File icons
+	{ "mbbill/undotree", keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
 	{
 		"tpope/vim-dispatch",
 		cmd = { "Make", "Dispatch" },
