@@ -44,7 +44,4 @@ return {
 	},
 
 	{ "SmiteshP/nvim-navic", lazy = true }, -- Breadcrumb
-	{ "norcalli/nvim-colorizer.lua", event = "BufRead", opts = {
-		"*",
-	} },
 }
