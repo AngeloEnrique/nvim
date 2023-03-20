@@ -9,6 +9,19 @@ vim.g.maplocalleader = ","
 -- keymap.set("n", "<leader>Q", ":q!<Return>", { silent = true })
 -- keymap.set("n", "<leader>w", ":w<Return>", { silent = true })
 
+-- Movements
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Blazing fast replace a word
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- format
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
 -- Do not yank with x
 keymap.set("n", "x", '"_x')
 

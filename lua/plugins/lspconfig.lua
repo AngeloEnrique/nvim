@@ -27,6 +27,8 @@ return {
 		end
 		local status2, navic = pcall(require, "nvim-navic")
 
+		local FORMAT_ON_SAVE = false
+
 		local JAVA_DAP_ACTIVE = true
 		local protocol = require("vim.lsp.protocol")
 		local lsp_formatting = function(bufnr)
@@ -42,19 +44,6 @@ return {
 		-- if you want to set up formatting on save, you can use this as a callback
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-		-- add to your shared on_attach callback
-		local on_attach = function(client, bufnr)
-			if client.supports_method("textDocument/formatting") then
-				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					group = augroup,
-					buffer = bufnr,
-					callback = function()
-						lsp_formatting(bufnr)
-					end,
-				})
-			end
-		end
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities.textDocument.foldingRange = {
 			dynamicRegistration = false,
@@ -75,22 +64,17 @@ return {
 				end
 				client.server_capabilities.document_formatting = false
 			end
-			-- formatting
-			-- if client.server_capabilities.documentFormattingProvider then
-			--   vim.api.nvim_command([[augroup Format]])
-			--   vim.api.nvim_command([[autocmd! * <buffer>]])
-			--   vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
-			--   vim.api.nvim_command([[augroup END]])
-			-- end
 			if client.supports_method("textDocument/formatting") then
-				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					group = augroup,
-					buffer = bufnr,
-					callback = function()
-						lsp_formatting(bufnr)
-					end,
-				})
+				if FORMAT_ON_SAVE then
+					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						group = augroup,
+						buffer = bufnr,
+						callback = function()
+							lsp_formatting(bufnr)
+						end,
+					})
+				end
 			end
 		end
 

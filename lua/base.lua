@@ -32,7 +32,7 @@ vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
 vim.opt.expandtab = true
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 20
 vim.opt.shell = "fish"
 vim.opt.ignorecase = true
@@ -82,3 +82,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.opt.formatoptions:append({ "r" })
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  callback = function()
+    vim.cmd [[%s/\s\+$//e]]
+  end,
+})
