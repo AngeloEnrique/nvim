@@ -1,4 +1,4 @@
-vim.cmd("autocmd!")
+vim.cmd "autocmd!"
 
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
@@ -48,40 +48,40 @@ vim.opt.si = true -- Smart Indent
 vim.opt.wrap = false -- No Wrap Lines
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.opt.undodir = os.getenv "HOME" .. "/.cache/nvim/undodir"
 vim.opt.backspace = "start,eol,indent"
-vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
-vim.opt.wildignore:append({ "*/node_modules/*" })
-vim.opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
-vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.path:append { "**" } -- Finding files - Search down into subfolders
+vim.opt.wildignore:append { "*/node_modules/*" }
+vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
+vim.opt.whichwrap:append "<,>,[,],h,l"
 vim.opt.list = true
 vim.opt.listchars = "tab:\\ ,trail:-"
 
 vim.g.snippets = "luasnip"
 
-if vim.fn.has("nvim-0.9.0") == 1 then
-	vim.opt.splitkeep = "screen"
-	vim.opt.shortmess = "filnxtToOFWIcC"
+if vim.fn.has "nvim-0.9.0" == 1 then
+  vim.opt.splitkeep = "screen"
+  vim.opt.shortmess = "filnxtToOFWIcC"
 end
 
 -- Undercurl
-vim.cmd([[let &t_Cs = "\e[4:3m"]])
-vim.cmd([[let &t_Ce = "\e[4:0m"]])
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]
 -- doesn't work on iTerm2
 
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
-	pattern = "*",
-	command = "set nopaste",
+  pattern = "*",
+  command = "set nopaste",
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
-	end,
+  callback = function()
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 200 }
+  end,
 })
 
-vim.opt.formatoptions:append({ "r" })
+vim.opt.formatoptions:append { "r" }
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   callback = function()

@@ -2,7 +2,8 @@ local keymap = vim.keymap
 
 keymap.set("n", "<Space>", "", {})
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+keymap.set("n", "<BS>", "", {})
+vim.g.maplocalleader = vim.api.nvim_replace_termcodes("<BS>", false, false, true)
 
 -- Exit and save
 -- keymap.set("n", "<leader>q", ":q<Return>", { silent = true })

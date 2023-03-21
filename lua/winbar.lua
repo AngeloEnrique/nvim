@@ -3,7 +3,7 @@ if not status then
   return
 end
 
-local icons = require("icons")
+local icons = require "icons"
 
 local winbar_filetype_exclude = {
   "help",
@@ -32,7 +32,7 @@ local winbar_filetype_exclude = {
   "",
 }
 
-navic.setup({
+navic.setup {
   icons = {
     Array = icons.kind.Array .. " ",
     Boolean = icons.kind.Boolean,
@@ -73,15 +73,15 @@ navic.setup({
   separator = " " .. ">" .. " ",
   depth_limit = 0,
   depth_limit_indicator = "..",
-})
+}
 
 local isempty = function(s)
   return s == nil or s == ""
 end
 
 local get_filename = function()
-  local filename = vim.fn.expand("%:t")
-  local extension = vim.fn.expand("%:e")
+  local filename = vim.fn.expand "%:t"
+  local extension = vim.fn.expand "%:e"
 
   if not isempty(filename) then
     local file_icon, file_icon_color =
@@ -143,7 +143,7 @@ local get_winbar = function()
 end
 
 vim.api.nvim_create_augroup("_winbar", {})
-if vim.fn.has("nvim-0.8") == 1 then
+if vim.fn.has "nvim-0.8" == 1 then
   vim.api.nvim_create_autocmd(
     { "CursorMoved", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed" },
     {

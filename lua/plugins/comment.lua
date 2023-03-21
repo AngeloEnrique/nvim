@@ -1,14 +1,14 @@
 return {
-	"numToStr/Comment.nvim",
-	event = "BufRead",
-	config = function()
-		local comment = require("Comment")
-		local pre_hook
-		local ts_comment = require("ts_context_commentstring.integrations.comment_nvim")
-		pre_hook = ts_comment.create_pre_hook()
+  "numToStr/Comment.nvim",
+  event = "BufRead",
+  config = function()
+    local comment = require "Comment"
+    local pre_hook
+    local ts_comment = require "ts_context_commentstring.integrations.comment_nvim"
+    pre_hook = ts_comment.create_pre_hook()
 
-		comment.setup({
-			pre_hook = pre_hook,
-		})
-	end,
+    comment.setup {
+      pre_hook = pre_hook,
+    }
+  end,
 } -- For comments
