@@ -5,7 +5,7 @@ return {
   dependencies = {
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
-    "HiPhish/nvim-ts-rainbow2",
+    -- "HiPhish/nvim-ts-rainbow2",
     {
       "windwp/nvim-autopairs",
       opts = {
@@ -73,12 +73,22 @@ return {
       autotag = {
         enable = true,
       },
-      rainbow = {
-        enable = true,
-        disable = {},
-        query = "rainbow-parens",
-        strategy = require("ts-rainbow").strategy.global,
-      },
+      -- rainbow = {
+      --   enable = false,
+      --   disable = {},
+      --   query = {
+      --     "rainbow-parens",
+      --     html = "rainbow-tags",
+      --     tsx = {
+      --       "rainbow-tags",
+      --     },
+      --     javascript = {
+      --       "rainbow-parens-react",
+      --       "rainbow-tags-react",
+      --     },
+      --   },
+      --   strategy = require("ts-rainbow").strategy.global,
+      -- },
       context_commentstring = {
         enable = true,
         enable_autocmd = false,
