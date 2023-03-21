@@ -111,7 +111,32 @@ return {
       cmd = { "typescript-language-server", "--stdio" },
     }
 
+    local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    nvim_lsp.emmet_ls.setup {
+      on_attach = on_attach,
+      capabilities = cmp_capabilities,
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+      },
+    }
+
     nvim_lsp.tailwindcss.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+
+    nvim_lsp.html.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+
+    nvim_lsp.jsonls.setup {
       on_attach = on_attach,
       capabilities = capabilities,
     }

@@ -5,7 +5,7 @@ return {
   dependencies = {
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
-    "mrjones2014/nvim-ts-rainbow",
+    "HiPhish/nvim-ts-rainbow2",
     {
       "windwp/nvim-autopairs",
       opts = {
@@ -75,8 +75,9 @@ return {
       },
       rainbow = {
         enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
+        disable = {},
+        query = "rainbow-parens",
+        strategy = require("ts-rainbow").strategy.global,
       },
       context_commentstring = {
         enable = true,
