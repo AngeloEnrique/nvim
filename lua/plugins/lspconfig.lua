@@ -64,6 +64,12 @@ return {
         end
         client.server_capabilities.document_formatting = false
       end
+      if client.name == "eslint" then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+        })
+      end
       if client.supports_method "textDocument/formatting" then
         if FORMAT_ON_SAVE then
           vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
@@ -90,6 +96,10 @@ return {
           },
         },
       },
+    }
+
+    nvim_lsp.eslint.setup {
+      on_attach = on_attach,
     }
 
     nvim_lsp.rust_analyzer.setup {
