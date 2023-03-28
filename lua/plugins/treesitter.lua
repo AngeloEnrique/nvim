@@ -64,11 +64,15 @@ return {
       highlight = {
         enable = true,
         aditional_vim_regex_highlighting = false,
-        disable = { "html" },
+        disable = function()
+          return vim.b.large_buf
+        end
       },
       indent = {
         enable = true,
-        disable = {},
+        disable = function()
+          return vim.b.large_buf
+        end
       },
       autotag = {
         enable = true,
