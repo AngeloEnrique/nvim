@@ -17,6 +17,14 @@ return {
             ignore = true,
           },
         },
+        text = {
+          spinner = "circle_halves",
+        },
+        window = {
+          blend = 0,
+          border = "rounded",
+          relative = "editor",
+        },
       },
     },
   },
