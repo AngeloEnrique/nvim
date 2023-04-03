@@ -1,7 +1,12 @@
 return {
   { "lewis6991/gitsigns.nvim", event = "BufRead", config = true },
   {
+    "tpope/vim-fugitive",
+    event = "BufRead",
+  },
+  {
     "dinhhuy258/git.nvim",
+    enabled = false,
     event = "BufRead",
     opts = {
       default_mappings = false,
