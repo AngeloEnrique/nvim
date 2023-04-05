@@ -4,6 +4,7 @@ return {
   keys = {
     { "<leader>no", "<cmd>Neorg index<cr>", desc = "Neorg" },
   },
+  cmd = { "Neorg" },
   dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } },
   opts = {
     load = {
