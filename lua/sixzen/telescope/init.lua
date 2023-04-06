@@ -32,24 +32,16 @@ function M.branches()
   }
 end
 
-function M.search_config()
-  require("telescope.builtin").git_files {
-    prompt_title = "< Dotfiles >",
-    cwd = "$HOME/.dotfiles",
-    show_untracked = true,
-  }
-end
-
 M.find_nvim_config = function()
   require("telescope.builtin").find_files {
-    prompt_title = "< Neovim >",
+    prompt_title = "Neovim",
     cwd = "$HOME/.config/nvim/",
   }
 end
 
 M.find_nvim_plugin = function()
   require("telescope.builtin").find_files {
-    prompt_title = "< Plugins >",
+    prompt_title = "Plugins",
     cwd = "$HOME/.config/nvim/lua/plugins/",
     attach_mappings = function(_, map)
       map("i", "<C-t>", my_actions.create_plugin)
