@@ -8,7 +8,7 @@ return {
   },
   keys = { { "<leader>d" } },
   config = function()
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
 
     local config = {
       builtinDap = {
