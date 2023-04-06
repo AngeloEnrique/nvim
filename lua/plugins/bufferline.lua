@@ -6,7 +6,7 @@ return {
   event = "BufRead",
   config = function()
     local bufferline = require "bufferline"
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
 
     local function is_ft(b, ft)
       return vim.bo[b].filetype == ft

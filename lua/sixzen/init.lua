@@ -1,0 +1,8 @@
+require "sixzen.base"
+require "sixzen.highlights"
+require "sixzen.maps"
+require "sixzen.plugin-loader"
+require "sixzen.colors"
+require "sixzen.winbar"
+require "sixzen.clipboard"
+require "sixzen.globals"

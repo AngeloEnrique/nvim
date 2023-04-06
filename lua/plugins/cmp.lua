@@ -18,7 +18,7 @@ return {
     local cmp = require "cmp"
     local cmp_window = require "cmp.config.window"
     local cmp_mapping = require "cmp.config.mapping"
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))

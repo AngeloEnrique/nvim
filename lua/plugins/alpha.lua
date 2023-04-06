@@ -39,7 +39,7 @@ return {
       "         ░    ░  ░    ░ ░        ░   ░         ░   ",
       "                                ░                  ",
     }
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
     local header = {
       type = "text",
       val = function()

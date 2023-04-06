@@ -3,7 +3,7 @@ if not status then
   return
 end
 
-local icons = require "icons"
+local icons = require "sixzen.icons"
 
 local winbar_filetype_exclude = {
   "help",

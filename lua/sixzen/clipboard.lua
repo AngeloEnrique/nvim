@@ -8,13 +8,13 @@ local is_win = has "win32"
 local is_wsl = has "wsl"
 
 if is_wsl then
-  require "wsl"
+  require "sixzen.wsl"
   return
 end
 
 if is_mac or is_linux then
-  require "unix"
+  require "sixzen.unix"
 end
 if is_win then
-  require "windows"
+  require "sixzen.windows"
 end

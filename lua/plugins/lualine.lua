@@ -53,7 +53,7 @@ return {
       return providers_for_methods
     end
 
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
 
     lualine.setup {
       options = {

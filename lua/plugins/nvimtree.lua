@@ -5,7 +5,7 @@ return {
   config = function()
     local tree = require "nvim-tree"
 
-    local icons = require "icons"
+    local icons = require "sixzen.icons"
 
     tree.setup {
       auto_reload_on_write = false,
