@@ -40,16 +40,16 @@ return {
     end,
   },
   {
-    "sindrets/diffview.nvim",
-    keys = { { "<leader><leader>dv", "<cmd>DiffviewOpen<CR>" } },
-  },
-  {
     "TimUntersberger/neogit",
     enabled = true,
     keys = { { "<leader><leader>ng", "<cmd>Neogit<CR>" } },
     dependencies = {
       {
         "nvim-lua/plenary.nvim",
+        {
+          "sindrets/diffview.nvim",
+          keys = { { "<leader><leader>dv", "<cmd>DiffviewOpen<CR>" } },
+        },
       },
     },
     opts = {
