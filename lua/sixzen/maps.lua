@@ -69,4 +69,4 @@ keymap.set("n", "<leader><down>", "3<C-w>-")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-keymap.set("n", "<leader>x", ":lua require'utils'.buf_kill('bd', 0, false) <CR>", { silent = true })
+keymap.set("n", "<leader>x", ":lua require'sixzen.utils'.buf_kill('bd', 0, false) <CR>", { silent = true })
