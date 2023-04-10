@@ -46,8 +46,8 @@ keymap.set("v", ">", ">gv")
 -- New tab
 keymap.set("n", "<leader>te", ":tabedit<Return>", { silent = true })
 -- Split window
-keymap.set("n", "<leader>ss", ":split<Return><C-w>w", { silent = true })
-keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", { silent = true })
+keymap.set("n", "<leader>-", ":split<Return><C-w>w", { silent = true })
+keymap.set("n", "<leader>|", ":vsplit<Return><C-w>w", { silent = true })
 -- Move window (now using tmux plugin)
 keymap.set("n", "<leader><Tab>", "<C-w>w")
 -- keymap.set("", "s<left>", "<C-w>h")
