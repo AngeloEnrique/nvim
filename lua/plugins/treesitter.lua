@@ -46,7 +46,7 @@ return {
         "python",
         "http",
         "bash",
-        "help",
+        "vimdoc",
         "yaml",
         "toml",
         "go",
