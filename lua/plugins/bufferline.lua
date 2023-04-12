@@ -52,15 +52,15 @@ return {
       options = {
         mode = "buffers",                        -- set to "tabs" to only show tabpages instead
         numbers = "none",                        -- can be "none" | "ordinal" | "buffer_id" | "both" | function
-        close_command = "bdelete! %d",           -- can be a string | function, see "Mouse actions"
-        right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
-        left_mouse_command = "buffer %d",        -- can be a string | function, see "Mouse actions"
-        middle_mouse_command = nil,              -- can be a string | function, see "Mouse actions"
+        -- close_command = "bdelete! %d",           -- can be a string | function, see "Mouse actions"
+        -- right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
+        -- left_mouse_command = "buffer %d",        -- can be a string | function, see "Mouse actions"
+        -- middle_mouse_command = nil,              -- can be a string | function, see "Mouse actions"
         indicator = {
           icon = icons.ui.BoldLineLeft,          -- this should be omitted if indicator style is not 'icon'
           style = "icon",                        -- can also be 'underline'|'none',
         },
-        buffer_close_icon = icons.ui.Close,
+        buffer_close_icon = "",
         modified_icon = icons.ui.Circle,
         close_icon = icons.ui.BoldClose,
         left_trunc_marker = icons.ui.ArrowCircleLeft,
