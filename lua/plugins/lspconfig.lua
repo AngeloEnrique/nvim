@@ -10,6 +10,9 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     {
+      "jose-elias-alvarez/typescript.nvim",
+    },
+    {
       "lvimuser/lsp-inlayhints.nvim",
       config = function()
         require("lsp-inlayhints").setup()
@@ -133,44 +136,88 @@ return {
       on_attach = on_attach,
       capabilities = capabilities,
     }
-
-    nvim_lsp.tsserver.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
+    require("typescript").setup {
+      disable_commands = false, -- prevent the plugin from creating Vim commands
+      debug = false, -- enable debug logging for commands
+      go_to_source_definition = {
+        fallback = true, -- fall back to standard LSP definition on failure
       },
-      cmd = { "typescript-language-server", "--stdio" },
-      settings = {
-        typescript = {
-          inlayHints = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-          },
+      server = {
+        -- pass options to lspconfig's setup method
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
         },
-        javascript = {
-          inlayHints = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
+        cmd = { "typescript-language-server", "--stdio" },
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
           },
         },
       },
     }
+    -- nvim_lsp.tsserver.setup {
+    --   on_attach = on_attach,
+    --   capabilities = capabilities,
+    --   filetypes = {
+    --     "javascript",
+    --     "javascriptreact",
+    --     "javascript.jsx",
+    --     "typescript",
+    --     "typescriptreact",
+    --     "typescript.tsx",
+    --   },
+    --   cmd = { "typescript-language-server", "--stdio" },
+    --   settings = {
+    --     typescript = {
+    --       inlayHints = {
+    --         includeInlayParameterNameHints = "all",
+    --         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+    --         includeInlayFunctionParameterTypeHints = true,
+    --         includeInlayVariableTypeHints = true,
+    --         includeInlayPropertyDeclarationTypeHints = true,
+    --         includeInlayFunctionLikeReturnTypeHints = true,
+    --         includeInlayEnumMemberValueHints = true,
+    --       },
+    --     },
+    --     javascript = {
+    --       inlayHints = {
+    --         includeInlayParameterNameHints = "all",
+    --         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+    --         includeInlayFunctionParameterTypeHints = true,
+    --         includeInlayVariableTypeHints = true,
+    --         includeInlayPropertyDeclarationTypeHints = true,
+    --         includeInlayFunctionLikeReturnTypeHints = true,
+    --         includeInlayEnumMemberValueHints = true,
+    --       },
+    --     },
+    --   },
+    -- }
 
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
     nvim_lsp.emmet_ls.setup {
@@ -222,7 +269,7 @@ return {
           },
           hint = {
             enable = true,
-          }
+          },
         },
       },
     }
