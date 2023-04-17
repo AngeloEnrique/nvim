@@ -2,12 +2,31 @@ return {
   "neovim/nvim-lspconfig", -- LSP
   event = "BufRead",
   dependencies = {
-    "SmiteshP/nvim-navic",             -- Breadcrumb
-    "mfussenegger/nvim-jdtls",         -- Java stuffs
+    "SmiteshP/nvim-navic", -- Breadcrumb
+    "mfussenegger/nvim-jdtls", -- Java stuffs
     "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+    },
+    {
+      "lvimuser/lsp-inlayhints.nvim",
+      config = function()
+        require("lsp-inlayhints").setup()
+        vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+        vim.api.nvim_create_autocmd("LspAttach", {
+          group = "LspAttach_inlayhints",
+          callback = function(args)
+            if not (args.data and args.data.client_id) then
+              return
+            end
+
+            local bufnr = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            require("lsp-inlayhints").on_attach(client, bufnr, false)
+          end,
+        })
+      end,
     },
     {
       "j-hui/fidget.nvim", -- LSP progress
@@ -127,6 +146,30 @@ return {
         "typescript.tsx",
       },
       cmd = { "typescript-language-server", "--stdio" },
+      settings = {
+        typescript = {
+          inlayHints = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
+        },
+        javascript = {
+          inlayHints = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
+        },
+      },
     }
 
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -177,6 +220,9 @@ return {
           telemetry = {
             enable = false,
           },
+          hint = {
+            enable = true,
+          }
         },
       },
     }
