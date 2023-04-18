@@ -1,9 +1,9 @@
 return {
   "akinsho/nvim-bufferline.lua",
+  event = "UiEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  event = "BufRead",
   config = function()
     local bufferline = require "bufferline"
     local icons = require "sixzen.icons"

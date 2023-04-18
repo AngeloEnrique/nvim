@@ -2,8 +2,8 @@ return {
   "neovim/nvim-lspconfig", -- LSP
   event = "BufRead",
   dependencies = {
-    "SmiteshP/nvim-navic", -- Breadcrumb
-    "mfussenegger/nvim-jdtls", -- Java stuffs
+    "SmiteshP/nvim-navic",             -- Breadcrumb
+    "mfussenegger/nvim-jdtls",         -- Java stuffs
     "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     "williamboman/mason.nvim",
     dependencies = {
@@ -11,6 +11,20 @@ return {
     },
     {
       "jose-elias-alvarez/typescript.nvim",
+    },
+    {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function()
+        require("lsp_lines").setup()
+
+        local opts = { noremap = true, silent = true }
+        vim.keymap.set(
+          "",
+          "<leader>ls",
+          require("lsp_lines").toggle,
+          opts
+        )
+      end,
     },
     {
       "lvimuser/lsp-inlayhints.nvim",
@@ -60,7 +74,7 @@ return {
     local FORMAT_ON_SAVE = false
 
     local JAVA_DAP_ACTIVE = true
-    local protocol = require "vim.lsp.protocol"
+    -- local protocol = require "vim.lsp.protocol"
     local lsp_formatting = function(bufnr)
       vim.lsp.buf.format {
         filter = function(client)
@@ -138,9 +152,9 @@ return {
     }
     require("typescript").setup {
       disable_commands = false, -- prevent the plugin from creating Vim commands
-      debug = false, -- enable debug logging for commands
+      debug = false,            -- enable debug logging for commands
       go_to_source_definition = {
-        fallback = true, -- fall back to standard LSP definition on failure
+        fallback = true,        -- fall back to standard LSP definition on failure
       },
       server = {
         -- pass options to lspconfig's setup method
@@ -280,11 +294,20 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    -- vim.diagnostic.config {
+    --   virtual_text = {
+    --     prefix = "●",
+    --   },
+    --   update_in_insert = true,
+    --   float = {
+    --     source = "always", -- Or "if_many"
+    --   },
+    -- }
+
     vim.diagnostic.config {
-      virtual_text = {
-        prefix = "●",
-      },
+      virtual_text = false,
       update_in_insert = true,
+      virtual_lines = true,
       float = {
         source = "always", -- Or "if_many"
       },
