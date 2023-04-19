@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim", -- Statusline
   event = "UiEnter",
+  enabled = false,
   config = function()
     local status, lualine = pcall(require, "lualine")
     if not status then

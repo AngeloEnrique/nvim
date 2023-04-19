@@ -288,31 +288,6 @@ return {
       },
     }
 
-    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
-    -- vim.diagnostic.config {
-    --   virtual_text = {
-    --     prefix = "●",
-    --   },
-    --   update_in_insert = true,
-    --   float = {
-    --     source = "always", -- Or "if_many"
-    --   },
-    -- }
-
-    vim.diagnostic.config {
-      virtual_text = false,
-      update_in_insert = true,
-      virtual_lines = true,
-      float = {
-        source = "always", -- Or "if_many"
-      },
-    }
-
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "<leader>gK", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
   end,
