@@ -5,8 +5,8 @@ return {
     { "lewis6991/gitsigns.nvim", config = true },
   },
   config = function()
-    local conditions = require("heirline.conditions")
-    local utils = require("heirline.utils")
+    local conditions = require "heirline.conditions"
+    local utils = require "heirline.utils"
     local colors = {
       bright_bg = utils.get_highlight("Folded").bg,
       bright_fg = utils.get_highlight("Folded").fg,
@@ -90,7 +90,7 @@ return {
           r = "orange",
           ["!"] = "red",
           t = "red",
-        }
+        },
       },
       -- We can now access the value of mode() that, by now, would have been
       -- computed by `init()` and use it to index our strings dictionary.
@@ -105,7 +105,7 @@ return {
       -- Same goes for the highlight. Now the foreground will change according to the current mode.
       hl = function(self)
         local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], bold = true, }
+        return { fg = self.mode_colors[mode], bold = true }
       end,
       -- Re-evaluate the component only on ModeChanged event!
       -- Also allows the statusline to be re-evaluated when entering operator-pending mode
@@ -113,7 +113,7 @@ return {
         "ModeChanged",
         pattern = "*:*",
         callback = vim.schedule_wrap(function()
-          vim.cmd("redrawstatus")
+          vim.cmd "redrawstatus"
         end),
       },
     }
@@ -130,14 +130,15 @@ return {
       init = function(self)
         local filename = self.filename
         local extension = vim.fn.fnamemodify(filename, ":e")
-        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+        self.icon, self.icon_color =
+            require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
       end,
       provider = function(self)
         return self.icon and (self.icon .. " ")
       end,
       hl = function(self)
         return { fg = self.icon_color }
-      end
+      end,
     }
 
     local FileName = {
@@ -145,7 +146,9 @@ return {
         -- first, trim the pattern relative to the current directory. For other
         -- options, see :h filename-modifers
         local filename = vim.fn.fnamemodify(self.filename, ":.")
-        if filename == "" then return "[No Name]" end
+        if filename == "" then
+          return "[No Name]"
+        end
         -- now, if the filename would occupy more than 1/4th of the available
         -- space, we trim the file path to its initials
         -- See Flexible Components section below for dynamic truncation
@@ -200,11 +203,12 @@ return {
     }
 
     -- let's add the children to our FileNameBlock component
-    FileNameBlock = utils.insert(FileNameBlock,
+    FileNameBlock = utils.insert(
+      FileNameBlock,
       FileIcon,
       utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
       FileFlags,
-      { provider = '%<' }                      -- this means that the statusline is cut here when there's not enough space
+      { provider = "%<" }                      -- this means that the statusline is cut here when there's not enough space
     )
 
     local FileType = {
@@ -217,7 +221,7 @@ return {
     local FileSize = {
       provider = function()
         -- stackoverflow, compute human readable file size
-        local suffix = { 'b', 'k', 'M', 'G', 'T', 'P', 'E' }
+        local suffix = { "b", "k", "M", "G", "T", "P", "E" }
         local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
         fsize = (fsize < 0 and 0) or fsize
         if fsize < 1024 then
@@ -225,7 +229,7 @@ return {
         end
         local i = math.floor((math.log(fsize) / math.log(1024)))
         return string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1])
-      end
+      end,
     }
 
     local FileLastModified = {
@@ -233,24 +237,24 @@ return {
       provider = function()
         local ftime = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
         return (ftime > 0) and os.date("%c", ftime)
-      end
+      end,
     }
 
     local LSPActive = {
       condition = conditions.lsp_attached,
-      update    = { 'LspAttach', 'LspDetach' },
+      update = { "LspAttach", "LspDetach" },
       -- You can keep it simple,
       -- provider = " [LSP]",
 
       -- Or complicate things a bit and get the servers names
-      provider  = function()
+      provider = function()
         local names = {}
         local copilot = false
-        for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-          if (server.name ~= "null-ls" and server.name ~= "copilot") then
+        for i, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+          if server.name ~= "null-ls" and server.name ~= "copilot" then
             table.insert(names, server.name)
           end
-          if (server.name == "copilot") then
+          if server.name == "copilot" then
             copilot = true
           end
         end
@@ -260,7 +264,7 @@ return {
           return " [" .. table.concat(names, " ") .. "]"
         end
       end,
-      hl        = { fg = "green", bold = true },
+      hl = { fg = "green", bold = true },
     }
     -- We're getting minimalists here!
     local Ruler = {
@@ -274,9 +278,9 @@ return {
     -- I take no credits for this! :lion:
     local ScrollBar = {
       static = {
-        -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+        sbar = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁" },
         -- Another variant, because the more choice the better.
-        sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+        -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
       },
       provider = function(self)
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -298,7 +302,7 @@ return {
         provider = function(self)
           return " " .. self.status_dict.head
         end,
-        hl = { bold = true }
+        hl = { bold = true },
       },
     }
 
@@ -313,7 +317,7 @@ return {
         condition = function(self)
           return self.has_changes
         end,
-        provider = " ("
+        provider = " [",
       },
       {
         provider = function(self)
@@ -340,7 +344,7 @@ return {
         condition = function(self)
           return self.has_changes
         end,
-        provider = ")",
+        provider = "]",
       },
     }
 
@@ -397,9 +401,23 @@ return {
     ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
 
     local DefaultStatusline = {
-      ViMode, Space, Git, Space, FileNameBlock, Align,
-      GitDiff, Space, Diagnostics, Space, LSPActive, Align,
-      FileType, Space, Ruler, Space, ScrollBar
+      ViMode,
+      Space,
+      Git,
+      Space,
+      FileNameBlock,
+      Align,
+      GitDiff,
+      Space,
+      Diagnostics,
+      Space,
+      LSPActive,
+      Align,
+      FileType,
+      Space,
+      Ruler,
+      Space,
+      ScrollBar,
     }
 
     local InactiveStatusline = {
@@ -411,15 +429,15 @@ return {
     }
     local SpecialStatusline = {
       condition = function()
-        return conditions.buffer_matches({
+        return conditions.buffer_matches {
           buftype = { "nofile", "prompt", "help", "quickfix" },
           filetype = { "^git.*", "fugitive" },
-        })
+        }
       end,
       FileType,
       Space,
       HelpFileName,
-      Align
+      Align,
     }
     local StatusLines = {
       hl = function()
@@ -437,6 +455,6 @@ return {
       DefaultStatusline,
     }
 
-    require("heirline").setup({ statusline = StatusLines })
-  end
+    require("heirline").setup { statusline = StatusLines }
+  end,
 }
