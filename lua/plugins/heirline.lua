@@ -22,25 +22,15 @@ return {
       diag_error = utils.get_highlight("DiagnosticError").fg,
       diag_hint = utils.get_highlight("DiagnosticHint").fg,
       diag_info = utils.get_highlight("DiagnosticInfo").fg,
-      git_del = utils.get_highlight("diffDeleted").fg,
-      git_add = utils.get_highlight("diffAdded").fg,
-      git_change = utils.get_highlight("diffChanged").fg,
+      git_del = utils.get_highlight("GitSignsDelete").fg,
+      git_add = utils.get_highlight("GitSignsAdd").fg,
+      git_change = utils.get_highlight("GitSignsChange").fg,
     }
     require("heirline").load_colors(colors)
     local icons = require "sixzen.icons"
     local ViMode = {
-      -- get vim current mode, this information will be required by the provider
-      -- and the highlight functions, so we compute it only once per component
-      -- evaluation and store it as a component attribute
-      init = function(self)
-        self.mode = vim.fn.mode(1) -- :h mode()
-      end,
-      -- Now we define some dictionaries to map the output of mode() to the
-      -- corresponding string and color. We can put these into `static` to compute
-      -- them at initialisation time.
       static = {
         mode_names = {
-          -- change the strings if you like it vvvvverbose!
           n = "N",
           no = "N?",
           nov = "N?",
@@ -76,39 +66,14 @@ return {
           ["!"] = "!",
           t = "T",
         },
-        mode_colors = {
-          n = "red",
-          i = "green",
-          v = "cyan",
-          V = "cyan",
-          ["\22"] = "cyan",
-          c = "orange",
-          s = "purple",
-          S = "purple",
-          ["\19"] = "purple",
-          R = "orange",
-          r = "orange",
-          ["!"] = "red",
-          t = "red",
-        },
       },
-      -- We can now access the value of mode() that, by now, would have been
-      -- computed by `init()` and use it to index our strings dictionary.
-      -- note how `static` fields become just regular attributes once the
-      -- component is instantiated.
-      -- To be extra meticulous, we can also add some vim statusline syntax to
-      -- control the padding and make sure our string is always at least 2
-      -- characters long. Plus a nice Icon.
-      provider = function(self)
-        return " %2(" .. self.mode_names[self.mode] .. "%)"
+      provider = function()
+        return " "
       end,
-      -- Same goes for the highlight. Now the foreground will change according to the current mode.
       hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], bold = true }
+        local color = self:mode_color() -- here!
+        return { bg = color, bold = true }
       end,
-      -- Re-evaluate the component only on ModeChanged event!
-      -- Also allows the statusline to be re-evaluated when entering operator-pending mode
       update = {
         "ModeChanged",
         pattern = "*:*",
@@ -165,7 +130,7 @@ return {
         condition = function()
           return vim.bo.modified
         end,
-        provider = "[+]",
+        provider = " [+]",
         hl = { fg = "green" },
       },
       {
@@ -251,7 +216,7 @@ return {
         local names = {}
         local copilot = false
         for i, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
-          if server.name ~= "null-ls" and server.name ~= "copilot" then
+          if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
             table.insert(names, server.name)
           end
           if server.name == "copilot" then
@@ -288,7 +253,10 @@ return {
         local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
         return string.rep(self.sbar[i], 2)
       end,
-      hl = { fg = "blue", bg = "bright_bg" },
+      hl = function(self)
+        local color = self:mode_color() -- here!
+        return { fg = color, bg = "bright_bg" }
+      end,
     }
 
     local Git = {
@@ -312,33 +280,44 @@ return {
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
-      hl = { fg = "purple" },
       {
         condition = function(self)
           return self.has_changes
         end,
-        provider = " [",
+        provider = "[",
       },
       {
         provider = function(self)
           local count = self.status_dict.added or 0
           return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors.git_add },
+        hl = { fg = "git_add" },
+      },
+      {
+        provider = " ",
+        condition = function(self)
+          return self.status_dict.added ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0)
+        end,
       },
       {
         provider = function(self)
           local count = self.status_dict.removed or 0
           return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors.git_del },
+        hl = { fg = "git_del" },
+      },
+      {
+        provider = " ",
+        condition = function(self)
+          return self.status_dict.changed ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.added ~= 0)
+        end,
       },
       {
         provider = function(self)
           local count = self.status_dict.changed or 0
           return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors.git_change },
+        hl = { fg = "git_change" },
       },
       {
         condition = function(self)
@@ -363,9 +342,9 @@ return {
         self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
       end,
       update = { "DiagnosticChanged", "BufEnter" },
-      hl = { fg = "blue" },
       {
-        provider = "![",
+        provider = "[",
+        condition = conditions.has_diagnostics,
       },
       {
         provider = function(self)
@@ -394,11 +373,12 @@ return {
       },
       {
         provider = "]",
+        condition = conditions.has_diagnostics,
       },
     }
     local Align = { provider = "%=" }
     local Space = { provider = " " }
-    ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
+    -- ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
 
     local DefaultStatusline = {
       ViMode,
@@ -418,6 +398,8 @@ return {
       Ruler,
       Space,
       ScrollBar,
+      Space,
+      ViMode,
     }
 
     local InactiveStatusline = {
@@ -450,6 +432,27 @@ return {
       -- the first statusline with no condition, or which condition returns true is used.
       -- think of it as a switch case with breaks to stop fallthrough.
       fallthrough = false,
+      static = {
+        mode_colors_map = {
+          n = "blue",
+          i = "green",
+          v = "cyan",
+          V = "cyan",
+          ["\22"] = "cyan",
+          c = "orange",
+          s = "purple",
+          S = "purple",
+          ["\19"] = "purple",
+          R = "orange",
+          r = "orange",
+          ["!"] = "red",
+          t = "green",
+        },
+        mode_color = function(self)
+          local mode = conditions.is_active() and vim.fn.mode() or "n"
+          return self.mode_colors_map[mode]
+        end,
+      },
       SpecialStatusline,
       InactiveStatusline,
       DefaultStatusline,
