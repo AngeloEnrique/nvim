@@ -1,6 +1,5 @@
 return {
   "akinsho/nvim-bufferline.lua",
-  enabled = false,
   event = "UiEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
@@ -51,7 +50,7 @@ return {
 
     bufferline.setup {
       options = {
-        mode = "buffers",                        -- set to "tabs" to only show tabpages instead
+        mode = "tabs",                        -- set to "tabs" to only show tabpages instead
         numbers = "none",                        -- can be "none" | "ordinal" | "buffer_id" | "both" | function
         -- close_command = "bdelete! %d",           -- can be a string | function, see "Mouse actions"
         -- right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
@@ -84,7 +83,7 @@ return {
         diagnostics_update_in_insert = false,
         diagnostics_indicator = diagnostics_indicator,
         -- NOTE: this will be called a lot so don't do any heavy processing here
-        custom_filter = custom_filter,
+        -- custom_filter = custom_filter,
         offsets = {
           {
             filetype = "undotree",
@@ -132,7 +131,7 @@ return {
           delay = 200,
           reveal = { "close" },
         },
-        sort_by = "id",
+        -- sort_by = "id",
       },
       highlights = {
         background = {
@@ -144,7 +143,7 @@ return {
       },
     }
 
-    vim.api.nvim_set_keymap("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", {})
-    vim.api.nvim_set_keymap("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", {})
+    -- vim.api.nvim_set_keymap("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", {})
+    -- vim.api.nvim_set_keymap("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", {})
   end,
 }
