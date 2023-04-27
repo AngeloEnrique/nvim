@@ -65,8 +65,8 @@ return {
           navic = true,
           treesitter = true,
           treesitter_context = true,
-          neogit = true
-
+          neogit = true,
+          neotree = true
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       }
