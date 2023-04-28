@@ -2,8 +2,7 @@ local keymap = vim.keymap
 
 keymap.set("n", "<Space>", "", {})
 vim.g.mapleader = " "
-keymap.set("n", "<BS>", "", {})
-vim.g.maplocalleader = vim.api.nvim_replace_termcodes("<BS>", false, false, true)
+vim.g.maplocalleader = "<C-/>"
 
 -- Exit and save
 -- keymap.set("n", "<leader>q", ":q<Return>", { silent = true })
@@ -68,5 +67,7 @@ keymap.set("n", "<leader><down>", "3<C-w>-")
 -- Move lines
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 keymap.set("n", "<leader>x", ":lua require'sixzen.utils'.buf_kill('bd', 0, false) <CR>", { silent = true })
