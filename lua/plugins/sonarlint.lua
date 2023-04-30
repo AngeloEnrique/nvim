@@ -1,6 +1,5 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-  enabled = false,
   config = function()
     require("sonarlint").setup {
       server = {
