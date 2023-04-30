@@ -4,31 +4,103 @@ if not status then
   return
 end
 
-local on_attach = require "sixzen.lsp.on_attach"
-local capabilities = require "sixzen.lsp.capabilities"
+local on_attach = require "sixzen.lsp".on_attach
+local capabilities = require "sixzen.lsp".capabilities
 
-nvim_lsp.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "off",
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
+local servers = {
+  ["pyright"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        python = {
+          analysis = {
+            typeCheckingMode = "off",
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
+          },
+        },
       },
-    },
-  },
+    }
+  end,
+  ["eslint"] = function()
+    return {
+      on_attach = on_attach,
+    }
+  end,
+  ["rust_analyzer"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
+  ["emmet_ls"] = function()
+    local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    return {
+      on_attach = on_attach,
+      capabilities = cmp_capabilities,
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+      },
+    }
+  end,
+  ["tailwindcss"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
+  ["html"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
+  ["jsonls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
+  ["lua_ls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          runtime = {
+            version = "LuaJIT",
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
+          hint = {
+            enable = true,
+          },
+        },
+      },
+    }
+  end
+
 }
 
-nvim_lsp.eslint.setup {
-  on_attach = on_attach,
-}
+for server, setup in pairs(servers) do
+  nvim_lsp[server].setup(setup())
+end
 
-nvim_lsp.rust_analyzer.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
 require("typescript").setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false,            -- enable debug logging for commands
@@ -111,58 +183,3 @@ require("typescript").setup {
 --     },
 --   },
 -- }
-
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-nvim_lsp.emmet_ls.setup {
-  on_attach = on_attach,
-  capabilities = cmp_capabilities,
-  filetypes = {
-    "html",
-    "typescriptreact",
-    "javascriptreact",
-    "css",
-    "sass",
-    "scss",
-    "less",
-  },
-}
-
-nvim_lsp.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-nvim_lsp.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-nvim_lsp.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-nvim_lsp.lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      runtime = {
-        version = "LuaJIT",
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
-      },
-      hint = {
-        enable = true,
-      },
-    },
-  },
-}

@@ -89,9 +89,10 @@ local get_filename = function()
 
     local hl_group = "FileIconColor" .. extension
 
-    vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
+    local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+    vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color, bg = statusline_hl.background })
     if isempty(file_icon) then
-      file_icon = icons.kind.File
+      file_icon = icons.kind.File .. " "
     end
 
     local buf_ft = vim.bo.filetype
@@ -116,7 +117,6 @@ local get_filename = function()
       file_icon = icons.ui.DebugConsole
     end
 
-    local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
     vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground, bg = statusline_hl.background })
 

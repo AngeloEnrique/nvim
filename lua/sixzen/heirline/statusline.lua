@@ -185,6 +185,43 @@ local LSPActive = {
       provider = function()
         local names = {}
         local copilot = false
+        local buf_ft = vim.bo.filetype
+
+        local list_registered = function(filetype)
+          local s = require "null-ls.sources"
+          local available_sources = s.get_available(filetype)
+          local registered = {}
+          for _, source in ipairs(available_sources) do
+            for method in pairs(source.methods) do
+              registered[method] = registered[method] or {}
+              table.insert(registered[method], source.name)
+            end
+          end
+          return registered
+        end
+
+        local null_ls = require "null-ls"
+
+        local formatters_list = function(filetype)
+          local method = null_ls.methods.FORMATTING
+          local registered_providers = list_registered(filetype)
+          return registered_providers[method] or {}
+        end
+
+        local linter_list = function(filetype)
+          local alternative_methods = {
+            null_ls.methods.DIAGNOSTICS,
+            null_ls.methods.DIAGNOSTICS_ON_OPEN,
+            null_ls.methods.DIAGNOSTICS_ON_SAVE,
+          }
+          local registered_providers = list_registered(filetype)
+          local providers_for_methods = vim.tbl_flatten(vim.tbl_map(function(m)
+            return registered_providers[m] or {}
+          end, alternative_methods))
+
+          return providers_for_methods
+        end
+
         for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
           if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
             table.insert(names, server.name)
@@ -193,10 +230,21 @@ local LSPActive = {
             copilot = true
           end
         end
+
+        -- add formatter
+        local supported_formatters = formatters_list(buf_ft)
+        vim.list_extend(names, supported_formatters)
+
+        -- add linter
+        local supported_linters = linter_list(buf_ft)
+        vim.list_extend(names, supported_linters)
+
+        local unique_client_names = vim.fn.uniq(names)
+
         if copilot then
-          return " [" .. table.concat(names, " ") .. "] " .. icons.git.Octoface .. " "
+          return " [" .. table.concat(unique_client_names, " ") .. "] " .. icons.git.Octoface .. " "
         else
-          return " [" .. table.concat(names, " ") .. "]"
+          return " [" .. table.concat(unique_client_names, " ") .. "]"
         end
       end,
       hl = { fg = "green", bold = true },

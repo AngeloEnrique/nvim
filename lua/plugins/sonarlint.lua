@@ -1,5 +1,7 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+  event = "BufEnter",
+  ft = "java",
   config = function()
     require("sonarlint").setup {
       server = {

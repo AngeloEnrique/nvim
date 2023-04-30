@@ -65,6 +65,7 @@ return {
     },
   },
   config = function()
-    require("sixzen.lsp")
+    require("sixzen.lsp.servers")
+    require("sixzen.lsp.mapping")
   end,
 }
