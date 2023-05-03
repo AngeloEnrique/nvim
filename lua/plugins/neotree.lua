@@ -71,9 +71,9 @@ return {
           expander_highlight = "NeoTreeExpander",
         },
         icon = {
-          folder_closed = "",
-          folder_open = "",
-          folder_empty = "ﰊ",
+          folder_closed = " ",
+          folder_open = " ",
+          folder_empty = "ﰊ" ,
           -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
           -- then these will never be used.
           default = "*",
@@ -93,14 +93,14 @@ return {
             -- Change type
             added = "",    -- or "✚", but this is redundant info if you use git_status_colors on the name
             modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted = "✖", -- this can only be used in the git_status source
-            renamed = "", -- this can only be used in the git_status source
+            deleted = "✖ ", -- this can only be used in the git_status source
+            renamed = " ", -- this can only be used in the git_status source
             -- Status type
-            untracked = "",
-            ignored = "",
-            unstaged = "",
-            staged = "",
-            conflict = "",
+            untracked = " ",
+            ignored = " ",
+            unstaged = " ",
+            staged = " ",
+            conflict = " ",
           },
         },
       },
@@ -255,8 +255,8 @@ return {
     }
 
     local normal_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
-    local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
-    local string_hl = vim.api.nvim_get_hl_by_name("String", true)
+    -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
+    -- local string_hl = vim.api.nvim_get_hl_by_name("String", true)
     local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
     -- local statusline_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
 
