@@ -4,8 +4,8 @@ if not status then
   return
 end
 
-local on_attach = require "sixzen.lsp".on_attach
-local capabilities = require "sixzen.lsp".capabilities
+local on_attach = require("sixzen.lsp").on_attach
+local capabilities = require("sixzen.lsp").capabilities()
 
 local servers = {
   ["pyright"] = function()
@@ -93,8 +93,7 @@ local servers = {
         },
       },
     }
-  end
-
+  end,
 }
 
 for server, setup in pairs(servers) do

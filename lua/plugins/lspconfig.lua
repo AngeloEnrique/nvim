@@ -18,12 +18,7 @@ return {
         require("lsp_lines").setup()
 
         local opts = { noremap = true, silent = true }
-        vim.keymap.set(
-          "",
-          "<leader>ls",
-          require("lsp_lines").toggle,
-          opts
-        )
+        vim.keymap.set("", "<leader>ls", require("lsp_lines").toggle, opts)
       end,
     },
     {
@@ -65,7 +60,7 @@ return {
     },
   },
   config = function()
-    require("sixzen.lsp.servers")
-    require("sixzen.lsp.mapping")
+    require "sixzen.lsp.servers"
+    require "sixzen.lsp.mapping"
   end,
 }

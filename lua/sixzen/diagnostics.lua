@@ -19,6 +19,6 @@ vim.diagnostic.config {
   update_in_insert = false,
   virtual_lines = true,
   float = {
-    source = "always",     -- Or "if_many"
+    source = "always", -- Or "if_many"
   },
 }

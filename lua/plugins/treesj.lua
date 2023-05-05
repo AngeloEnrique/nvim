@@ -1,10 +1,10 @@
 return {
-  'Wansmer/treesj',
-  keys = { '<space>m' },
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  "Wansmer/treesj",
+  keys = { "<space>m" },
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
-    local treesj = require('treesj')
-    treesj.setup({
+    local treesj = require "treesj"
+    treesj.setup {
       -- Use default keymaps
       -- (<space>m - toggle, <space>j - join, <space>s - split)
       use_default_keymaps = false,
@@ -20,19 +20,19 @@ return {
       -- hold - cursor follows the node/place on which it was called
       -- start - cursor jumps to the first symbol of the node being formatted
       -- end - cursor jumps to the last symbol of the node being formatted
-      cursor_behavior = 'hold',
+      cursor_behavior = "hold",
 
       -- Notify about possible problems or not
       notify = true,
 
       -- Use `dot` for repeat action
       dot_repeat = true,
-    })
+    }
     -- For use default preset and it work with dot
-    vim.keymap.set('n', '<leader>m', treesj.toggle)
+    vim.keymap.set("n", "<leader>m", treesj.toggle)
     -- For extending default preset with `recursive = true`, but this doesn't work with dot
-    vim.keymap.set('n', '<leader>M', function()
-      treesj.toggle({ split = { recursive = true } })
+    vim.keymap.set("n", "<leader>M", function()
+      treesj.toggle { split = { recursive = true } }
     end)
   end,
 }

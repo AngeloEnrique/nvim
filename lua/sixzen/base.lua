@@ -44,14 +44,14 @@ vim.opt.mouse = ""
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.laststatus = 3 -- always show status line
-vim.opt.ai = true -- Auto Indent
-vim.opt.si = true -- Smart Indent
-vim.opt.wrap = false -- No Wrap Lines
+vim.opt.ai = true      -- Auto Indent
+vim.opt.si = true      -- Smart Indent
+vim.opt.wrap = false   -- No Wrap Lines
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv "HOME" .. "/.cache/nvim/undodir"
 vim.opt.backspace = "start,eol,indent"
-vim.opt.path:append { "**" } -- Finding files - Search down into subfolders
+vim.opt.path:append { "**" }   -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { "*/node_modules/*" }
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.opt.whichwrap:append "<,>,[,],h,l"
@@ -97,10 +97,10 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()))
     if ok and stats and (stats.size > 1000000) then
       vim.b.large_buf = true
-      vim.cmd("syntax off")
-      vim.cmd("IlluminatePauseBuf") -- disable vim-illuminate
-      vim.cmd("IndentBlanklineDisable") -- disable indent-blankline.nvim
-      vim.cmd("TSContextDisable")
+      vim.cmd "syntax off"
+      vim.cmd "IlluminatePauseBuf"     -- disable vim-illuminate
+      vim.cmd "IndentBlanklineDisable" -- disable indent-blankline.nvim
+      vim.cmd "TSContextDisable"
       vim.opt_local.foldmethod = "manual"
       vim.opt_local.spell = false
     else

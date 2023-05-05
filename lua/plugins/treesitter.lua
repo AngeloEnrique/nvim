@@ -66,13 +66,13 @@ return {
         aditional_vim_regex_highlighting = false,
         disable = function()
           return vim.b.large_buf
-        end
+        end,
       },
       indent = {
         enable = true,
         disable = function()
           return vim.b.large_buf
-        end
+        end,
       },
       autotag = {
         enable = true,

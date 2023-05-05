@@ -33,7 +33,7 @@ return {
     end,
   },
 
-  { 'kevinhwang91/nvim-bqf' },
+  { "kevinhwang91/nvim-bqf" },
   {
     "axelvc/template-string.nvim",
     ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
