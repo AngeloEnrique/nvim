@@ -321,7 +321,7 @@ local GitDiff = {
       {
         provider = function(self)
           local count = self.status_dict.added or 0
-          return count > 0 and (" " .. count)
+          return count > 0 and (" " .. count)
         end,
         hl = { fg = "git_add" },
       },
@@ -334,7 +334,7 @@ local GitDiff = {
       {
         provider = function(self)
           local count = self.status_dict.removed or 0
-          return count > 0 and (" " .. count)
+          return count > 0 and (" " .. count)
         end,
         hl = { fg = "git_del" },
       },
@@ -347,7 +347,7 @@ local GitDiff = {
       {
         provider = function(self)
           local count = self.status_dict.changed or 0
-          return count > 0 and ("柳" .. count)
+          return count > 0 and (" " .. count)
         end,
         hl = { fg = "git_change" },
       },
