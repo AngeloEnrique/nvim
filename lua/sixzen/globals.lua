@@ -1,7 +1,7 @@
 --- Dumps all values into pretty print
 ---@vararg any
 ---@return any
-dump = function(...)
+Dump = function(...)
   local args = { ... }
 
   local mapped = {}

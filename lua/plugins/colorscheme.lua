@@ -66,7 +66,10 @@ return {
           treesitter = true,
           treesitter_context = true,
           neogit = true,
-          neotree = true
+          neotree = true,
+          mason = true,
+          lsp_trouble = true,
+          alpha = true
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       }

@@ -7,16 +7,15 @@ return {
       default = true,
     },
   }, -- File icons
-  { "mbbill/undotree",    keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
+  { "mbbill/undotree",   keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
   {
     "tpope/vim-dispatch",
     cmd = { "Make", "Dispatch" },
   },
-  { "tpope/vim-surround", event = "BufRead" },
-  { "tpope/vim-repeat",   event = "BufRead" },
-  { "tpope/vim-rhubarb",  event = "BufRead" },
-  { "tpope/vim-dotenv",   event = "BufRead" },
-  { "tpope/vim-eunuch",   event = "BufRead" },
+  { "tpope/vim-repeat",  event = "BufRead" },
+  { "tpope/vim-rhubarb", event = "BufRead" },
+  { "tpope/vim-dotenv",  event = "BufRead" },
+  { "tpope/vim-eunuch",  event = "BufRead" },
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
@@ -33,6 +32,8 @@ return {
       vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end,
   },
+
+  { 'kevinhwang91/nvim-bqf' },
   {
     "axelvc/template-string.nvim",
     ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
