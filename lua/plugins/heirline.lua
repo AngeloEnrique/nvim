@@ -1,6 +1,6 @@
 return {
   "rebelot/heirline.nvim",
-  event = "UiEnter",
+  event = "UIEnter",
   dependencies = {
     { "lewis6991/gitsigns.nvim", config = true },
   },

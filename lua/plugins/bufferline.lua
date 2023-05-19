@@ -1,6 +1,6 @@
 return {
   "akinsho/nvim-bufferline.lua",
-  event = "UiEnter",
+  event = "UIEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
