@@ -70,6 +70,7 @@ return {
           mason = true,
           lsp_trouble = true,
           alpha = true,
+          noice = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       }

@@ -40,24 +40,24 @@ return {
         })
       end,
     },
-    {
-      "j-hui/fidget.nvim", -- LSP progress
-      opts = {
-        sources = {
-          ["null-ls"] = {
-            ignore = true,
-          },
-        },
-        text = {
-          spinner = "circle_halves",
-        },
-        window = {
-          blend = 0,
-          border = "rounded",
-          relative = "editor",
-        },
-      },
-    },
+    -- {
+    --   "j-hui/fidget.nvim", -- LSP progress
+    --   opts = {
+    --     sources = {
+    --       ["null-ls"] = {
+    --         ignore = true,
+    --       },
+    --     },
+    --     text = {
+    --       spinner = "circle_halves",
+    --     },
+    --     window = {
+    --       blend = 0,
+    --       border = "rounded",
+    --       relative = "editor",
+    --     },
+    --   },
+    -- },
   },
   config = function()
     require "sixzen.lsp.servers"
