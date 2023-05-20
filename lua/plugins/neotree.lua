@@ -1,6 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  keys = { { "<leader>e", "<cmd>NeoTreeFloatToggle<CR>" } },
+  keys = { { "<leader>e", "<cmd>NeoTreeRevealToggle<CR>" } },
   branch = "v2.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -109,7 +109,7 @@ return {
       -- see `:h neo-tree-global-custom-commands`
       commands = {},
       window = {
-        position = "right",
+        position = "float",
         width = 40,
         mapping_options = {
           noremap = true,

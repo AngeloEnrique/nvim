@@ -167,3 +167,4 @@ vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = normal_hl.background, bg 
 require("telescope").load_extension "notify"
 require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
+require("telescope").load_extension "noice"
