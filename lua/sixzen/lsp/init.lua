@@ -39,6 +39,9 @@ M.on_attach = function(client, bufnr)
       command = "EslintFixAll",
     })
   end
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+  end
   if client.supports_method "textDocument/formatting" then
     if FORMAT_ON_SAVE then
       vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
