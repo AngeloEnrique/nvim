@@ -1,6 +1,6 @@
 return {
   "glepnir/lspsaga.nvim", -- LSP UIs
-  event = "BufRead",
+  event = "LspAttach",
   config = function()
     local saga = require "lspsaga"
 

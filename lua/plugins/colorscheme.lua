@@ -54,7 +54,11 @@ return {
         --   operators = {},
         -- },
         -- color_overrides = {},
-        -- custom_highlights = {},
+        -- custom_highlights = function(colors)
+        --   return {
+        --     LspInlayHint = { bg = colors.none },
+        --   }
+        -- end,
         integrations = {
           cmp = true,
           gitsigns = true,

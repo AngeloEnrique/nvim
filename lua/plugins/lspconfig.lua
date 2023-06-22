@@ -2,9 +2,8 @@ return {
   "neovim/nvim-lspconfig", -- LSP
   event = "BufRead",
   dependencies = {
-    "SmiteshP/nvim-navic",             -- Breadcrumb
-    "mfussenegger/nvim-jdtls",         -- Java stuffs
-    "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    "SmiteshP/nvim-navic",                            -- Breadcrumb
+    "jose-elias-alvarez/null-ls.nvim",                -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
