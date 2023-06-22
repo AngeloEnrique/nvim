@@ -8,7 +8,7 @@ local reloader = function()
   end
 end
 
-local fb_actions = require("telescope").extensions.file_browser.actions
+-- local fb_actions = require("telescope").extensions.file_browser.actions
 local actions = require "telescope.actions"
 local my_actions = require "sixzen.telescope.actions"
 
@@ -101,29 +101,29 @@ function M.refactor()
   return require("telescope").extensions.refactoring.refactors()
 end
 
-function M.file_browser_relative()
-  return M.file_browser { path = "%:p:h" }
-end
+-- function M.file_browser_relative()
+--   return M.file_browser { path = "%:p:h" }
+-- end
 
-function M.file_browser(opts)
-  opts = opts or {}
-
-  opts = {
-    path = opts.path,
-    sorting_strategy = "ascending",
-    scroll_strategy = "cycle",
-    layout_config = {
-      prompt_position = "top",
-    },
-    attach_mappings = function(_, map)
-      map("i", "<c-y>", fb_actions.create)
-
-      return true
-    end,
-  }
-
-  return require("telescope").extensions.file_browser.file_browser(opts)
-end
+-- function M.file_browser(opts)
+--   opts = opts or {}
+--
+--   opts = {
+--     path = opts.path,
+--     sorting_strategy = "ascending",
+--     scroll_strategy = "cycle",
+--     layout_config = {
+--       prompt_position = "top",
+--     },
+--     attach_mappings = function(_, map)
+--       map("i", "<c-y>", fb_actions.create)
+--
+--       return true
+--     end,
+--   }
+--
+--   return require("telescope").extensions.file_browser.file_browser(opts)
+-- end
 
 return setmetatable({}, {
   __index = function(_, k)

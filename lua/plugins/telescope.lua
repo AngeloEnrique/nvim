@@ -17,7 +17,7 @@ return {
         },
       },
     },
-    { "nvim-telescope/telescope-file-browser.nvim" },
+    -- { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-tree/nvim-web-devicons" },
   },
   config = function()

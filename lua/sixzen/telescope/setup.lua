@@ -1,7 +1,7 @@
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local action_layout = require "telescope.actions.layout"
-local fb_actions = require("telescope").extensions.file_browser.actions
+-- local fb_actions = require("telescope").extensions.file_browser.actions
 
 local set_prompt_to_entry_value = function(prompt_bufnr)
   local entry = action_state.get_selected_entry()
@@ -120,28 +120,28 @@ require("telescope").setup {
       use_highlighter = false,
       minimum_grep_characters = 6,
     },
-    file_browser = {
-      theme = "dropdown",
-      -- disables netrw add use telescope-file-browser in its place
-      hijack_netrw = true,
-      sorting_strategy = "ascending",
-      scroll_strategy = "cycle",
-      mappings = {
-        -- your custom inset mode mappings
-        ["i"] = {
-          ["<C-w>"] = function()
-            vim.cmd "normal vbd"
-          end,
-        },
-        ["n"] = {
-          ["N"] = fb_actions.create,
-          ["h"] = fb_actions.goto_parent_dir,
-          ["/"] = function()
-            vim.cmd "startinsert"
-          end,
-        },
-      },
-    },
+    -- file_browser = {
+    --   theme = "dropdown",
+    --   -- disables netrw add use telescope-file-browser in its place
+    --   hijack_netrw = true,
+    --   sorting_strategy = "ascending",
+    --   scroll_strategy = "cycle",
+    --   mappings = {
+    --     -- your custom inset mode mappings
+    --     ["i"] = {
+    --       ["<C-w>"] = function()
+    --         vim.cmd "normal vbd"
+    --       end,
+    --     },
+    --     ["n"] = {
+    --       ["N"] = fb_actions.create,
+    --       ["h"] = fb_actions.goto_parent_dir,
+    --       ["/"] = function()
+    --         vim.cmd "startinsert"
+    --       end,
+    --     },
+    --   },
+    -- },
   },
 }
 
@@ -165,6 +165,6 @@ vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = normal_hl.background })
 vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = normal_hl.background, bg = normal_hl.background })
 
 require("telescope").load_extension "notify"
-require("telescope").load_extension "file_browser"
+-- require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "noice"
