@@ -3,6 +3,9 @@ if not status then
   return
 end
 
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+
 -- Setup Workspace
 local home = os.getenv "HOME"
 local workspace_path = home .. "/.local/share/jdtls-workspace/"

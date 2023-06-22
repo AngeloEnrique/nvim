@@ -1,5 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
+  event = "UIEnter",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-lua/popup.nvim" },
