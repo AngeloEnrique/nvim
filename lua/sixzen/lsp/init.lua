@@ -26,12 +26,13 @@ M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
   end
-  if client.name == "jdt.ls" then
+  if client.name == "jdtls" then
     if JAVA_DAP_ACTIVE then
       require("jdtls").setup_dap()
       require("jdtls.dap").setup_dap_main_class_configs()
     end
     client.server_capabilities.document_formatting = false
+    vim.keymap.set("n", "<leader>i", "<cmd>lua vim.lsp.inlay_hint(0)<CR>")
   end
   if client.name == "eslint" then
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -40,7 +41,7 @@ M.on_attach = function(client, bufnr)
     })
   end
   if client.server_capabilities.inlayHintProvider then
-    vim.lsp.buf.inlay_hint(bufnr, true)
+    vim.keymap.set("n", "<leader>i", "<cmd>lua vim.lsp.inlay_hint(0)<CR>")
   end
   if client.supports_method "textDocument/formatting" then
     if FORMAT_ON_SAVE then

@@ -1,5 +1,5 @@
 return {
-  "glepnir/lspsaga.nvim", -- LSP UIs
+  "nvimdev/lspsaga.nvim", -- LSP UIs
   event = "LspAttach",
   config = function()
     local saga = require "lspsaga"
@@ -12,6 +12,16 @@ return {
         sign = true,
         sign_priority = 40,
         virtual_text = false,
+      },
+      code_action = {
+        num_shortcut = true,
+        show_server_name = true,
+        extend_gitsigns = true,
+        keys = {
+          -- string | table type
+          quit = "q",
+          exec = "<CR>",
+        },
       },
       symbol_in_winbar = {
         enable = false,
@@ -31,7 +41,7 @@ return {
 
     vim.keymap.set("n", "<leader>j", "<Cmd>Lspsaga diagnostic_jump_next<cr>", opts)
     vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<cr>", opts)
-    vim.keymap.set("n", "<leader>gd", "<Cmd>Lspsaga lsp_finder<cr>", opts)
+    vim.keymap.set("n", "<leader>gd", "<Cmd>Lspsaga finder<cr>", opts)
     vim.keymap.set("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<cr>", opts)
     vim.keymap.set("n", "<leader>gr", "<Cmd>Lspsaga rename<cr>", opts)
     -- Show line diagnostics

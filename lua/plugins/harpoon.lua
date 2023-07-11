@@ -4,9 +4,8 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-lua/popup.nvim",
   },
+  event = "VeryLazy",
   keys = {
-    { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>" },
-    { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>" },
   },
   config = function()
     require("harpoon").setup()
@@ -16,5 +15,7 @@ return {
         require("harpoon.ui").nav_file(i)
       end, { noremap = true, silent = true, expr = false })
     end
+    vim.keymap.set("n", "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>")
+    vim.keymap.set("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>")
   end,
 }

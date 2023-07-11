@@ -22,6 +22,7 @@ end
 local capabilities = require("sixzen.lsp").capabilities()
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
 -- Setup Testing and Debugging
 local bundles = {}
@@ -106,12 +107,12 @@ local config = {
       format = {
         enabled = false,
       },
+      signatureHelp = { enabled = true },
     },
-    signatureHelp = { enabled = true },
-    extendedClientCapabilities = extendedClientCapabilities,
   },
   init_options = {
     bundles = bundles,
+    extendedClientCapabilities = extendedClientCapabilities,
   },
 }
 
