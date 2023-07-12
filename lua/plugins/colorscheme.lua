@@ -62,11 +62,10 @@ return {
         integrations = {
           cmp = true,
           gitsigns = true,
-          nvimtree = true,
           telescope = true,
           notify = true,
           illuminate = true,
-          navic = true,
+          navic = { enabled = true, custom_bg = "lualine"},
           treesitter = true,
           treesitter_context = true,
           neogit = true,

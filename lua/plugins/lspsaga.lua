@@ -28,8 +28,7 @@ return {
         separator = " > ",
         hide_keyword = true,
         show_file = true,
-        folder_level = 1,
-        respect_root = false,
+        folder_level = 0,
         color_mode = true,
       },
       ui = {
@@ -48,5 +47,9 @@ return {
     vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
     -- Code action
     vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+
+    -- local normal_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
+    -- vim.api.nvim_set_hl(0, "Winbar", { bg = normal_hl.background })
+
   end,
 }
