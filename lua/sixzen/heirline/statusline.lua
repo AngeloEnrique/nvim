@@ -268,6 +268,14 @@ local Ruler = {
   provider = "%7(%l/%3L%):%2c %P",
 }
 
+local ShowMode = {
+  condition = require("noice").api.status.mode.has,
+  provider = require("noice").api.status.mode.get,
+  hl = function()
+    return { fg = "purple" }
+  end,
+}
+
 local ScrollBar = {
   static = {
     sbar = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁" },
@@ -570,6 +578,8 @@ local DefaultStatusline = {
   LSPActive,
   Space,
   Align,
+  ShowMode,
+  Space,
   FileType,
   Space,
   Ruler,
@@ -585,6 +595,7 @@ local InactiveStatusline = {
   Space,
   FileName,
   Align,
+  ShowMode,
 }
 
 local SpecialStatusline = {
@@ -598,6 +609,7 @@ local SpecialStatusline = {
   Space,
   HelpFileName,
   Align,
+  ShowMode,
 }
 
 M.StatusLines = {
