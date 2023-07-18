@@ -62,10 +62,10 @@ return {
         integrations = {
           cmp = true,
           gitsigns = true,
-          telescope = true,
+          telescope = { enabled = true, style = "nvchad" },
           notify = true,
           illuminate = true,
-          navic = { enabled = true, custom_bg = "lualine"},
+          navic = { enabled = true, custom_bg = "lualine" },
           treesitter = true,
           treesitter_context = true,
           neogit = true,

@@ -145,24 +145,24 @@ require("telescope").setup {
   },
 }
 
-local normal_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
-local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
-local string_hl = vim.api.nvim_get_hl_by_name("String", true)
-local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
+-- local normal_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
+-- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
+-- local string_hl = vim.api.nvim_get_hl_by_name("String", true)
+-- local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
 -- local statusline_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
 
-vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = visual_hl.background, bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = normal_hl.background, bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = normal_hl.background, bg = string_hl.foreground })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = visual_hl.background, bg = visual_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = normal_hl.foreground, bg = visual_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = error_hl.foreground, bg = visual_hl.background })
-vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = normal_hl.background, bg = error_hl.foreground })
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = normal_hl.background, bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = normal_hl.background })
-vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = normal_hl.background, bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = visual_hl.background, bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = normal_hl.background, bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = normal_hl.background, bg = string_hl.foreground })
+-- vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = visual_hl.background, bg = visual_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = normal_hl.foreground, bg = visual_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = error_hl.foreground, bg = visual_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = normal_hl.background, bg = error_hl.foreground })
+-- vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = normal_hl.background, bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = normal_hl.background })
+-- vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = normal_hl.background, bg = normal_hl.background })
 
 require("telescope").load_extension "notify"
 -- require("telescope").load_extension "file_browser"

@@ -39,7 +39,7 @@ return {
     end,
   },
   {
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     enabled = true,
     keys = { { "<leader><leader>ng", "<cmd>Neogit<CR>" } },
     dependencies = {
@@ -78,7 +78,11 @@ return {
         item = { ">", "v" },
         hunk = { "", "" },
       },
+      telescope_sorter = function()
+        return require("telescope").extensions.fzf.native_fzf_sorter()
+      end,
       integrations = {
+        telescope = true,
         diffview = true,
       },
       -- Setting any section to `false` will make the section not render at all
