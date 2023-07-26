@@ -2,7 +2,11 @@ local M = {}
 
 local conditions = require "heirline.conditions"
 local utils = require "heirline.utils"
+local surround_delimeter = { "", "" }
 local colors = {
+  black = "#000000",
+  mantle = "#181825",
+  base = "#1e1e2e",
   bright_bg = utils.get_highlight("Folded").bg,
   bright_fg = utils.get_highlight("Folded").fg,
   red = utils.get_highlight("DiagnosticError").fg,
@@ -63,11 +67,11 @@ local ViMode = {
     },
   },
   provider = function()
-    return " "
+    return " "
   end,
   hl = function(self)
     local color = self:mode_color() -- here!
-    return { bg = color, bold = true }
+    return { fg = color, bold = true }
   end,
   update = {
     "ModeChanged",
@@ -160,20 +164,26 @@ local FileNameModifer = {
   end,
 }
 
-FileNameBlock = utils.insert(
-  FileNameBlock,
-  FileIcon,
-  utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
-  FileFlags
--- { provider = "%<" }                      -- this means that the statusline is cut here when there's not enough space
+FileNameBlock = utils.surround(
+  surround_delimeter,
+  "mantle",
+  utils.insert(
+    FileNameBlock,
+    FileIcon,
+    utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
+    FileFlags
+  -- { provider = "%<" }                      -- this means that the statusline is cut here when there's not enough space
+  )
 )
 
 local FileType = {
   provider = function()
     return string.upper(vim.bo.filetype)
   end,
-  hl = { fg = utils.get_highlight("Type").fg, bold = true },
+  hl = { fg = "black", bold = true },
 }
+
+FileType = utils.surround(surround_delimeter, "orange", FileType)
 
 local LSPActive = {
   flexible = 2,
@@ -182,78 +192,84 @@ local LSPActive = {
     {
       condition = conditions.lsp_attached,
       update = { "LspAttach", "LspDetach" },
-      provider = function()
-        local names = {}
-        local copilot = false
-        local buf_ft = vim.bo.filetype
+      {
+        utils.surround(surround_delimeter, "mantle", {
+          provider = function()
+            local names = {}
+            local copilot = false
+            local buf_ft = vim.bo.filetype
 
-        local list_registered = function(filetype)
-          local s = require "null-ls.sources"
-          local available_sources = s.get_available(filetype)
-          local registered = {}
-          for _, source in ipairs(available_sources) do
-            for method in pairs(source.methods) do
-              registered[method] = registered[method] or {}
-              table.insert(registered[method], source.name)
+            local list_registered = function(filetype)
+              local s = require "null-ls.sources"
+              local available_sources = s.get_available(filetype)
+              local registered = {}
+              for _, source in ipairs(available_sources) do
+                for method in pairs(source.methods) do
+                  registered[method] = registered[method] or {}
+                  table.insert(registered[method], source.name)
+                end
+              end
+              return registered
             end
-          end
-          return registered
-        end
 
-        local null_ls = require "null-ls"
+            local null_ls = require "null-ls"
 
-        local formatters_list = function(filetype)
-          local method = null_ls.methods.FORMATTING
-          local registered_providers = list_registered(filetype)
-          return registered_providers[method] or {}
-        end
+            local formatters_list = function(filetype)
+              local method = null_ls.methods.FORMATTING
+              local registered_providers = list_registered(filetype)
+              return registered_providers[method] or {}
+            end
 
-        local linter_list = function(filetype)
-          local alternative_methods = {
-            null_ls.methods.DIAGNOSTICS,
-            null_ls.methods.DIAGNOSTICS_ON_OPEN,
-            null_ls.methods.DIAGNOSTICS_ON_SAVE,
-          }
-          local registered_providers = list_registered(filetype)
-          local providers_for_methods = vim.tbl_flatten(vim.tbl_map(function(m)
-            return registered_providers[m] or {}
-          end, alternative_methods))
+            local linter_list = function(filetype)
+              local alternative_methods = {
+                null_ls.methods.DIAGNOSTICS,
+                null_ls.methods.DIAGNOSTICS_ON_OPEN,
+                null_ls.methods.DIAGNOSTICS_ON_SAVE,
+              }
+              local registered_providers = list_registered(filetype)
+              local providers_for_methods = vim.tbl_flatten(vim.tbl_map(function(m)
+                return registered_providers[m] or {}
+              end, alternative_methods))
 
-          return providers_for_methods
-        end
+              return providers_for_methods
+            end
 
-        for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
-          if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
-            table.insert(names, server.name)
-          end
-          if server.name == "copilot" then
-            copilot = true
-          end
-        end
+            for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+              if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
+                table.insert(names, server.name)
+              end
+              if server.name == "copilot" then
+                copilot = true
+              end
+            end
 
-        -- add formatter
-        local supported_formatters = formatters_list(buf_ft)
-        vim.list_extend(names, supported_formatters)
+            -- add formatter
+            local supported_formatters = formatters_list(buf_ft)
+            vim.list_extend(names, supported_formatters)
 
-        -- add linter
-        local supported_linters = linter_list(buf_ft)
-        vim.list_extend(names, supported_linters)
+            -- add linter
+            local supported_linters = linter_list(buf_ft)
+            vim.list_extend(names, supported_linters)
 
-        local unique_client_names = vim.fn.uniq(names)
+            local unique_client_names = vim.fn.uniq(names)
 
-        if copilot then
-          return " [" .. table.concat(unique_client_names, " ") .. "] " .. icons.git.Octoface .. " "
-        else
-          return " [" .. table.concat(unique_client_names, " ") .. "]"
-        end
-      end,
-      hl = { fg = "green", bold = true },
+            if copilot then
+              return " [" .. table.concat(unique_client_names, " ") .. "] " .. icons.git.Octoface .. " "
+            else
+              return " [" .. table.concat(unique_client_names, " ") .. "]"
+            end
+          end,
+        }),
+        hl = { fg = "green", bold = true },
+      },
     },
     {
       condition = conditions.lsp_attached,
       update = { "LspAttach", "LspDetach" },
-      provider = " [LSP]",
-      hl = { fg = "green", bold = true },
+      utils.surround(surround_delimeter, "mantle", {
+        provider = " [LSP]",
+        hl = { fg = "green", bold = true },
+      }),
     },
   },
   {
@@ -266,14 +282,20 @@ local Ruler = {
   -- %c = column number
   -- %P = percentage through file of displayed window
   provider = "%7(%l/%3L%):%2c %P",
+  hl = { fg = "black" },
 }
+
+Ruler = utils.surround(surround_delimeter, "cyan", Ruler)
 
 local ShowMode = {
   condition = require("noice").api.status.mode.has,
-  provider = require("noice").api.status.mode.get,
-  hl = function()
-    return { fg = "purple" }
-  end,
+  {
+    condition = require("noice").api.status.mode.has,
+    utils.surround(surround_delimeter, "purple", {
+      provider = require("noice").api.status.mode.get,
+    }),
+    hl = { fg = "black" },
+  },
 }
 
 local ScrollBar = {
@@ -300,13 +322,13 @@ local Git = {
     ---@diagnostic disable-next-line: undefined-field
     self.status_dict = vim.b.gitsigns_status_dict
   end,
-  hl = { fg = "orange" },
-  {
+  hl = { fg = "black" },
+  utils.surround(surround_delimeter, "orange", {
     provider = function(self)
       return " " .. self.status_dict.head
     end,
     hl = { bold = true },
-  },
+  }),
 }
 
 local GitDiff = {
@@ -324,46 +346,53 @@ local GitDiff = {
         condition = function(self)
           return self.has_changes
         end,
-        provider = "[",
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.added or 0
-          return count > 0 and (" " .. count)
-        end,
-        hl = { fg = "git_add" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.status_dict.added ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.removed or 0
-          return count > 0 and (" " .. count)
-        end,
-        hl = { fg = "git_del" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.status_dict.changed ~= 0 and self.status_dict.removed ~= 0
-        end,
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.changed or 0
-          return count > 0 and (" " .. count)
-        end,
-        hl = { fg = "git_change" },
-      },
-      {
-        condition = function(self)
-          return self.has_changes
-        end,
-        provider = "]",
+        utils.surround(surround_delimeter, "mantle", {
+          -- {
+          --   condition = function(self)
+          --     return self.has_changes
+          --   end,
+          --   provider = "[",
+          -- },
+          {
+            provider = function(self)
+              local count = self.status_dict.added or 0
+              return count > 0 and (" " .. count)
+            end,
+            hl = { fg = "git_add" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.status_dict.added ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              local count = self.status_dict.removed or 0
+              return count > 0 and (" " .. count)
+            end,
+            hl = { fg = "git_del" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.status_dict.changed ~= 0 and self.status_dict.removed ~= 0
+            end,
+          },
+          {
+            provider = function(self)
+              local count = self.status_dict.changed or 0
+              return count > 0 and (" " .. count)
+            end,
+            hl = { fg = "git_change" },
+          },
+          -- {
+          --   condition = function(self)
+          --     return self.has_changes
+          --   end,
+          --   provider = "]",
+          -- },
+        }),
       },
     },
     {
@@ -377,46 +406,53 @@ local GitDiff = {
         condition = function(self)
           return self.has_changes
         end,
-        provider = "~[",
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.added or 0
-          return count > 0 and ("" .. count)
-        end,
-        hl = { fg = "git_add" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.status_dict.added ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.removed or 0
-          return count > 0 and ("" .. count)
-        end,
-        hl = { fg = "git_del" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.status_dict.changed ~= 0 and self.status_dict.removed ~= 0
-        end,
-      },
-      {
-        provider = function(self)
-          local count = self.status_dict.changed or 0
-          return count > 0 and ("" .. count)
-        end,
-        hl = { fg = "git_change" },
-      },
-      {
-        condition = function(self)
-          return self.has_changes
-        end,
-        provider = "]",
+        utils.surround(surround_delimeter, "mantle", {
+          {
+            condition = function(self)
+              return self.has_changes
+            end,
+            provider = "~[",
+          },
+          {
+            provider = function(self)
+              local count = self.status_dict.added or 0
+              return count > 0 and ("" .. count)
+            end,
+            hl = { fg = "git_add" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.status_dict.added ~= 0 and (self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              local count = self.status_dict.removed or 0
+              return count > 0 and ("" .. count)
+            end,
+            hl = { fg = "git_del" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.status_dict.changed ~= 0 and self.status_dict.removed ~= 0
+            end,
+          },
+          {
+            provider = function(self)
+              local count = self.status_dict.changed or 0
+              return count > 0 and ("" .. count)
+            end,
+            hl = { fg = "git_change" },
+          },
+          {
+            condition = function(self)
+              return self.has_changes
+            end,
+            provider = "]",
+          },
+        }),
       },
     },
     {
@@ -445,55 +481,60 @@ local Diagnostics = {
       end,
       update = { "DiagnosticChanged", "BufEnter" },
       {
-        provider = "[",
-        condition = conditions.has_diagnostics,
-      },
-      {
-        provider = function(self)
-          -- 0 is just another output, we can decide to print it or not!
-          return self.errors > 0 and (self.error_icon .. self.errors)
-        end,
-        hl = { fg = "diag_error" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.errors ~= 0 and (self.warnings ~= 0 or self.info ~= 0 or self.hints ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          return self.warnings > 0 and (self.warn_icon .. self.warnings)
-        end,
-        hl = { fg = "diag_warn" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.warnings ~= 0 and (self.info ~= 0 or self.hints ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          return self.info > 0 and (self.info_icon .. self.info)
-        end,
-        hl = { fg = "diag_info" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.info ~= 0 and self.hints ~= 0
-        end,
-      },
-      {
-        provider = function(self)
-          return self.hints > 0 and (self.hint_icon .. self.hints)
-        end,
-        hl = { fg = "diag_hint" },
-      },
-      {
-        provider = "]",
-        condition = conditions.has_diagnostics,
+        conditon = conditions.has_diagnostics,
+        utils.surround(surround_delimeter, "mantle", {
+          -- {
+          --   provider = "[",
+          --   condition = conditions.has_diagnostics,
+          -- },
+          {
+            provider = function(self)
+              -- 0 is just another output, we can decide to print it or not!
+              return self.errors > 0 and (self.error_icon .. self.errors)
+            end,
+            hl = { fg = "diag_error" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.errors ~= 0 and (self.warnings ~= 0 or self.info ~= 0 or self.hints ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              return self.warnings > 0 and (self.warn_icon .. self.warnings)
+            end,
+            hl = { fg = "diag_warn" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.warnings ~= 0 and (self.info ~= 0 or self.hints ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              return self.info > 0 and (self.info_icon .. self.info)
+            end,
+            hl = { fg = "diag_info" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.info ~= 0 and self.hints ~= 0
+            end,
+          },
+          {
+            provider = function(self)
+              return self.hints > 0 and (self.hint_icon .. self.hints)
+            end,
+            hl = { fg = "diag_hint" },
+          },
+          -- {
+          --   provider = "]",
+          --   condition = conditions.has_diagnostics,
+          -- },
+        }),
       },
     },
     {
@@ -506,55 +547,60 @@ local Diagnostics = {
       end,
       update = { "DiagnosticChanged", "BufEnter" },
       {
-        provider = "![",
         condition = conditions.has_diagnostics,
-      },
-      {
-        provider = function(self)
-          -- 0 is just another output, we can decide to print it or not!
-          return self.errors > 0 and self.errors
-        end,
-        hl = { fg = "diag_error" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.errors ~= 0 and (self.warnings ~= 0 or self.info ~= 0 or self.hints ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          return self.warnings > 0 and self.warnings
-        end,
-        hl = { fg = "diag_warn" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.warnings ~= 0 and (self.info ~= 0 or self.hints ~= 0)
-        end,
-      },
-      {
-        provider = function(self)
-          return self.info > 0 and self.info
-        end,
-        hl = { fg = "diag_info" },
-      },
-      {
-        provider = " ",
-        condition = function(self)
-          return self.info ~= 0 and self.hints ~= 0
-        end,
-      },
-      {
-        provider = function(self)
-          return self.hints > 0 and self.hints
-        end,
-        hl = { fg = "diag_hint" },
-      },
-      {
-        provider = "]",
-        condition = conditions.has_diagnostics,
+        utils.surround(surround_delimeter, "mantle", {
+          {
+            provider = "![",
+            condition = conditions.has_diagnostics,
+          },
+          {
+            provider = function(self)
+              -- 0 is just another output, we can decide to print it or not!
+              return self.errors > 0 and self.errors
+            end,
+            hl = { fg = "diag_error" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.errors ~= 0 and (self.warnings ~= 0 or self.info ~= 0 or self.hints ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              return self.warnings > 0 and self.warnings
+            end,
+            hl = { fg = "diag_warn" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.warnings ~= 0 and (self.info ~= 0 or self.hints ~= 0)
+            end,
+          },
+          {
+            provider = function(self)
+              return self.info > 0 and self.info
+            end,
+            hl = { fg = "diag_info" },
+          },
+          {
+            provider = " ",
+            condition = function(self)
+              return self.info ~= 0 and self.hints ~= 0
+            end,
+          },
+          {
+            provider = function(self)
+              return self.hints > 0 and self.hints
+            end,
+            hl = { fg = "diag_hint" },
+          },
+          {
+            provider = "]",
+            condition = conditions.has_diagnostics,
+          },
+        }),
       },
     },
   },
@@ -576,7 +622,6 @@ local DefaultStatusline = {
   Diagnostics,
   Space,
   LSPActive,
-  Space,
   Align,
   ShowMode,
   Space,

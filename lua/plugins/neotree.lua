@@ -263,7 +263,7 @@ return {
 
     vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
 
-    local normal_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
+    local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
     -- local string_hl = vim.api.nvim_get_hl_by_name("String", true)
     local error_hl = vim.api.nvim_get_hl_by_name("Error", true)

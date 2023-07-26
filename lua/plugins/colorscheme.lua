@@ -54,11 +54,11 @@ return {
         --   operators = {},
         -- },
         -- color_overrides = {},
-        -- custom_highlights = function(colors)
-        --   return {
-        --     LspInlayHint = { bg = colors.none },
-        --   }
-        -- end,
+        custom_highlights = function(colors)
+          return {
+            Statusline = { bg = colors.none },
+          }
+        end,
         integrations = {
           cmp = true,
           gitsigns = true,
