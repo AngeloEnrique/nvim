@@ -76,7 +76,7 @@ return {
           {
             "diff",
             -- Is it me or the symbol for modified us really weird
-            symbols = { added = " ", modified = "柳", removed = " " },
+            symbols = { added = " ", modified = "", removed = " " },
           },
         },
         lualine_x = {

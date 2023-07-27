@@ -67,7 +67,7 @@ local ViMode = {
     },
   },
   provider = function()
-    return " "
+    return " "
   end,
   hl = function(self)
     local color = self:mode_color() -- here!
