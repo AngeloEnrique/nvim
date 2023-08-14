@@ -232,7 +232,7 @@ return {
         follow_current_file = {
           enabled = true,          -- This will find and focus the file in the active buffer every time
           --              -- the current file is changed while the tree is open.
-          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+          leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
         -- time the current file is changed while the tree is open.
         group_empty_dirs = true, -- when true, empty folders will be grouped together
@@ -261,7 +261,7 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
+    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true<CR>")
 
     local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)

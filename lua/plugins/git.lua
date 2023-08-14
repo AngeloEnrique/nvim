@@ -31,13 +31,13 @@ return {
   --     },
   --   },
   -- }, -- For git blame and browse
-  {
-    "kdheepak/lazygit.nvim",
-    keys = { { "<leader><leader>lg", "<cmd>LazyGit<CR>" } },
-    config = function()
-      vim.g.lazygit_floating_window_use_plenary = 1
-    end,
-  },
+  -- {
+  --   "kdheepak/lazygit.nvim",
+  --   keys = { { "<leader><leader>lg", "<cmd>LazyGit<CR>" } },
+  --   config = function()
+  --     vim.g.lazygit_floating_window_use_plenary = 1
+  --   end,
+  -- },
   {
     "NeogitOrg/neogit",
     enabled = true,

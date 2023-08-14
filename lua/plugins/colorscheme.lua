@@ -56,7 +56,7 @@ return {
         -- color_overrides = {},
         custom_highlights = function(colors)
           return {
-            Statusline = { bg = colors.none },
+            StatusLine = { bg = colors.none },
           }
         end,
         integrations = {
@@ -65,7 +65,7 @@ return {
           telescope = { enabled = true, style = "nvchad" },
           notify = true,
           illuminate = true,
-          navic = { enabled = true, custom_bg = "lualine" },
+          -- navic = { enabled = true, custom_bg = "lualine" },
           treesitter = true,
           treesitter_context = true,
           neogit = true,

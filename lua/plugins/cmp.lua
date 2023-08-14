@@ -132,8 +132,8 @@ return {
         documentation = cmp_window.bordered(),
       },
       mapping = cmp_mapping.preset.insert {
-        ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
-        ["<C-j>"] = cmp_mapping(cmp_mapping.select_next_item(), { "i", "c" }),
+        -- ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
+        -- ["<C-j>"] = cmp_mapping(cmp_mapping.select_next_item(), { "i", "c" }),
         ["<Down>"] = cmp_mapping(cmp_mapping.select_next_item { behavior = SelectBehavior.Select }, { "i" }),
         ["<Up>"] = cmp_mapping(cmp_mapping.select_prev_item { behavior = SelectBehavior.Select }, { "i" }),
         ["<C-d>"] = cmp_mapping.scroll_docs(-4),
@@ -148,7 +148,7 @@ return {
             end
           end,
         },
-        ["<Tab>"] = cmp_mapping(function(fallback)
+        ["<C-n>"] = cmp_mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif luasnip.expand_or_locally_jumpable() then
@@ -162,7 +162,7 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp_mapping(function(fallback)
+        ["<C-p>"] = cmp_mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
@@ -173,30 +173,30 @@ return {
         end, { "i", "s" }),
         ["<C-Space>"] = cmp_mapping.complete(),
         ["<C-e>"] = cmp_mapping.abort(),
-        ["<CR>"] = cmp_mapping(function(fallback)
-          if cmp.visible() then
-            local confirm_opts = {
-              behavior = ConfirmBehavior.Replace,
-              select = false,
-            }
-            local is_insert_mode = function()
-              return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
-            end
-            if is_insert_mode() then -- prevent overwriting brackets
-              confirm_opts.behavior = ConfirmBehavior.Insert
-            end
-            local entry = cmp.get_selected_entry()
-            local is_copilot = entry and entry.source.name == "copilot"
-            if is_copilot then
-              confirm_opts.behavior = ConfirmBehavior.Replace
-              confirm_opts.select = true
-            end
-            if cmp.confirm(confirm_opts) then
-              return -- success, exit early
-            end
-          end
-          fallback() -- if not exited early, always fallback
-        end),
+        -- ["<CR>"] = cmp_mapping(function(fallback)
+        --   if cmp.visible() then
+        --     local confirm_opts = {
+        --       behavior = ConfirmBehavior.Replace,
+        --       select = false,
+        --     }
+        --     local is_insert_mode = function()
+        --       return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
+        --     end
+        --     if is_insert_mode() then -- prevent overwriting brackets
+        --       confirm_opts.behavior = ConfirmBehavior.Insert
+        --     end
+        --     local entry = cmp.get_selected_entry()
+        --     local is_copilot = entry and entry.source.name == "copilot"
+        --     if is_copilot then
+        --       confirm_opts.behavior = ConfirmBehavior.Replace
+        --       confirm_opts.select = true
+        --     end
+        --     if cmp.confirm(confirm_opts) then
+        --       return -- success, exit early
+        --     end
+        --   end
+        --   fallback() -- if not exited early, always fallback
+        -- end),
       },
       sources = cmp.config.sources {
         {

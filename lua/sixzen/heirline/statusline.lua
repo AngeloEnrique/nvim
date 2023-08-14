@@ -254,8 +254,10 @@ local LSPActive = {
             local unique_client_names = vim.fn.uniq(names)
 
             if copilot then
+              ---@diagnostic disable-next-line: param-type-mismatch
               return " [" .. table.concat(unique_client_names, " ") .. "] " .. icons.git.Octoface .. " "
             else
+              ---@diagnostic disable-next-line: param-type-mismatch
               return " [" .. table.concat(unique_client_names, " ") .. "]"
             end
           end,
