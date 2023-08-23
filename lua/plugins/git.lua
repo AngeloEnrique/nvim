@@ -100,9 +100,11 @@ return {
           folded = true,
         },
         unpulled = {
+          hidden = false,
           folded = true,
         },
         unmerged = {
+          hidden = false,
           folded = false,
         },
         recent = {

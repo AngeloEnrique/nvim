@@ -70,6 +70,10 @@ function M.grep_word()
   require("telescope.builtin").grep_string { search = vim.fn.expand "<cword>" }
 end
 
+function M.live_grep()
+  require("telescope.builtin").live_grep {}
+end
+
 function M.find_symbol()
   vim.ui.input({ prompt = "Symbol for > " }, function(input)
     if input == nil then

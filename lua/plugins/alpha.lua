@@ -75,7 +75,6 @@ return {
       entries = {
         { "f", icons.ui.FindFile .. "  Find File",   "<CMD>Telescope find_files<CR>" },
         { "n", icons.ui.NewFile .. "  New File",     "<CMD>ene!<CR>" },
-        { "p", icons.ui.Project .. "  Projects ",    "<CMD>Telescope project<CR>" },
         { "r", icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>" },
         { "t", icons.ui.FindText .. "  Find Text",   "<CMD>Telescope live_grep<CR>" },
         {

@@ -57,6 +57,10 @@ return {
         custom_highlights = function(colors)
           return {
             StatusLine = { bg = colors.none },
+            TreesitterContextBottom = {
+              sp = C.surface0,
+              style = {},
+            },
           }
         end,
         integrations = {

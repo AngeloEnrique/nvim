@@ -22,7 +22,7 @@ local servers = {
             autoImportCompletions = true,
             autoSearchPaths = true,
             diagnosticMode = "workspace", -- openFilesOnly, workspace
-            typeCheckingMode = "basic", -- off, basic, strict
+            typeCheckingMode = "basic",   -- off, basic, strict
             useLibraryCodeForTypes = true,
           },
         },
@@ -54,6 +54,21 @@ local servers = {
         "scss",
         "less",
       },
+    }
+  end,
+  ["gopls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        }
+      }
     }
   end,
   ["tailwindcss"] = function()
@@ -108,9 +123,9 @@ end
 
 require("typescript").setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
-  debug = false, -- enable debug logging for commands
+  debug = false,            -- enable debug logging for commands
   go_to_source_definition = {
-    fallback = true, -- fall back to standard LSP definition on failure
+    fallback = true,        -- fall back to standard LSP definition on failure
   },
   server = {
     -- pass options to lspconfig's setup method
