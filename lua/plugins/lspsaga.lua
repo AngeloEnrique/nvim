@@ -38,7 +38,8 @@ return {
 
     local opts = { noremap = true, silent = true }
 
-    vim.keymap.set("n", "<leader>j", "<Cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+    vim.keymap.set("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+    vim.keymap.set("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
     vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<cr>", opts)
     vim.keymap.set("n", "<leader>gd", "<Cmd>Lspsaga finder<cr>", opts)
     vim.keymap.set("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<cr>", opts)
