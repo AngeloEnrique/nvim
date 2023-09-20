@@ -1,5 +1,7 @@
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
+vim.bo.expandtab = true
 
 local status, jdtls = pcall(require, "jdtls")
 if not status then
