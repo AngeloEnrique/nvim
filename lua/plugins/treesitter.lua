@@ -6,6 +6,7 @@ return {
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
     -- "HiPhish/nvim-ts-rainbow2",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     {
       "windwp/nvim-autopairs",
       opts = {
@@ -33,79 +34,76 @@ return {
       end,
     },
   },
-  config = function()
-    require("nvim-treesitter.configs").setup {
-      ensure_installed = {
-        "tsx",
-        "lua",
-        "json",
-        "javascript",
-        "typescript",
-        "html",
-        "css",
-        "python",
-        "http",
-        "bash",
-        "vimdoc",
-        "yaml",
-        "toml",
-        "go",
-        "rust",
-        "c",
-        "cpp",
-        "java",
-        "markdown",
-        "markdown_inline",
-        "regex",
-        "vim",
-      },
-      sync_install = true,
-      auto_install = true,
-      highlight = {
+  main = "nvim-treesitter.configs",
+  opts = {
+    ensure_installed = {
+      "tsx",
+      "lua",
+      "json",
+      "javascript",
+      "typescript",
+      "html",
+      "css",
+      "python",
+      "http",
+      "bash",
+      "vimdoc",
+      "yaml",
+      "toml",
+      "go",
+      "rust",
+      "c",
+      "cpp",
+      "java",
+      "markdown",
+      "markdown_inline",
+      "regex",
+      "vim",
+    },
+    sync_install = true,
+    auto_install = true,
+    highlight = {
+      enable = true,
+      aditional_vim_regex_highlighting = false,
+      disable = function()
+        return vim.b.large_buf
+      end,
+    },
+    indent = {
+      enable = true,
+      disable = function()
+        return vim.b.large_buf
+      end,
+    },
+    autotag = {
+      enable = true,
+    },
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
+    textobjects = {
+      select = {
         enable = true,
-        aditional_vim_regex_highlighting = false,
-        disable = function()
-          return vim.b.large_buf
-        end,
-      },
-      indent = {
-        enable = true,
-        disable = function()
-          return vim.b.large_buf
-        end,
-      },
-      autotag = {
-        enable = true,
-      },
-      -- rainbow = {
-      --   enable = false,
-      --   disable = {},
-      --   query = {
-      --     "rainbow-parens",
-      --     html = "rainbow-tags",
-      --     tsx = {
-      --       "rainbow-tags",
-      --     },
-      --     javascript = {
-      --       "rainbow-parens-react",
-      --       "rainbow-tags-react",
-      --     },
-      --   },
-      --   strategy = require("ts-rainbow").strategy.global,
-      -- },
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-      },
-      incremental_selection = {
-        enable = true,
+        lookahead = true,
         keymaps = {
-          init_selection = "gnn", -- set to `false` to disable one of the mappings
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@conditional.outer",
+          ["ic"] = "@conditional.inner",
+          ["al"] = "@loop.outer",
+          ["il"] = "@loop.inner",
         },
       },
-    }
-  end,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "gnn", -- set to `false` to disable one of the mappings
+        node_incremental = "grn",
+        scope_incremental = "grc",
+        node_decremental = "grm",
+      },
+    },
+  },
 }
