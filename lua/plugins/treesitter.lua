@@ -1,11 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = "BufRead",
+  event = "VeryLazy",
   build = ":TSUpdate",
   dependencies = {
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
-    -- "HiPhish/nvim-ts-rainbow2",
     "nvim-treesitter/nvim-treesitter-textobjects",
     {
       "windwp/nvim-autopairs",
@@ -19,7 +18,7 @@ return {
       config = function()
         require("treesitter-context").setup {
           enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
-          max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+          max_lines = 6,            -- How many lines the window should span. Values <= 0 mean no limit.
           min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
           line_numbers = true,
           multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
