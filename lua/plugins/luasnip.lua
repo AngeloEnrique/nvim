@@ -6,6 +6,7 @@ return {
       "rafamadriz/friendly-snippets",
     },
   },
+  version = "v2.*",
   config = function()
     local luasnip = require "luasnip"
 
