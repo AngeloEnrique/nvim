@@ -69,7 +69,7 @@ return {
           telescope = { enabled = true, style = "nvchad" },
           notify = true,
           illuminate = true,
-          -- navic = { enabled = true, custom_bg = "lualine" },
+          navic = { enabled = true },
           treesitter = true,
           treesitter_context = true,
           neogit = true,

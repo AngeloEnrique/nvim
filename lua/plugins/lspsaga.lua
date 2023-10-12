@@ -1,6 +1,7 @@
 return {
   "nvimdev/lspsaga.nvim", -- LSP UIs
   event = "LspAttach",
+  enabled = false,
   config = function()
     local saga = require "lspsaga"
 

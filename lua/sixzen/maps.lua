@@ -17,10 +17,10 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Blazing fast replace a word
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- format
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- Do not yank with x
 keymap.set("n", "x", '"_x')
@@ -45,8 +45,8 @@ keymap.set("v", ">", ">gv")
 -- New tab
 keymap.set("n", "<leader>te", ":tabedit<Return>", { silent = true })
 -- Split window
-keymap.set("n", "<leader>-", ":split<Return><C-w>w", { silent = true })
-keymap.set("n", "<leader>|", ":vsplit<Return><C-w>w", { silent = true })
+keymap.set("n", "<leader>ss", ":split<Return><C-w>w", { silent = true })
+keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", { silent = true })
 -- Move window (now using tmux plugin)
 keymap.set("n", "<leader><Tab>", "<C-w>w")
 -- keymap.set("", "s<left>", "<C-w>h")

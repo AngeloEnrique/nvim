@@ -40,10 +40,10 @@ return {
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
         popup = {
-          border = "none",
+          border = "rounded",
         },
         hover = {
-          border = "none",
+          border = "rounded",
           position = { row = 2, col = 2 },
         },
         mini = {
