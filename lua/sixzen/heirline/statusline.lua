@@ -262,7 +262,7 @@ local LSPActive = {
             end
           end,
         }),
-        hl = { fg = "green", bold = true },
+        hl = { fg = "gray", bold = true },
       },
     },
     {
@@ -270,7 +270,7 @@ local LSPActive = {
       update = { "LspAttach", "LspDetach" },
       utils.surround(surround_delimeter, "mantle", {
         provider = " [LSP]",
-        hl = { fg = "green", bold = true },
+        hl = { fg = "gray", bold = true },
       }),
     },
   },
@@ -622,9 +622,9 @@ local DefaultStatusline = {
   GitDiff,
   Space,
   Diagnostics,
-  Space,
-  LSPActive,
   Align,
+  LSPActive,
+  Space,
   ShowMode,
   Space,
   FileType,

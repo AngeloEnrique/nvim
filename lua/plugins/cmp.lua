@@ -35,9 +35,39 @@ return {
           luasnip.filetype_extend("javascript", { "javascriptreact" })
         end,
       },
+      experimental = {
+        native_menu = false,
+        ghost_text = true,
+      },
       window = {
         completion = cmp_window.bordered(),
         documentation = cmp_window.bordered(),
+      },
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+
+          -- copied from cmp-under, but I don't think I need the plugin for this.
+          -- I might add some more of my own.
+          function(entry1, entry2)
+            local _, entry1_under = entry1.completion_item.label:find "^_+"
+            local _, entry2_under = entry2.completion_item.label:find "^_+"
+            entry1_under = entry1_under or 0
+            entry2_under = entry2_under or 0
+            if entry1_under > entry2_under then
+              return false
+            elseif entry1_under < entry2_under then
+              return true
+            end
+          end,
+
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
       },
       mapping = cmp_mapping.preset.insert {
         ["<Down>"] = cmp_mapping(cmp_mapping.select_next_item { behavior = SelectBehavior.Select }, { "i" }),
@@ -45,10 +75,10 @@ return {
         ["<C-d>"] = cmp_mapping.scroll_docs(-4),
         ["<C-u>"] = cmp_mapping.scroll_docs(4),
         ["<C-y>"] = cmp_mapping {
-          i = cmp_mapping.confirm { behavior = ConfirmBehavior.Replace, select = false },
+          i = cmp_mapping.confirm { behavior = ConfirmBehavior.Replace, select = true },
           c = function(fallback)
             if cmp.visible() then
-              cmp.confirm { behavior = ConfirmBehavior.Replace, select = false }
+              cmp.confirm { behavior = ConfirmBehavior.Replace, select = true }
             else
               fallback()
             end
@@ -56,7 +86,7 @@ return {
         },
         ["<C-n>"] = cmp_mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item { behavior = SelectBehavior.Select }
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           elseif luasnip.jumpable(1) then
@@ -67,7 +97,7 @@ return {
         end, { "i", "s" }),
         ["<C-p>"] = cmp_mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
+            cmp.select_prev_item { behavior = SelectBehavior.Select }
           elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -253,10 +283,6 @@ return {
           end
           return vim_item
         end,
-        experimental = {
-          native_menu = false,
-          ghost_text = true,
-        },
       },
     }
 
@@ -303,9 +329,6 @@ return {
       }),
     })
 
-    vim.cmd [[
-			set completeopt=menuone,noinsert,noselect
-			highlight! default link CmpItemKind CmpItemMenuDefault
-		]]
+    vim.api.nvim_set_hl(0, "CmpItemKind", { link = "CmpItemMenuDefault" })
   end,
 }
