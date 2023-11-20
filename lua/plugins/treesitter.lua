@@ -4,7 +4,6 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "numToStr/Comment.nvim",
-    "JoosepAlviste/nvim-ts-context-commentstring", -- Comments for jsx
     "nvim-treesitter/nvim-treesitter-textobjects",
     {
       "windwp/nvim-autopairs",
@@ -76,10 +75,6 @@ return {
     },
     autotag = {
       enable = true,
-    },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
     },
     textobjects = {
       select = {

@@ -4,6 +4,8 @@ return {
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-lua/popup.nvim" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
+    { "nvim-telescope/telescope-fzy-native.nvim" },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",

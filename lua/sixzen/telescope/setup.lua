@@ -120,6 +120,17 @@ require("telescope").setup {
       use_highlighter = false,
       minimum_grep_characters = 6,
     },
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- borderchars = {
+        --   prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        --   results = { "─", "│", "─", "│", "╭", "╮", "┤", "├" },
+        --   preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        -- },
+        width = 0.8,
+        previewer = false,
+      },
+    },
     -- file_browser = {
     --   theme = "dropdown",
     --   -- disables netrw add use telescope-file-browser in its place
@@ -167,4 +178,5 @@ require("telescope").setup {
 require("telescope").load_extension "notify"
 -- require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
+require("telescope").load_extension "ui-select"
 require("telescope").load_extension "noice"
