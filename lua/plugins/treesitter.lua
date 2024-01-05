@@ -5,12 +5,12 @@ return {
   dependencies = {
     "numToStr/Comment.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    {
-      "windwp/nvim-autopairs",
-      opts = {
-        disable_filetype = { "TelescopePrompt", "vim" },
-      },
-    },
+    -- {
+    --   "windwp/nvim-autopairs",
+    --   opts = {
+    --     disable_filetype = { "TelescopePrompt", "vim" },
+    --   },
+    -- },
     { "windwp/nvim-ts-autotag", config = true },
     {
       "nvim-treesitter/nvim-treesitter-context",

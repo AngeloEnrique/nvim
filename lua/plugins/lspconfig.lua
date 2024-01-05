@@ -12,15 +12,15 @@ return {
       "antosha417/nvim-lsp-file-operations",
       config = true,
     },
-    {
-      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-      config = function()
-        require("lsp_lines").setup()
-
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set("", "<leader>ls", require("lsp_lines").toggle, opts)
-      end,
-    },
+    -- {
+    --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    --   config = function()
+    --     require("lsp_lines").setup()
+    --
+    --     local opts = { noremap = true, silent = true }
+    --     vim.keymap.set("", "<leader>ls", require("lsp_lines").toggle, opts)
+    --   end,
+    -- },
     -- {
     --   "j-hui/fidget.nvim", -- LSP progress
     --   opts = {

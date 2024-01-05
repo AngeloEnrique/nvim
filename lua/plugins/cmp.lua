@@ -10,19 +10,19 @@ return {
     "hrsh7th/cmp-cmdline",                 -- nvim-cmp for cmdline
     "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
     "L3MON4D3/LuaSnip",                    -- Snippets
-    "zbirenbaum/copilot-cmp",              -- Copilot
-    "windwp/nvim-autopairs",
+    -- "zbirenbaum/copilot-cmp",              -- Copilot
+    -- "windwp/nvim-autopairs",
     "roobert/tailwindcss-colorizer-cmp.nvim",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   config = function()
     local cmp = require "cmp"
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+    -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
     local cmp_window = require "cmp.config.window"
     local cmp_mapping = require "cmp.config.mapping"
     local icons = require "sixzen.icons"
 
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
     local cmp_types = require "cmp.types.cmp"
     local ConfirmBehavior = cmp_types.ConfirmBehavior
@@ -108,11 +108,11 @@ return {
         ["<C-e>"] = cmp_mapping.abort(),
       },
       sources = cmp.config.sources {
-        {
-          name = "copilot",
-          keyword_length = 0,
-          max_item_count = 3,
-        },
+        -- {
+        --   name = "copilot",
+        --   keyword_length = 0,
+        --   max_item_count = 3,
+        -- },
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
