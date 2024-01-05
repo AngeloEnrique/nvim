@@ -9,9 +9,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     {
-      "jose-elias-alvarez/typescript.nvim",
-    },
-    {
       "antosha417/nvim-lsp-file-operations",
       config = true,
     },

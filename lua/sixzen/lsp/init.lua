@@ -34,7 +34,9 @@ M.on_attach = function(client, bufnr)
       require("jdtls.dap").setup_dap_main_class_configs()
     end
     client.server_capabilities.document_formatting = false
-    vim.keymap.set("n", "<leader>i", "<cmd>lua vim.lsp.inlay_hint(0)<CR>")
+    vim.keymap.set("n", "<leader>i", function()
+      vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
+    end)
   end
   if client.name == "eslint" then
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -43,7 +45,9 @@ M.on_attach = function(client, bufnr)
     })
   end
   if client.server_capabilities.inlayHintProvider then
-    vim.keymap.set("n", "<leader>i", "<cmd>lua vim.lsp.inlay_hint(0)<CR>")
+    vim.keymap.set("n", "<leader>i", function()
+      vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
+    end)
   end
   if client.supports_method "textDocument/formatting" then
     if FORMAT_ON_SAVE then

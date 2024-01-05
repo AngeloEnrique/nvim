@@ -37,7 +37,7 @@ return {
       },
       experimental = {
         native_menu = false,
-        ghost_text = true,
+        ghost_text = false,
       },
       window = {
         completion = cmp_window.bordered(),
@@ -75,10 +75,10 @@ return {
         ["<C-d>"] = cmp_mapping.scroll_docs(-4),
         ["<C-u>"] = cmp_mapping.scroll_docs(4),
         ["<C-y>"] = cmp_mapping {
-          i = cmp_mapping.confirm { behavior = ConfirmBehavior.Replace, select = true },
+          i = cmp_mapping.confirm { behavior = ConfirmBehavior.Insert, select = true },
           c = function(fallback)
             if cmp.visible() then
-              cmp.confirm { behavior = ConfirmBehavior.Replace, select = true }
+              cmp.confirm { behavior = ConfirmBehavior.Insert, select = true }
             else
               fallback()
             end

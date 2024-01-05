@@ -15,10 +15,9 @@ return {
         null_ls.builtins.formatting.stylua,
         -- null_ls.builtins.formatting.eslint_d,
         -- null_ls.builtins.formatting.eslint,
-        null_ls.builtins.formatting.prettierd,
+        -- null_ls.builtins.formatting.prettierd,
         -- null_ls.builtins.formatting.google_java_format,
         -- null_ls.builtins.diagnostics.zsh,
-        require "typescript.extensions.null-ls.code-actions",
       },
     }
   end,
