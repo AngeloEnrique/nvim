@@ -1,6 +1,5 @@
 local M = {}
 
-local conditions = require "heirline.conditions"
 local utils = require "heirline.utils"
 local surround_delimeter = { "", "" }
 
@@ -12,7 +11,7 @@ local StatusIcon = {
     if self.is_active then
       return " "
     end
-    return " "
+    return " "
   end,
   hl = function(self)
     if self.is_active then
@@ -58,6 +57,23 @@ local Tabblock = utils.surround(surround_delimeter, "mantle", {
   Space,
 })
 
+local TabPageIndicator = {
+  provider = function()
+    local num_tabs = #vim.api.nvim_list_tabpages()
+    if num_tabs > 1 then
+      local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
+      return "󰓩 " .. tabpage_number .. "/" .. tostring(num_tabs)
+    end
+  end,
+  hl = function()
+    return { fg = "gray" }
+  end,
+}
+
+local TabInfo = utils.surround(surround_delimeter, "mantle", {
+  TabPageIndicator,
+})
+
 local Tabpage = {
   init = function(self)
     local win = vim.api.nvim_tabpage_get_win(self.tabpage)
@@ -80,6 +96,7 @@ local TabPages = {
 M.TabLine = {
   TabPages,
   Align,
+  TabInfo,
 }
 
 vim.o.showtabline = 1
