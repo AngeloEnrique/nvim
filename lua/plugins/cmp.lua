@@ -8,7 +8,7 @@ return {
     "hrsh7th/cmp-nvim-lua",                -- nvim-cmp for lua
     "hrsh7th/cmp-git",                     -- nvim-cmp for git
     "hrsh7th/cmp-cmdline",                 -- nvim-cmp for cmdline
-    "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
+    -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
     "L3MON4D3/LuaSnip",                    -- Snippets
     -- "zbirenbaum/copilot-cmp",              -- Copilot
     -- "windwp/nvim-autopairs",
@@ -116,7 +116,7 @@ return {
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
+        -- { name = "nvim_lsp_signature_help" },
         {
           name = "buffer",
           keyword_length = 4,

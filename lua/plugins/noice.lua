@@ -1,6 +1,6 @@
 return {
   "folke/noice.nvim",
-  enabled = true,
+  enabled = false,
   event = "UIEnter",
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -25,6 +25,12 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
+        },
+        signature = {
+          enabled = true,
+          auto_open = {
+            enabled = false,
+          },
         },
       },
       presets = {

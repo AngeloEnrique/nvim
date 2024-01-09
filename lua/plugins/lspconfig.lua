@@ -5,9 +5,8 @@ return {
     "SmiteshP/nvim-navic", -- Breadcrumb
     "nvimtools/none-ls.nvim",
     "williamboman/mason.nvim",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-    },
+    "williamboman/mason-lspconfig.nvim",
+    "folke/neodev.nvim",
     {
       "antosha417/nvim-lsp-file-operations",
       config = true,
@@ -21,24 +20,20 @@ return {
     --     vim.keymap.set("", "<leader>ls", require("lsp_lines").toggle, opts)
     --   end,
     -- },
-    -- {
-    --   "j-hui/fidget.nvim", -- LSP progress
-    --   opts = {
-    --     sources = {
-    --       ["null-ls"] = {
-    --         ignore = true,
-    --       },
-    --     },
-    --     text = {
-    --       spinner = "circle_halves",
-    --     },
-    --     window = {
-    --       blend = 0,
-    --       border = "rounded",
-    --       relative = "editor",
-    --     },
-    --   },
-    -- },
+    {
+      "j-hui/fidget.nvim", -- LSP progress
+      dependencies = {
+        "rcarriga/nvim-notify",
+      },
+      opts = {
+        progress = {
+          notification_group = function(msg)
+            return msg.lsp_client.name
+          end,
+          ignore = { "null-ls", "copilot" }, -- List of LSP servers to ignore
+        },
+      },
+    },
   },
   main = "sixzen.lsp",
   config = true,

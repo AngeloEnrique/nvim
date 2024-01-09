@@ -14,9 +14,9 @@ local my_actions = require "sixzen.telescope.actions"
 
 local M = {}
 
-M.noice = function()
-  require("telescope").extensions.noice.noice {}
-end
+-- M.noice = function()
+--   require("telescope").extensions.noice.noice {}
+-- end
 
 function M.project_files()
   local opts = { show_untracked = true } -- define here if you want to define something

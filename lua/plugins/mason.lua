@@ -1,7 +1,6 @@
 return {
   "williamboman/mason.nvim",
   build = ":MasonUpdate",
-  event = "BufRead",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
@@ -16,7 +15,6 @@ return {
         "tsserver",
         "jdtls",
         "pyright",
-        "clangd",
       },
     }
   end,

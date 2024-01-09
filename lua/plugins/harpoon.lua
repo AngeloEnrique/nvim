@@ -5,8 +5,6 @@ return {
     "nvim-lua/popup.nvim",
   },
   event = "VeryLazy",
-  keys = {
-  },
   config = function()
     require("harpoon").setup()
     local quick_binds = vim.g.harpoon_quick_binds or 5

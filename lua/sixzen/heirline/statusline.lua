@@ -7,6 +7,8 @@ local colors = {
   black = "#000000",
   mantle = "#181825",
   base = "#1e1e2e",
+  normal_fg = utils.get_highlight("Normal").fg,
+  normal_bg = utils.get_highlight("Normal").bg,
   bright_bg = utils.get_highlight("Folded").bg,
   bright_fg = utils.get_highlight("Folded").fg,
   red = utils.get_highlight("DiagnosticError").fg,
@@ -234,7 +236,7 @@ local LSPActive = {
               return providers_for_methods
             end
 
-            for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+            for _, server in pairs(vim.lsp.get_clients{ bufnr = 0 }) do
               if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
                 table.insert(names, server.name)
               end
@@ -289,16 +291,16 @@ local Ruler = {
 
 Ruler = utils.surround(surround_delimeter, "cyan", Ruler)
 
-local ShowMode = {
-  condition = require("noice").api.status.mode.has,
-  {
-    condition = require("noice").api.status.mode.has,
-    utils.surround(surround_delimeter, "purple", {
-      provider = require("noice").api.status.mode.get,
-    }),
-    hl = { fg = "black" },
-  },
-}
+-- local ShowMode = {
+--   condition = require("noice").api.status.mode.has,
+--   {
+--     condition = require("noice").api.status.mode.has,
+--     utils.surround(surround_delimeter, "purple", {
+--       provider = require("noice").api.status.mode.get,
+--     }),
+--     hl = { fg = "black" },
+--   },
+-- }
 
 local ScrollBar = {
   static = {
@@ -313,9 +315,9 @@ local ScrollBar = {
     return string.rep(self.sbar[i], 2)
   end,
   update = { "CursorMoved", "CursorMovedI", "BufEnter" },
-  hl = function()
-    return { fg = "purple", bg = "bright_bg" }
-  end,
+  -- hl = function()
+  --   return { fg = "purple", bg = "bright_bg" }
+  -- end,
 }
 
 local Git = {
@@ -625,7 +627,7 @@ local DefaultStatusline = {
   Align,
   LSPActive,
   Space,
-  ShowMode,
+  -- ShowMode,
   Space,
   FileType,
   Space,
@@ -642,7 +644,7 @@ local InactiveStatusline = {
   Space,
   FileName,
   Align,
-  ShowMode,
+  -- ShowMode,
 }
 
 local SpecialStatusline = {
@@ -656,7 +658,7 @@ local SpecialStatusline = {
   Space,
   HelpFileName,
   Align,
-  ShowMode,
+  -- ShowMode,
 }
 
 M.StatusLines = {

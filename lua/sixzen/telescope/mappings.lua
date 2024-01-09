@@ -22,7 +22,7 @@ end
 vim.api.nvim_set_keymap("c", "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", { noremap = false, nowait = true })
 
 map_tele("<leader>;f", "project_files")
-map_tele("<leader>;n", "noice")
+-- map_tele("<leader>;n", "noice")
 map_tele("<leader>;gb", "branches")
 map_tele("<leader>;w", "grep_word")
 map_tele("<leader>;s", "grep_string")

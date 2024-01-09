@@ -6,9 +6,11 @@ return {
   },
   config = function()
     local StatusLines = require("sixzen.heirline.statusline").StatusLines
+    local TabLine = require("sixzen.heirline.tabline").TabLine
 
     require("heirline").setup {
       statusline = StatusLines,
+      tabline = TabLine
     }
   end,
 }

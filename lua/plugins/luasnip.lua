@@ -7,6 +7,7 @@ return {
     },
   },
   version = "v2.*",
+  build = "make install_jsregexp",
   config = function()
     local luasnip = require "luasnip"
 
@@ -32,12 +33,12 @@ return {
       end,
     })
 
-    local keymap = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-    keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-    keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-    keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-    keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+    -- local keymap = vim.api.nvim_set_keymap
+    -- local opts = { noremap = true, silent = true }
+    -- keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    -- keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    -- keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+    -- keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
 
     require "config.snippets"
   end,
