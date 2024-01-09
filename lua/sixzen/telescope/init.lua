@@ -1,4 +1,4 @@
-SHOULD_RELOAD_TELESCOPE = true
+SHOULD_RELOAD_TELESCOPE = false
 
 local reloader = function()
   if SHOULD_RELOAD_TELESCOPE then
@@ -72,6 +72,10 @@ end
 
 function M.live_grep()
   require("telescope.builtin").live_grep {}
+end
+
+function M.resume()
+  require("telescope.builtin").resume {}
 end
 
 function M.find_symbol()
