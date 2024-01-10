@@ -1,6 +1,6 @@
 return {
   "Wansmer/treesj",
-  keys = { "<space>m" },
+  keys = { "<leader>m", "<leader>M" },
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
     local treesj = require "treesj"

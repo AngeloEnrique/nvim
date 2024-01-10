@@ -120,7 +120,6 @@ local config = {
 
 config["on_attach"] = function(client, bufnr)
   local _, _ = pcall(vim.lsp.codelens.refresh)
-  require("jdtls.setup").add_commands()
   require("jdtls").setup_dap { hotcodereplace = "auto" }
   require("sixzen.lsp").on_attach(client, bufnr)
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
