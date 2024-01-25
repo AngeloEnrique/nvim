@@ -36,6 +36,8 @@ map_tele("<leader>;l", "live_grep")
 -- map_tele("<leader>;er", "file_browser_relative")
 -- map_tele("<leader>;eb", "file_browser")
 map_tele("<leader>;gs", "git_status")
+map_tele("<leader>;gcc", "git_commits")
+map_tele("<leader>;gbc", "git_buf_commits")
 map_tele("<leader>;d", "diagnostics")
 
 return map_tele

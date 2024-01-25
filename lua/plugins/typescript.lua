@@ -10,6 +10,7 @@ return {
       capabilities = capabilities,
       settings = {
         expose_as_code_action = "all",
+        code_lens = "all",
         tsserver_file_preferences = {
           includeInlayParameterNameHints = "all",
           includeCompletionsForModuleExports = true,

@@ -7,6 +7,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
+    "3rd/image.nvim",
     {
       -- only needed if you want to use the commands with "_with_window_picker" suffix
       "s1n7ax/nvim-window-picker",
@@ -29,12 +30,6 @@ return {
     },
   },
   config = function()
-    -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-    vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-    vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-    vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-    vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-
     require("neo-tree").setup {
       close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = "rounded",
@@ -108,7 +103,7 @@ return {
       -- see `:h neo-tree-global-custom-commands`
       commands = {},
       window = {
-        position = "float",
+        position = "current",
         width = 40,
         mapping_options = {
           noremap = true,
@@ -261,7 +256,7 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true<CR>")
+    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true position=float<CR>")
 
     local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)

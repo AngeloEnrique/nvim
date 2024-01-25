@@ -41,8 +41,8 @@ vim.keymap.set("n", "<leader><up>", "3<C-w>+")
 vim.keymap.set("n", "<leader><down>", "3<C-w>-")
 
 -- Move lines
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, silent = true })
 

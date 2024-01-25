@@ -74,6 +74,14 @@ function M.live_grep()
   require("telescope.builtin").live_grep {}
 end
 
+function M.git_commits()
+  require("telescope.builtin").git_commits {}
+end
+
+function M.git_buf_commits()
+  require("telescope.builtin").git_bcommits {}
+end
+
 function M.resume()
   require("telescope.builtin").resume {}
 end

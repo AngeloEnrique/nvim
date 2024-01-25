@@ -61,6 +61,7 @@ return {
               sp = C.surface0,
               style = {},
             },
+            PackageInfoOutdatedVersion = { fg = colors.peach },
           }
         end,
         integrations = {

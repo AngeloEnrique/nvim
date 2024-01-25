@@ -78,11 +78,11 @@ return {
         item = { ">", "v" },
         hunk = { "", "" },
       },
-      telescope_sorter = function()
-        return require("telescope").extensions.fzf.native_fzf_sorter()
-      end,
+      -- telescope_sorter = function()
+      --   return require("telescope").extensions.fzf.native_fzf_sorter()
+      -- end,
       integrations = {
-        telescope = true,
+        telescope = false,
         diffview = true,
       },
       -- Setting any section to `false` will make the section not render at all
