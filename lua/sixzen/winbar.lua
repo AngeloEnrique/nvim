@@ -125,12 +125,12 @@ local get_filename = function()
 end
 
 local excludes = function()
-  return vim.tbl_contains(winbar_filetype_exclude or {}, vim.bo.filetype)
+  return vim.tbl_contains(winbar_filetype_exclude or {}, vim.bo.filetype) or vim.wo.diff
 end
 
 local get_winbar = function()
   if excludes() then
-    return
+    return nil
   end
   local value = get_filename()
   local location = navic.get_location()

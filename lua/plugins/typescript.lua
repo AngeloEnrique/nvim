@@ -1,5 +1,6 @@
 return {
   "pmizio/typescript-tools.nvim",
+  ft = { "typescript", "typescriptreact", "javascript", "javascriptreact"},
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   config = function()
     local on_attach = require("sixzen.lsp").on_attach

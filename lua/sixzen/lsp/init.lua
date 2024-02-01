@@ -39,10 +39,14 @@ M.on_attach = function(client, bufnr)
     end)
   end
   if client.name == "eslint" then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
+    if require("null-ls").is_registered "prettier" then
+      client.server_capabilities.document_formatting = false
+    else
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        command = "EslintFixAll",
+      })
+    end
   end
   if client.server_capabilities.inlayHintProvider then
     vim.keymap.set("n", "<leader>i", function()

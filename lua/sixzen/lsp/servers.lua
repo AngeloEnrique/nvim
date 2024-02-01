@@ -40,6 +40,18 @@ local servers = {
       capabilities = capabilities,
     }
   end,
+  ["lemminx"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
+  ["yamlls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
   ["emmet_ls"] = function()
     local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
     return {
