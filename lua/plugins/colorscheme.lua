@@ -62,6 +62,7 @@ return {
               style = {},
             },
             PackageInfoOutdatedVersion = { fg = colors.peach },
+            CmpNormal = { bg = colors.mantle },
           }
         end,
         integrations = {

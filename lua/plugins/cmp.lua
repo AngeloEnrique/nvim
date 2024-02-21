@@ -1,15 +1,15 @@
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
-    "saadparwaiz1/cmp_luasnip",            --cmp luasnip
-    "hrsh7th/cmp-path",                    -- nvim-cmp buffer for paths
-    "hrsh7th/cmp-buffer",                  -- nvim-cmp source for buffer words
-    "hrsh7th/cmp-nvim-lsp",                -- nvim-cmp source for neovim',s built-in LSP
-    "hrsh7th/cmp-nvim-lua",                -- nvim-cmp for lua
-    "hrsh7th/cmp-git",                     -- nvim-cmp for git
-    "hrsh7th/cmp-cmdline",                 -- nvim-cmp for cmdline
+    "saadparwaiz1/cmp_luasnip", --cmp luasnip
+    "hrsh7th/cmp-path",         -- nvim-cmp buffer for paths
+    "hrsh7th/cmp-buffer",       -- nvim-cmp source for buffer words
+    "hrsh7th/cmp-nvim-lsp",     -- nvim-cmp source for neovim',s built-in LSP
+    "hrsh7th/cmp-nvim-lua",     -- nvim-cmp for lua
+    "hrsh7th/cmp-git",          -- nvim-cmp for git
+    "hrsh7th/cmp-cmdline",      -- nvim-cmp for cmdline
     -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
-    "L3MON4D3/LuaSnip",                    -- Snippets
+    "L3MON4D3/LuaSnip",         -- Snippets
     -- "zbirenbaum/copilot-cmp",              -- Copilot
     -- "windwp/nvim-autopairs",
     "roobert/tailwindcss-colorizer-cmp.nvim",
@@ -18,7 +18,7 @@ return {
   config = function()
     local cmp = require "cmp"
     -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    local cmp_window = require "cmp.config.window"
+    -- local cmp_window = require "cmp.config.window"
     local cmp_mapping = require "cmp.config.mapping"
     local icons = require "sixzen.icons"
 
@@ -40,8 +40,11 @@ return {
         ghost_text = false,
       },
       window = {
-        completion = cmp_window.bordered(),
-        documentation = cmp_window.bordered(),
+        -- completion = cmp_window.bordered(),
+        -- documentation = cmp_window.bordered(),
+        completion = {
+          winhighlight = "Normal:CmpNormal",
+        },
       },
       sorting = {
         comparators = {
@@ -92,7 +95,7 @@ return {
           elseif luasnip.jumpable(1) then
             luasnip.jump(1)
           else
-            fallback()
+            cmp_mapping.complete()
           end
         end, { "i", "s" }),
         ["<C-p>"] = cmp_mapping(function(fallback)

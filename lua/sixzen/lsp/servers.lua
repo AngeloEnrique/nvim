@@ -34,6 +34,12 @@ local servers = {
       on_attach = on_attach,
     }
   end,
+  ["dockerls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
   ["rust_analyzer"] = function()
     return {
       on_attach = on_attach,
