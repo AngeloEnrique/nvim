@@ -8,9 +8,13 @@ return {
   dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } },
   opts = {
     load = {
-      ["core.defaults"] = {},  -- Loads default behaviour
-      ["core.concealer"] = {}, -- Adds pretty icons to your documents
-      ["core.dirman"] = {      -- Manages Neorg workspaces
+      ["core.defaults"] = {}, -- Loads default behaviour
+      ["core.concealer"] = {
+        config = {
+          init_open_folds = "never",
+        },
+      },                  -- Adds pretty icons to your documents
+      ["core.dirman"] = { -- Manages Neorg workspaces
         config = {
           workspaces = {
             notes = "~/notes",

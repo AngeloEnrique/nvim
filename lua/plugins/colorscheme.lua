@@ -58,7 +58,7 @@ return {
           return {
             StatusLine = { bg = colors.none },
             TreesitterContextBottom = {
-              sp = C.surface0,
+              sp = colors.surface0,
               style = {},
             },
             PackageInfoOutdatedVersion = { fg = colors.peach },

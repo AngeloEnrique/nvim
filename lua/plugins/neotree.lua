@@ -2,6 +2,7 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   -- keys = { {} },
   -- event = "UIEnter",
+  enabled = false,
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -191,7 +192,7 @@ return {
         },
         -- time the current file is changed while the tree is open.
         group_empty_dirs = false,               -- when true, empty folders will be grouped together
-        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+        hijack_netrw_behavior = "disabled", -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the
         -- window like netrw would, regardless of window.position
@@ -255,7 +256,7 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true position=float<CR>")
+    vim.keymap.set("n", "<leader>en", "<cmd>Neotree toggle reveal=true position=float<CR>")
 
     local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
