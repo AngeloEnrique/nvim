@@ -1,11 +1,12 @@
 return {
   "nvim-neorg/neorg",
-  build = ":Neorg sync-parsers",
+  -- build = ":Neorg sync-parsers",
   keys = {
     { "<leader>no", "<cmd>Neorg index<cr>", desc = "Neorg" },
   },
   cmd = { "Neorg" },
-  dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } },
+  dependencies = { "luarocks.nvim" },
+  version = "*",
   opts = {
     load = {
       ["core.defaults"] = {}, -- Loads default behaviour

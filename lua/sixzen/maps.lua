@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<Space>", "", {})
 vim.g.mapleader = " "
-vim.g.maplocalleader = "<C-/>"
+vim.g.maplocalleader = "\\"
 
 -- Movements
 vim.keymap.set("n", "J", "mzJ`z")

@@ -142,18 +142,18 @@ local get_winbar = function()
   return value
 end
 
-vim.api.nvim_create_augroup("_winbar", {})
-if vim.fn.has "nvim-0.8" == 1 then
-  vim.api.nvim_create_autocmd(
-    { "CursorMoved", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed" },
-    {
-      group = "_winbar",
-      callback = function()
-        local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", get_winbar(), { scope = "local" })
-        if not status_ok then
-          return
-        end
-      end,
-    }
-  )
-end
+-- vim.api.nvim_create_augroup("_winbar", {})
+-- if vim.fn.has "nvim-0.8" == 1 then
+--   vim.api.nvim_create_autocmd(
+--     { "CursorMoved", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed" },
+--     {
+--       group = "_winbar",
+--       callback = function()
+--         local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", get_winbar(), { scope = "local" })
+--         if not status_ok then
+--           return
+--         end
+--       end,
+--     }
+--   )
+-- end

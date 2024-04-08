@@ -1,6 +1,6 @@
 return {
   "jackMort/ChatGPT.nvim",
-  enable = false,
+  enabled = false,
   keys = { { "<leader>c", "<cmd>ChatGPT<cr>" } },
   dependencies = {
     "MunifTanjim/nui.nvim",

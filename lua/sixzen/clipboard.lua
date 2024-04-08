@@ -7,10 +7,10 @@ local is_linux = has "linux"
 local is_win = has "win32"
 local is_wsl = has "wsl"
 
-if is_wsl then
-  require "sixzen.wsl"
-  return
-end
+-- if is_wsl then
+--   require "sixzen.wsl"
+--   return
+-- end
 
 if is_mac or is_linux then
   require "sixzen.unix"

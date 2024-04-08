@@ -89,6 +89,12 @@ local servers = {
       },
     }
   end,
+  ["cssls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
   ["tailwindcss"] = function()
     return {
       on_attach = on_attach,

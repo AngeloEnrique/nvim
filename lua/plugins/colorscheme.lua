@@ -63,6 +63,8 @@ return {
             },
             PackageInfoOutdatedVersion = { fg = colors.peach },
             CmpNormal = { bg = colors.mantle },
+            -- InclineNormal = { bg = colors.mantle },
+            -- InclineNormalNC = { bg = colors.surface0 },
           }
         end,
         integrations = {

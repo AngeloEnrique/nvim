@@ -32,7 +32,6 @@ return {
     },
   },
   { "folke/todo-comments.nvim", event = "BufRead", dependencies = "nvim-lua/plenary.nvim", config = true },
-  -- { "mg979/vim-visual-multi",   event = "BufRead" },
   {
     "rmagatti/alternate-toggler",
     keys = "<leader>ta",

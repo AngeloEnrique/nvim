@@ -11,6 +11,7 @@ end
 -- local fb_actions = require("telescope").extensions.file_browser.actions
 local actions = require "telescope.actions"
 local my_actions = require "sixzen.telescope.actions"
+local builtin = require "telescope.builtin"
 
 local M = {}
 
@@ -20,14 +21,14 @@ local M = {}
 
 function M.project_files()
   local opts = { show_untracked = true } -- define here if you want to define something
-  local ok = pcall(require("telescope.builtin").git_files, opts)
+  local ok = pcall(builtin.git_files, opts)
   if not ok then
-    require("telescope.builtin").find_files(opts)
+    builtin.find_files { hidden = true }
   end
 end
 
 function M.branches()
-  require("telescope.builtin").git_branches {
+  builtin.git_branches {
     attach_mappings = function(_, map)
       map("i", "<c-j>", actions.git_create_branch)
       map("n", "<c-j>", actions.git_create_branch)
@@ -37,14 +38,14 @@ function M.branches()
 end
 
 M.find_nvim_config = function()
-  require("telescope.builtin").find_files {
+  builtin.find_files {
     prompt_title = "Neovim",
     cwd = "$HOME/.config/nvim/",
   }
 end
 
 M.find_nvim_plugin = function()
-  require("telescope.builtin").find_files {
+  builtin.find_files {
     prompt_title = "Plugins",
     cwd = "$HOME/.config/nvim/lua/plugins/",
     attach_mappings = function(_, map)
@@ -62,28 +63,28 @@ function M.grep_string()
     if input == nil then
       return
     end
-    require("telescope.builtin").grep_string { search = input }
+    builtin.grep_string { search = input }
   end)
 end
 
 function M.grep_word()
-  require("telescope.builtin").grep_string { search = vim.fn.expand "<cword>" }
+  builtin.grep_string { search = vim.fn.expand "<cword>" }
 end
 
 function M.live_grep()
-  require("telescope.builtin").live_grep {}
+  builtin.live_grep {}
 end
 
 function M.git_commits()
-  require("telescope.builtin").git_commits {}
+  builtin.git_commits {}
 end
 
 function M.git_buf_commits()
-  require("telescope.builtin").git_bcommits {}
+  builtin.git_bcommits {}
 end
 
 function M.resume()
-  require("telescope.builtin").resume {}
+  builtin.resume {}
 end
 
 function M.find_symbol()
@@ -91,7 +92,7 @@ function M.find_symbol()
     if input == nil then
       return
     end
-    require("telescope.builtin").lsp_workspace_symbols { query = input }
+    builtin.lsp_workspace_symbols { query = input }
   end)
 end
 
@@ -100,7 +101,7 @@ function M.my_plugins()
     vim.notify("Directory ~/code/plugins does not exists", vim.log.levels.WARN, { title = "Telescope Mappings" })
     return
   end
-  require("telescope.builtin").find_files {
+  builtin.find_files {
     cwd = "~/code/plugins/",
   }
 end
@@ -147,7 +148,7 @@ return setmetatable({}, {
     if M[k] then
       return M[k]
     else
-      return require("telescope.builtin")[k]
+      return builtin[k]
     end
   end,
 })

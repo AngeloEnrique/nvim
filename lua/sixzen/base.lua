@@ -51,7 +51,7 @@ vim.opt.wildignore:append { "*/node_modules/*" }
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.opt.whichwrap:append "<,>,[,],h,l"
 vim.opt.list = true
-vim.opt.listchars = "tab:\\ ,trail:•"
+vim.opt.listchars = "tab: ,trail:•"
 
 vim.g.snippets = "luasnip"
 

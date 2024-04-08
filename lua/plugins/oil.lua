@@ -1,5 +1,6 @@
 return {
   "stevearc/oil.nvim",
+  enabled= false,
   dependencies = { "nvim-tree/nvim-web-devicons", "SirZenith/oil-vcs-status" },
   config = function()
     require("oil").setup {
@@ -16,6 +17,12 @@ return {
     local StatusType = status_const.StatusType
 
     require("oil-vcs-status").setup {
+      fs_event_debounce = 500,
+      vcs_specific = {
+        git = {
+          status_update_debounce = 200,
+        },
+      },
       status_priority = {
         [StatusType.UpstreamIgnored] = 0,
         [StatusType.UpstreamUntracked] = 1,
@@ -71,6 +78,6 @@ return {
         [StatusType.UpstreamExternal] = "",
       },
     }
-    vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory float" })
+    vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }
