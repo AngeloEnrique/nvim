@@ -29,10 +29,10 @@ vim.keymap.set("v", ">", ">gv")
 -- New tab
 vim.keymap.set("n", "<leader>te", ":tabedit<Return>", { silent = true })
 -- Split window
-vim.keymap.set("n", "<leader>ss", ":split<Return><C-w>w", { silent = true })
-vim.keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", { silent = true })
+-- vim.keymap.set("n", "<leader>ss", ":split<Return><C-w>w", { silent = true })
+-- vim.keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", { silent = true })
 -- Move window
-vim.keymap.set("n", "<leader><Tab>", "<C-w>w")
+-- vim.keymap.set("n", "<leader><Tab>", "<C-w>w")
 
 -- Resize window
 vim.keymap.set("n", "<leader><left>", "5<C-w><")

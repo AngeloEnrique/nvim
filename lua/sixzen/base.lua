@@ -14,6 +14,7 @@ vim.opt.showtabline = 2
 vim.opt.hidden = true
 -- vim.opt.foldlevelstart = 99
 vim.opt.pumheight = 10
+vim.opt.breakindent = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false

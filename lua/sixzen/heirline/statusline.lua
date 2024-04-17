@@ -237,10 +237,10 @@ local LSPActive = {
             end
 
             for _, server in pairs(vim.lsp.get_clients{ bufnr = 0 }) do
-              if server.name ~= "null-ls" and server.name ~= "copilot" and server.name ~= "emmet_ls" then
+              if server.name ~= "null-ls" and server.name ~= "GitHub Copilot" and server.name ~= "emmet_ls" then
                 table.insert(names, server.name)
               end
-              if server.name == "copilot" then
+              if server.name == "GitHub Copilot" then
                 copilot = true
               end
             end

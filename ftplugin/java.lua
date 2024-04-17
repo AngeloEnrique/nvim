@@ -71,22 +71,34 @@ local config = {
       configuration = {
         updateBuildConfiguration = "interactive",
         runtimes = {
-          {
-            name = "JavaSE-11",
-            path = "~/.sdkman/candidates/java/11.0.2-open",
-          },
-          {
-            name = "JavaSE-17",
-            path = "~/.sdkman/candidates/java/17-open",
-          },
-          {
-            name = "JavaSE-18",
-            path = "~/.sdkman/candidates/java/18.0.1.1-open",
-          },
+          -- {
+          --   name = "JavaSE-11",
+          --   path = "~/.sdkman/candidates/java/11.0.2-open",
+          -- },
+          -- {
+          --   name = "JavaSE-17",
+          --   path = "~/.sdkman/candidates/java/17-open",
+          -- },
+          -- {
+          --   name = "JavaSE-18",
+          --   path = "~/.sdkman/candidates/java/18.0.1.1-open",
+          -- },
           {
             name = "JavaSE-19",
             path = "~/.sdkman/candidates/java/19-open",
           },
+          {
+            name = "JavaSE-20",
+            path = "~/.sdkman/candidates/java/20-open",
+          },
+          {
+            name = "JavaSE-21",
+            path = "~/.sdkman/candidates/java/21.0.2-open",
+          },
+          -- {
+          --   name = "JavaSE-22",
+          --   path = "~/.sdkman/candidates/java/22-open",
+          -- },
         },
       },
       maven = {
