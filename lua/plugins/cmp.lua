@@ -116,6 +116,7 @@ return {
         --   keyword_length = 0,
         --   max_item_count = 3,
         -- },
+        { name = "otter" },
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "nvim_lsp" },

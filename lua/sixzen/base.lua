@@ -106,3 +106,10 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
   group = aug,
   pattern = "*",
 })
+
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  pattern = { '*' },
+  callback = function(_)
+    vim.cmd.setlocal 'nonumber'
+  end,
+})

@@ -4,14 +4,21 @@ if not status then
   return
 end
 
+local util = require "lspconfig.util"
 local on_attach = require("sixzen.lsp").on_attach
 local capabilities = require("sixzen.lsp").capabilities()
+local python_capabilities = capabilities
+if python_capabilities.workspace == nil then
+  python_capabilities.workspace = {}
+  python_capabilities.workspace.didChangeWatchedFiles = {}
+end
+python_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 local servers = {
   ["pyright"] = function()
     return {
       on_attach = on_attach,
-      capabilities = capabilities,
+      capabilities = python_capabilities,
       settings = {
         pyright = {
           disableLanguageServices = false,
@@ -22,8 +29,32 @@ local servers = {
             autoImportCompletions = true,
             autoSearchPaths = true,
             diagnosticMode = "workspace", -- openFilesOnly, workspace
-            typeCheckingMode = "basic",   -- off, basic, strict
+            -- typeCheckingMode = "basic",   -- off, basic, strict
             useLibraryCodeForTypes = true,
+          },
+        },
+      },
+      root_dir = function(fname)
+        return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
+            or util.path.dirname(fname)
+      end,
+    }
+  end,
+  ["marksman"] = function()
+    return {
+      capabilities = capabilities,
+      filetypes = { "markdown", "quarto" },
+      root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+    }
+  end,
+  ["r_language_server"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        r = {
+          lsp = {
+            rich_documentation = false,
           },
         },
       },
@@ -32,6 +63,12 @@ local servers = {
   ["eslint"] = function()
     return {
       on_attach = on_attach,
+    }
+  end,
+  ["dotls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
     }
   end,
   ["dockerls"] = function()
