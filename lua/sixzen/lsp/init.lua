@@ -34,8 +34,8 @@ M.on_attach = function(client, bufnr)
       require("jdtls.dap").setup_dap_main_class_configs()
     end
     client.server_capabilities.document_formatting = false
-    vim.keymap.set("n", "<leader>i", function()
-      vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
+    vim.keymap.set("n", "<leader>ih", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end)
   end
   if client.name == "eslint" then
@@ -49,8 +49,8 @@ M.on_attach = function(client, bufnr)
     end
   end
   if client.server_capabilities.inlayHintProvider then
-    vim.keymap.set("n", "<leader>i", function()
-      vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
+    vim.keymap.set("n", "<leader>ih", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end)
   end
   if client.supports_method "textDocument/formatting" then
