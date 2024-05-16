@@ -77,6 +77,6 @@ return {
         [StatusType.UpstreamExternal] = "",
       },
     }
-    vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }

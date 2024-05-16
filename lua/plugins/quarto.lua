@@ -112,6 +112,7 @@ return {
   { -- send code from python/r/qmd documets to a terminal or REPL
     -- like ipython, R, bash
     "jpalardy/vim-slime",
+    ft = { "quarto" },
     init = function()
       vim.b["quarto_is_python_chunk"] = false
       Quarto_is_in_python_chunk = function()
@@ -184,6 +185,8 @@ return {
 
   { -- preview equations
     "jbyuki/nabla.nvim",
+    event = "BufEnter",
+    ft = { "markdown", "quarto", "latex" },
     keys = {
       { "<leader>qm", ':lua require"nabla".toggle_virt()<cr>', desc = "toggle [m]ath equations" },
     },
