@@ -11,7 +11,6 @@ return {
     --     disable_filetype = { "TelescopePrompt", "vim" },
     --   },
     -- },
-    { "windwp/nvim-ts-autotag", config = true },
     {
       "nvim-treesitter/nvim-treesitter-context",
       config = function()
@@ -69,9 +68,9 @@ return {
         return vim.b.large_buf
       end,
     },
-    autotag = {
-      enable = true,
-    },
+    -- autotag = {
+    --   enable = true,
+    -- },
     textobjects = {
       select = {
         enable = true,
