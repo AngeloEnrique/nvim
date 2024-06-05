@@ -1,7 +1,7 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   -- keys = { {} },
-  -- event = "UIEnter",
+  event = "UIEnter",
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",

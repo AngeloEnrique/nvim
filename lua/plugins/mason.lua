@@ -1,6 +1,7 @@
 return {
   "williamboman/mason.nvim",
   build = ":MasonUpdate",
+  event = "VeryLazy",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },

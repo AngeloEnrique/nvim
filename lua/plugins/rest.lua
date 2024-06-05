@@ -71,6 +71,11 @@ return {
               end,
             },
           },
+          keybinds = {
+            buffer_local = true,
+            prev = "H",
+            next = "L",
+          },
         },
         highlight = {
           enable = true,
@@ -92,10 +97,14 @@ return {
         ---@see vim.keymap.set
         keybinds = {
           {
-            "<localleader>rr", "<cmd>Rest run<cr>", "Run request under the cursor",
+            "<localleader>rr",
+            "<cmd>Rest run<cr>",
+            "Run request under the cursor",
           },
           {
-            "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request",
+            "<localleader>rl",
+            "<cmd>Rest run last<cr>",
+            "Re-run latest request",
           },
         },
       }

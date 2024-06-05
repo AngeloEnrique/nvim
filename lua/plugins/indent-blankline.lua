@@ -18,7 +18,7 @@ return {
       },
       exclude = {
         buftypes = { "terminal" },
-        filetypes = { "alpha", "NvimTree", "neo-tree", "oil" },
+        filetypes = { "alpha", "dashboard", "NvimTree", "neo-tree", "oil" },
       },
     }
   end,

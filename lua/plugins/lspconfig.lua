@@ -1,6 +1,7 @@
 return {
   "neovim/nvim-lspconfig", -- LSP
   event = { "BufReadPre", "BufNewFile" },
+  commit = '38de86f82efd9ba0881203767d6a8e1815abca28',
   dependencies = {
     "SmiteshP/nvim-navic", -- Breadcrumb
     "nvimtools/none-ls.nvim",
