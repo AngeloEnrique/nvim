@@ -50,14 +50,21 @@ return {
         vim.api.nvim_feedkeys(keys, "n", false)
       end
 
-      -- local insert_r_chunk = function()
-      --   insert_code_chunk "r"
-      -- end
+      local insert_r_chunk = function()
+        insert_code_chunk "r"
+      end
 
       local insert_py_chunk = function()
         insert_code_chunk "python"
       end
 
+      local function show_r_table()
+        local node = vim.treesitter.get_node { ignore_injections = false }
+        assert(node, "no symbol found under cursor")
+        local text = vim.treesitter.get_node_text(node, 0)
+        local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
+        vim.cmd(cmd)
+      end
       -- local insert_lua_chunk = function()
       --   insert_code_chunk "lua"
       -- end
@@ -75,10 +82,18 @@ return {
       -- end
 
       vim.keymap.set({ "n", "i" }, "<M-c>", insert_py_chunk)
+      vim.keymap.set({ "n", "i" }, "<M-r>", insert_r_chunk)
+      vim.keymap.set("n", "<leader>qrt", show_r_table, { silent = true, noremap = true })
       vim.keymap.set("n", "<leader>qp", quarto.quartoPreview, { silent = true, noremap = true })
-      vim.keymap.set("n", "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true })
-      vim.keymap.set("n", "<leader>qt", ":split term://ipython<cr>G<C-w>k", { silent = true, noremap = true })
-      vim.cmd("TSContextDisable")
+      vim.keymap.set({ "n", "i" }, "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true })
+      vim.keymap.set(
+        "n",
+        "<leader>qtp",
+        ":vsplit term://ipython  --no-confirm-exit<cr>G<C-w>h",
+        { silent = true, noremap = true }
+      )
+      vim.keymap.set("n", "<leader>qtr", ":vsplit term://R --no-save<cr>G<C-w>h", { silent = true, noremap = true })
+      vim.cmd "TSContextDisable"
     end,
     dependencies = {
       -- for language features in code cells

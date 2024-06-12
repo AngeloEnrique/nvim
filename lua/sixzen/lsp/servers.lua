@@ -14,6 +14,31 @@ if python_capabilities.workspace == nil then
 end
 python_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
+-- local function get_quarto_resource_path()
+--   local function strsplit(s, delimiter)
+--     local result = {}
+--     for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
+--       table.insert(result, match)
+--     end
+--     return result
+--   end
+--
+--   local f = assert(io.popen("quarto --paths", "r"))
+--   local s = assert(f:read "*a")
+--   f:close()
+--   return strsplit(s, "\n")[2]
+-- end
+--
+-- local lua_library_files = vim.api.nvim_get_runtime_file("", true)
+-- local lua_plugin_paths = {}
+-- local resource_path = get_quarto_resource_path()
+-- if resource_path == nil then
+--   vim.notify_once "quarto not found, lua library files not loaded"
+-- else
+--   table.insert(lua_library_files, resource_path .. "/lua-types")
+--   table.insert(lua_plugin_paths, resource_path .. "/lua-plugin/plugin.lua")
+-- end
+
 local servers = {
   ["pyright"] = function()
     return {
@@ -150,6 +175,34 @@ local servers = {
       capabilities = capabilities,
     }
   end,
+  -- ["lua_ls"] = function()
+  --   return {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --     settings = {
+  --       Lua = {
+  --         completion = {
+  --           callSnippet = "Replace",
+  --         },
+  --         runtime = {
+  --           version = "LuaJIT",
+  --           plugin = lua_plugin_paths,
+  --         },
+  --         diagnostics = {
+  --           globals = { "vim", "quarto", "pandoc", "io", "string", "print", "require", "table" },
+  --           disable = { "trailing-space" },
+  --         },
+  --         workspace = {
+  --           library = lua_library_files,
+  --           checkThirdParty = false,
+  --         },
+  --         telemetry = {
+  --           enable = false,
+  --         },
+  --       },
+  --     },
+  --   }
+  -- end,
   ["lua_ls"] = function()
     return {
       on_attach = on_attach,

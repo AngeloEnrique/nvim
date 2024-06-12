@@ -19,7 +19,7 @@ return {
       },
       buffers = {
         set_filetype = true,
-        write_to_disk = false,
+        write_to_disk = true,
       },
       handle_leading_whitespace = true,
     }

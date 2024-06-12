@@ -13,15 +13,26 @@ return {
     vim.g.db_ui_win_position = "right"
     vim.g.db_ui_winwidth = 80
 
-    vim.g.db_ui_table_helpers = {
-      mysql = {
-        Count = "select count(1) from {optional_schema}{table}",
-        Explain = "EXPLAIN {last_query}",
-      },
-      sqlite = {
-        Describe = "PRAGMA table_info({table})",
-      },
-    }
+    vim.cmd [[
+    let g:db_ui_table_helpers = {
+\        'mysql': {
+\          'Count': 'select count(1) from {optional_schema}{table}',
+\          'Explain': 'EXPLAIN {last_query}'
+\        },
+\        'sqlite': {
+\          'Describe': 'PRAGMA table_info({table})'
+\        },
+\        'mongodb': {
+\          'Count': '{table}.countDocuments()',
+\          'FindOne': '{table}.findOne()'
+\        },
+\        'mongodb+srv': {
+\          'List': '{table}.find()',
+\          'Count': '{table}.countDocuments()',
+\          'FindOne': '{table}.findOne()'
+\        }
+\      }
+    ]]
 
     vim.g.db_ui_icons = {
       expanded = {

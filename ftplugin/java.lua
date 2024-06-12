@@ -125,6 +125,7 @@ local config = {
     },
   },
   init_options = {
+    -- bundles = vim.list_extend(bundles, require("spring_boot").java_extensions()),
     bundles = bundles,
     extendedClientCapabilities = extendedClientCapabilities,
   },
