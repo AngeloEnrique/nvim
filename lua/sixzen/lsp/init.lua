@@ -33,7 +33,7 @@ M.on_attach = function(client, bufnr)
       require("jdtls").setup_dap()
       require("jdtls.dap").setup_dap_main_class_configs()
     end
-    client.server_capabilities.document_formatting = false
+    -- client.server_capabilities.document_formatting = false
     vim.keymap.set("n", "<leader>ih", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end)

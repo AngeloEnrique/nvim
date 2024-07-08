@@ -77,7 +77,7 @@ local config = {
           -- },
           -- {
           --   name = "JavaSE-17",
-          --   path = "~/.sdkman/candidates/java/17-open",
+          --   path = "~/.sdkman/candidates/java/17.0.11-oracle",
           -- },
           -- {
           --   name = "JavaSE-18",
@@ -95,10 +95,10 @@ local config = {
             name = "JavaSE-21",
             path = "~/.sdkman/candidates/java/21.0.2-open",
           },
-          -- {
-          --   name = "JavaSE-22",
-          --   path = "~/.sdkman/candidates/java/22-open",
-          -- },
+          {
+            name = "JavaSE-22",
+            path = "~/.sdkman/candidates/java/22-open",
+          },
         },
       },
       maven = {
@@ -119,13 +119,12 @@ local config = {
         },
       },
       format = {
-        enabled = false,
+        enabled = true,
       },
       signatureHelp = { enabled = true },
     },
   },
   init_options = {
-    -- bundles = vim.list_extend(bundles, require("spring_boot").java_extensions()),
     bundles = bundles,
     extendedClientCapabilities = extendedClientCapabilities,
   },

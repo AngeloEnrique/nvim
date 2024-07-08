@@ -5,7 +5,6 @@ return {
     { "<leader>no", "<cmd>Neorg index<cr>", desc = "Neorg" },
   },
   cmd = { "Neorg" },
-  dependencies = { "luarocks.nvim" },
   version = "*",
   opts = {
     load = {

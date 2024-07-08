@@ -72,6 +72,12 @@ local servers = {
       root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
     }
   end,
+  -- ["jdtls"] = function()
+  --   return {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --   }
+  -- end,
   ["r_language_server"] = function()
     return {
       on_attach = on_attach,

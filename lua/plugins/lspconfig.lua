@@ -6,10 +6,10 @@ return {
     "nvimtools/none-ls.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    {
-      "folke/neodev.nvim",
-      opts = {}
-    },
+    -- {
+    --   "folke/neodev.nvim",
+    --   opts = {}
+    -- },
     {
       "antosha417/nvim-lsp-file-operations",
       config = true,

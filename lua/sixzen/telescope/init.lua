@@ -27,6 +27,10 @@ function M.project_files()
   end
 end
 
+function M.find_all_files()
+  builtin.find_files { hidden = true, no_ignore = true }
+end
+
 function M.branches()
   builtin.git_branches {
     attach_mappings = function(_, map)

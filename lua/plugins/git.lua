@@ -71,7 +71,7 @@ return {
       -- Sorting keys: https://git-scm.com/docs/git-for-each-ref#_options
       sort_branches = "-committerdate",
       -- Change the default way of opening neogit
-      kind = "split",
+      kind = "tab",
       -- Disable line numbers and relative line numbers
       disable_line_numbers = true,
       -- The time after which an output console is shown for slow running commands
@@ -82,7 +82,7 @@ return {
         recent_commit_count = 10,
       },
       commit_editor = {
-        kind = "split",
+        kind = "auto",
       },
       commit_select_view = {
         kind = "tab",

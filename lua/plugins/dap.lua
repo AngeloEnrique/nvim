@@ -37,27 +37,57 @@ return {
     }
 
     local dap = require "dap"
-
-    vim.fn.sign_define("DapBreakpoint", config.builtinDap.breakpoint)
-    vim.fn.sign_define("DapBreakpointRejected", config.builtinDap.breakpoint_rejected)
-    vim.fn.sign_define("DapStopped", config.builtinDap.stopped)
-
-    vim.keymap.set("n", "<leader>dt", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-    vim.keymap.set("n", "<leader>db", "<cmd>lua require'dap'.step_back()<cr>")
-    vim.keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>")
-    vim.keymap.set("n", "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>")
-    vim.keymap.set("n", "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>")
-    vim.keymap.set("n", "<leader>dq", "<cmd>lua require'dap'.session()<cr>")
-    vim.keymap.set("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>")
-    vim.keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>")
-    vim.keymap.set("n", "<leader>du", "<cmd>lua require'dap'.step_out()<cr>")
-    vim.keymap.set("n", "<leader>dp", "<cmd>lua require'dap'.pause()<cr>")
-    vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
-    vim.keymap.set("n", "<leader>ds", "<cmd>lua require'dap'.continue()<cr>")
-    vim.keymap.set("n", "<leader>dq", "<cmd>lua require'dap'.close()<cr>")
-    vim.keymap.set("n", "<leader>dU", "<cmd>lua require'dapui'.toggle()<cr>")
-
     local dapui = require "dapui"
+
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+      require('dapui').open()
+    end
+
+    dap.configurations.java = {
+      {
+        name = "Debug Launch (2GB)";
+        type = 'java';
+        request = 'launch';
+        vmArgs = "" ..
+          "-Xmx2g "
+      },
+      {
+        name = "Debug Attach (8000)";
+        type = 'java';
+        request = 'attach';
+        hostName = "127.0.0.1";
+        port = 8000;
+      },
+      {
+        name = "Debug Attach (5005)";
+        type = 'java';
+        request = 'attach';
+        hostName = "127.0.0.1";
+        port = 5005;
+      },
+      {
+        name = "My Custom Java Run Configuration",
+        type = "java",
+        request = "launch",
+        -- You need to extend the classPath to list your dependencies.
+        -- `nvim-jdtls` would automatically add the `classPaths` property if it is missing
+        -- classPaths = {},
+
+        -- If using multi-module projects, remove otherwise.
+        -- projectName = "yourProjectName",
+
+        -- javaExec = "java",
+        mainClass = "replace.with.your.fully.qualified.MainClass",
+
+        -- If using the JDK9+ module system, this needs to be extended
+        -- `nvim-jdtls` would automatically populate this property
+        -- modulePaths = {},
+        vmArgs = "" ..
+          "-Xmx2g "
+      },
+    }
+
+
     dapui.setup {
       expand_lines = true,
       icons = { expanded = "", collapsed = "", circular = "" },
@@ -117,5 +147,24 @@ return {
         }),
       })
     end
+
+    vim.fn.sign_define("DapBreakpoint", config.builtinDap.breakpoint)
+    vim.fn.sign_define("DapBreakpointRejected", config.builtinDap.breakpoint_rejected)
+    vim.fn.sign_define("DapStopped", config.builtinDap.stopped)
+
+    vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+    vim.keymap.set("n", "<leader>db", dap.step_back)
+    vim.keymap.set("n", "<leader>dc", dap.continue)
+    vim.keymap.set("n", "<leader>dC", dap.run_to_cursor)
+    vim.keymap.set("n", "<leader>dd", dap.disconnect)
+    vim.keymap.set("n", "<leader>dq", dap.session)
+    vim.keymap.set("n", "<leader>di", dap.step_into)
+    vim.keymap.set("n", "<leader>do", dap.step_over)
+    vim.keymap.set("n", "<leader>du", dap.step_out)
+    vim.keymap.set("n", "<leader>dp", dap.pause)
+    vim.keymap.set("n", "<leader>dr", dap.repl.toggle)
+    vim.keymap.set("n", "<leader>ds", dap.continue)
+    vim.keymap.set("n", "<leader>dq", dap.close)
+    vim.keymap.set("n", "<leader>dU", dapui.toggle)
   end,
 }

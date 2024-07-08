@@ -10,19 +10,14 @@ return {
       quarto.setup {
         lspFeatures = {
           languages = { "r", "python", "julia", "bash", "lua", "html", "dot", "javascript", "typescript", "ojs" },
+          diagnostics = {
+            enabled = true,
+            triggers = { "InsertLeave" },
+          },
         },
         codeRunner = {
           enabled = true,
           default_method = "slime",
-        },
-        keymap = {
-          hover = "K",
-          definition = "gd",
-          type_definition = "<leader>D",
-          rename = "<leader>rn",
-          format = "<leader>f",
-          references = "gr",
-          document_symbols = false,
         },
       }
 
