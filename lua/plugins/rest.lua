@@ -1,7 +1,6 @@
 return {
   "rest-nvim/rest.nvim",
   ft = "http",
-  dependencies = { "luarocks.nvim" },
   config = function()
     local rest = require "rest-nvim"
     rest.setup {

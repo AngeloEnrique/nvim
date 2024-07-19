@@ -19,6 +19,20 @@ end
 -- if you want to set up formatting on save, you can use this as a callback
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+M.action = setmetatable({}, {
+  __index = function(_, action)
+    return function()
+      vim.lsp.buf.code_action({
+        apply = true,
+        context = {
+          only = { action },
+          diagnostics = {},
+        },
+      })
+    end
+  end,
+})
+
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
@@ -69,6 +83,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set({ "n" }, "<leader>cA", M.action.source, opts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format { async = true }
@@ -84,27 +99,12 @@ M.capabilities = function()
     has_cmp and cmp_nvim_lsp.default_capabilities() or {}
   )
 
-  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-  -- capabilities.textDocument.completion.completionItem.resolveSupport = {
-  --   properties = {
-  --     "documentation",
-  --     "detail",
-  --     "additionalTextEdits",
-  --   },
-  -- }
-
   return capabilities
 end
 
 M.setup = function()
   require "sixzen.lsp.servers"
   require "sixzen.lsp.mapping"
-  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  --   border = border,
-  -- })
-  -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  --   border = border,
-  -- })
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
   })
