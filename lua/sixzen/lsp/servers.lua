@@ -235,6 +235,53 @@ local servers = {
       },
     }
   end,
+  ["vtsls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        complete_function_calls = true,
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          enableOrganizeImportsCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+        javascript = {
+          updateImportsOnFileMove = "always",
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
+        },
+        typescript = {
+          updateImportsOnFileMove = "always",
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
+        },
+      },
+    }
+  end,
   -- ["tsserver"] = function()
   --   return {
   --     on_attach = on_attach,

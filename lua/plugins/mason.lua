@@ -13,7 +13,7 @@ return {
     lspconfig.setup {
       ensure_installed = {
         "lua_ls",
-        "tsserver",
+        "vtsls",
         "jdtls",
         "pyright",
         "gopls",

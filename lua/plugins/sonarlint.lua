@@ -1,7 +1,12 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-  event = "BufRead *.java",
-  enabled = false,
+  event = {
+    "BufRead *.java",
+    "BufRead *.js",
+    "BufRead *.ts",
+    "BufRead *.jsx",
+    "BufRead *.tsx",
+  },
   dependencies = {
     "mfussenegger/nvim-jdtls", -- Java stuffs
   },
@@ -17,6 +22,12 @@ return {
           -- vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
           -- vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarcfamily.jar",
           vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjava.jar",
+          vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
+        },
+        settings = {
+          sonarlint = {
+            test = "test",
+          },
         },
       },
       filetypes = {
@@ -25,6 +36,10 @@ return {
         -- "cpp",
         -- Requires nvim-jdtls, otherwise an error message will be printed
         "java",
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact",
       },
     }
   end,

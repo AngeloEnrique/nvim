@@ -28,6 +28,7 @@ return {
         "toggleterm",
         "DressingSelect",
         "TelescopePrompt",
+        "Dashboard",
       },
       -- filetypes_allowlist: filetypes to illuminate, this is overridden by filetypes_denylist
       filetypes_allowlist = {},

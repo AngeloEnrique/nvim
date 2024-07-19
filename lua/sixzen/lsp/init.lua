@@ -1,7 +1,5 @@
 local M = {}
 
-local status2, navic = pcall(require, "nvim-navic")
-
 local FORMAT_ON_SAVE = false
 
 local JAVA_DAP_ACTIVE = true
@@ -22,9 +20,6 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 M.on_attach = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider and status2 then
-    navic.attach(client, bufnr)
-  end
   if client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
   end
@@ -81,20 +76,22 @@ M.on_attach = function(client, bufnr)
 end
 
 M.capabilities = function()
-  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if status_ok then
-    return cmp_nvim_lsp.default_capabilities()
-  end
+  local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  local capabilities = vim.tbl_deep_extend(
+    "force",
+    {},
+    vim.lsp.protocol.make_client_capabilities(),
+    has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+  )
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  }
+  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+  -- capabilities.textDocument.completion.completionItem.resolveSupport = {
+  --   properties = {
+  --     "documentation",
+  --     "detail",
+  --     "additionalTextEdits",
+  --   },
+  -- }
 
   return capabilities
 end

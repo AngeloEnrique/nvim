@@ -1,10 +1,11 @@
 return {
-  "mfussenegger/nvim-dap",  -- Debugger
+  "rcarriga/nvim-dap-ui", -- Debugger UIs
   dependencies = {
-    "rcarriga/nvim-dap-ui", -- Debugger UIs
+    "mfussenegger/nvim-dap",  -- Debugger
     "theHamsta/nvim-dap-virtual-text",
     "nvim-telescope/telescope-dap.nvim",
     "rcarriga/cmp-dap",
+    "nvim-neotest/nvim-nio",
   },
   keys = { { "<leader>d" } },
   config = function()
@@ -40,30 +41,29 @@ return {
     local dapui = require "dapui"
 
     dap.listeners.after.event_initialized["dapui_config"] = function()
-      require('dapui').open()
+      require("dapui").open()
     end
 
     dap.configurations.java = {
       {
-        name = "Debug Launch (2GB)";
-        type = 'java';
-        request = 'launch';
-        vmArgs = "" ..
-          "-Xmx2g "
+        name = "Debug Launch (2GB)",
+        type = "java",
+        request = "launch",
+        vmArgs = "" .. "-Xmx2g ",
       },
       {
-        name = "Debug Attach (8000)";
-        type = 'java';
-        request = 'attach';
-        hostName = "127.0.0.1";
-        port = 8000;
+        name = "Debug Attach (8000)",
+        type = "java",
+        request = "attach",
+        hostName = "127.0.0.1",
+        port = 8000,
       },
       {
-        name = "Debug Attach (5005)";
-        type = 'java';
-        request = 'attach';
-        hostName = "127.0.0.1";
-        port = 5005;
+        name = "Debug Attach (5005)",
+        type = "java",
+        request = "attach",
+        hostName = "127.0.0.1",
+        port = 5005,
       },
       {
         name = "My Custom Java Run Configuration",
@@ -82,11 +82,9 @@ return {
         -- If using the JDK9+ module system, this needs to be extended
         -- `nvim-jdtls` would automatically populate this property
         -- modulePaths = {},
-        vmArgs = "" ..
-          "-Xmx2g "
+        vmArgs = "" .. "-Xmx2g ",
       },
     }
-
 
     dapui.setup {
       expand_lines = true,
