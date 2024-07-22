@@ -63,7 +63,7 @@ return {
             },
             PackageInfoOutdatedVersion = { fg = colors.peach },
             CmpNormal = { bg = colors.mantle },
-            -- LspInlayHint = { bg = colors.none },
+            LspInlayHint = { fg = colors.surface1, bg = colors.none },
             -- InclineNormal = { bg = colors.mantle },
             -- InclineNormalNC = { bg = colors.surface0 },
           }

@@ -4,7 +4,7 @@ local FORMAT_ON_SAVE = false
 
 local JAVA_DAP_ACTIVE = true
 
-local border = "rounded"
+-- local border = "rounded"
 -- local protocol = require "vim.lsp.protocol"
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format {
@@ -22,13 +22,13 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 M.action = setmetatable({}, {
   __index = function(_, action)
     return function()
-      vim.lsp.buf.code_action({
+      vim.lsp.buf.code_action {
         apply = true,
         context = {
           only = { action },
           diagnostics = {},
         },
-      })
+      }
     end
   end,
 })
@@ -44,7 +44,7 @@ M.on_attach = function(client, bufnr)
     end
     -- client.server_capabilities.document_formatting = false
     vim.keymap.set("n", "<leader>ih", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
     end)
   end
   if client.name == "eslint" then
@@ -59,7 +59,7 @@ M.on_attach = function(client, bufnr)
   end
   if client.server_capabilities.inlayHintProvider then
     vim.keymap.set("n", "<leader>ih", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
     end)
   end
   if client.supports_method "textDocument/formatting" then
