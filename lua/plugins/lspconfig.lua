@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig", -- LSP
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "SmiteshP/nvim-navic", -- Breadcrumb
+    -- "SmiteshP/nvim-navic", -- Breadcrumb
     "nvimtools/none-ls.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",

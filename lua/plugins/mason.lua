@@ -28,6 +28,7 @@ return {
         "html",
         "jsonls",
         "lua_ls",
+        "angularls",
       },
     }
   end,

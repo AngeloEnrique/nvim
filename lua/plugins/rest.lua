@@ -1,105 +1,121 @@
 return {
-  "rest-nvim/rest.nvim",
-  ft = "http",
-  config = function()
-    local rest = require "rest-nvim"
-    rest.setup {
-      client = "curl",
-      env_file = ".env",
-      env_pattern = "\\.env$",
-      env_edit_command = "tabedit",
-      encode_url = true,
-      skip_ssl_verification = false,
-      custom_dynamic_variables = {},
-      logs = {
-        level = "info",
-        save = true,
-      },
-      result = {
-        split = {
-          horizontal = false,
-          in_place = false,
-          stay_in_current_window_after_split = true,
+  {
+    "rest-nvim/rest.nvim",
+    ft = "http",
+    enabled = false,
+    config = function()
+      local rest = require "rest-nvim"
+      rest.setup {
+        client = "curl",
+        env_file = ".env",
+        env_pattern = "\\.env$",
+        env_edit_command = "tabedit",
+        encode_url = true,
+        skip_ssl_verification = false,
+        custom_dynamic_variables = {},
+        logs = {
+          level = "info",
+          save = true,
         },
-        behavior = {
-          decode_url = true,
-          show_info = {
-            url = true,
-            headers = true,
-            http_info = true,
-            curl_command = true,
+        result = {
+          split = {
+            horizontal = false,
+            in_place = false,
+            stay_in_current_window_after_split = true,
           },
-          statistics = {
-            enable = true,
-            ---@see https://curl.se/libcurl/c/curl_easy_getinfo.html
-            stats = {
-              { "total_time",      title = "Time taken:" },
-              { "size_download_t", title = "Download size:" },
+          behavior = {
+            decode_url = true,
+            show_info = {
+              url = true,
+              headers = true,
+              http_info = true,
+              curl_command = true,
+            },
+            statistics = {
+              enable = true,
+              ---@see https://curl.se/libcurl/c/curl_easy_getinfo.html
+              stats = {
+                { "total_time",      title = "Time taken:" },
+                { "size_download_t", title = "Download size:" },
+              },
+            },
+            formatters = {
+              json = "jq",
+              html = function(body)
+                if vim.fn.executable "tidy" == 0 then
+                  return body, { found = false, name = "tidy" }
+                end
+                local fmt_body = vim.fn
+                    .system({
+                      "tidy",
+                      "-i",
+                      "-q",
+                      "--tidy-mark",
+                      "no",
+                      "--show-body-only",
+                      "auto",
+                      "--show-errors",
+                      "0",
+                      "--show-warnings",
+                      "0",
+                      "-",
+                    }, body)
+                    :gsub("\n$", "")
+
+                return fmt_body, { found = true, name = "tidy" }
+              end,
             },
           },
-          formatters = {
-            json = "jq",
-            html = function(body)
-              if vim.fn.executable "tidy" == 0 then
-                return body, { found = false, name = "tidy" }
-              end
-              local fmt_body = vim.fn
-                  .system({
-                    "tidy",
-                    "-i",
-                    "-q",
-                    "--tidy-mark",
-                    "no",
-                    "--show-body-only",
-                    "auto",
-                    "--show-errors",
-                    "0",
-                    "--show-warnings",
-                    "0",
-                    "-",
-                  }, body)
-                  :gsub("\n$", "")
-
-              return fmt_body, { found = true, name = "tidy" }
-            end,
+          keybinds = {
+            buffer_local = true,
+            prev = "H",
+            next = "L",
           },
         },
+        highlight = {
+          enable = true,
+          timeout = 750,
+        },
+        ---Example:
+        ---
+        ---```lua
+        ---keybinds = {
+        ---  {
+        ---    "<localleader>rr", "<cmd>Rest run<cr>", "Run request under the cursor",
+        ---  },
+        ---  {
+        ---    "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request",
+        ---  },
+        ---}
+        ---
+        ---```
+        ---@see vim.keymap.set
         keybinds = {
-          buffer_local = true,
-          prev = "H",
-          next = "L",
+          {
+            "<localleader>rr",
+            "<cmd>Rest run<cr>",
+            "Run request under the cursor",
+          },
+          {
+            "<localleader>rl",
+            "<cmd>Rest run last<cr>",
+            "Re-run latest request",
+          },
         },
-      },
-      highlight = {
-        enable = true,
-        timeout = 750,
-      },
-      ---Example:
-      ---
-      ---```lua
-      ---keybinds = {
-      ---  {
-      ---    "<localleader>rr", "<cmd>Rest run<cr>", "Run request under the cursor",
-      ---  },
-      ---  {
-      ---    "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request",
-      ---  },
-      ---}
-      ---
-      ---```
-      ---@see vim.keymap.set
-      keybinds = {
-        {
-          "<localleader>rr",
-          "<cmd>Rest run<cr>",
-          "Run request under the cursor",
-        },
-        {
-          "<localleader>rl",
-          "<cmd>Rest run last<cr>",
-          "Re-run latest request",
-        },
-      },
-    }
-  end,
+      }
+    end,
+  },
+  {
+    "mistweaverco/kulala.nvim",
+    ft = "http",
+    config = function()
+      local kulala = require "kulala"
+      kulala.setup()
+      vim.keymap.set("n", "<localleader>rr", kulala.run)
+      vim.keymap.set("n", "<localleader>ry", kulala.copy)
+      vim.keymap.set("n", "<localleader>rt", kulala.toggle_view)
+      vim.keymap.set("n", "<localleader>rn", kulala.jump_next)
+      vim.keymap.set("n", "<localleader>rp", kulala.jump_prev)
+    end,
+  },
 }

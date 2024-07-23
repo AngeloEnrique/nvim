@@ -93,7 +93,7 @@ M.capabilities = function()
   return capabilities
 end
 
-M.setup = function()
+M.setup = function(_)
   require "sixzen.lsp.servers"
   require "sixzen.lsp.mapping"
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

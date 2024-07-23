@@ -65,6 +65,12 @@ end
 vim.cmd [[let &t_Cs = "\e[4:3m"]]
 vim.cmd [[let &t_Ce = "\e[4:0m"]]
 -- doesn't work on iTerm2
+--
+vim.filetype.add {
+  extension = {
+    ["http"] = "http",
+  },
+}
 
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
@@ -107,9 +113,9 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
   pattern = "*",
 })
 
-vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-  pattern = { '*' },
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = { "*" },
   callback = function(_)
-    vim.cmd.setlocal 'nonumber'
+    vim.cmd.setlocal "nonumber"
   end,
 })
