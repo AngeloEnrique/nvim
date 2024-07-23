@@ -4,6 +4,8 @@ local FORMAT_ON_SAVE = false
 
 local JAVA_DAP_ACTIVE = true
 
+local lspUtils = require "sixzen.lsp.utils"
+
 -- local border = "rounded"
 -- local protocol = require "vim.lsp.protocol"
 local lsp_formatting = function(bufnr)
@@ -19,23 +21,12 @@ end
 -- if you want to set up formatting on save, you can use this as a callback
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-M.action = setmetatable({}, {
-  __index = function(_, action)
-    return function()
-      vim.lsp.buf.code_action {
-        apply = true,
-        context = {
-          only = { action },
-          diagnostics = {},
-        },
-      }
-    end
-  end,
-})
-
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.server_capabilities.document_formatting = false
+  -- if client.name == "tsserver" then
+  --   client.server_capabilities.document_formatting = false
+  -- end
+  if client.name == "angularls" then
+    client.server_capabilities.renameProvider = false
   end
   if client.name == "jdtls" then
     if JAVA_DAP_ACTIVE then
@@ -83,7 +74,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set({ "n" }, "<leader>cA", M.action.source, opts)
+  vim.keymap.set({ "n" }, "<leader>cA", lspUtils.action.source, opts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format { async = true }

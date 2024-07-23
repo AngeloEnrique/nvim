@@ -5,6 +5,7 @@ if not status then
 end
 
 local util = require "lspconfig.util"
+local lspUtils = require "sixzen.lsp.utils"
 local on_attach = require("sixzen.lsp").on_attach
 local capabilities = require("sixzen.lsp").capabilities()
 local python_capabilities = capabilities
@@ -250,6 +251,15 @@ local servers = {
               enableServerSideFuzzyMatch = true,
             },
           },
+          tsserver = {
+            globalPlugins = {
+              {
+                name = "@angular/language-server",
+                location = lspUtils.get_pkg_path("angular-language-server", "node_modules/@angular/language-server"),
+                enableForWorkspaceTypeScriptVersions = false,
+              },
+            },
+          },
         },
         javascript = {
           updateImportsOnFileMove = "always",
@@ -280,6 +290,31 @@ local servers = {
           },
         },
       },
+    }
+  end,
+  ["angularls"] = function()
+    local cmd = {
+      "ngserver",
+      "--stdio",
+      "--tsProbeLocations",
+      table.concat({
+        lspUtils.get_pkg_path("angular-language-server", "node_modules"),
+        vim.fn.getcwd() .. "/node_modules",
+      }, ","),
+      "--ngProbeLocations",
+      table.concat({
+        lspUtils.get_pkg_path("angular-language-server", "node_modules/@angular/language-server/node_modules"),
+        vim.fn.getcwd() .. "/node_modules",
+      }, ","),
+    }
+
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      cmd = cmd,
+      on_new_config = function(new_config, new_root_dir)
+        new_config.cmd = cmd
+      end,
     }
   end,
   -- ["tsserver"] = function()
