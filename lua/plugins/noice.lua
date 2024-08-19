@@ -48,10 +48,10 @@ return {
         popup = {
           border = "rounded",
         },
-        hover = {
-          border = "rounded",
-          position = { row = 2, col = 2 },
-        },
+        -- hover = {
+        --   border = "rounded",
+        --   position = { row = 2, col = 2 },
+        -- },
         mini = {
           timeout = 3000,
           position = { row = -2 },

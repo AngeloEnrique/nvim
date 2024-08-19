@@ -20,7 +20,7 @@ vim.keymap.set("n", "+", "<C-a>")
 vim.keymap.set("n", "-", "<C-x>")
 
 -- Paste without yank.
-vim.keymap.set("v", "<leader>p", '"_dP')
+-- vim.keymap.set("v", "<leader>p", '"_dp')
 
 -- Indent
 vim.keymap.set("v", "<", "<gv")
