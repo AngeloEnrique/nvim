@@ -57,6 +57,7 @@ return {
         custom_highlights = function(colors)
           return {
             StatusLine = { bg = colors.none },
+            TabLineFill = { bg = colors.none },
             TreesitterContextBottom = {
               sp = colors.surface0,
               style = {},

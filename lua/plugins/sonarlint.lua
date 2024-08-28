@@ -1,5 +1,6 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+  enabled = false,
   event = {
     "BufRead *.java",
     "BufRead *.js",
