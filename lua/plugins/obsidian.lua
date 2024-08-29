@@ -18,7 +18,7 @@ return {
     notes_subdir = "limbo",
     new_notes_location = "limbo",
     attachments = {
-      img_folder = "files",
+      img_folder = "img",
     },
     daily_notes = {
       template = "note",

@@ -168,6 +168,7 @@ local servers = {
     return {
       on_attach = on_attach,
       capabilities = capabilities,
+      filetypes = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "astro", "css" },
     }
   end,
   ["html"] = function()
