@@ -66,6 +66,7 @@ return {
   },
   {
     "kndndrj/nvim-dbee",
+    enabled = false,
     keys = { {
       "<leader><leader>de",
       function()
