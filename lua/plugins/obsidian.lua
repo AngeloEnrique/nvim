@@ -1,6 +1,13 @@
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
+  ft = "markdown",
+  keys = {
+    { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "Obsidian New note" },
+    { "<leader>;os", "<cmd>ObsidianSearch<cr>", desc = "Obsidian Search note" },
+    { "<leader>;of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Obsidian Files" },
+    { "<leader>oc", "<cmd>ObsidianTOC<cr>", desc = "Obsidian Content" },
+  },
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
@@ -8,7 +15,7 @@ return {
     workspaces = {
       {
         name = "Notes",
-        path = "~/obsidian-notes/",
+        path = "/mnt/c/Users/azapata/notes/",
       },
     },
     completion = {
@@ -24,26 +31,30 @@ return {
       template = "note",
     },
     mappings = {
-      -- Toggle check-boxes "obsidian done"
-      ["<leader>od"] = {
+      ["gf"] = {
+        action = function()
+          return require("obsidian").util.gf_passthrough()
+        end,
+        opts = { noremap = false, expr = true, buffer = true },
+      },
+      ["<leader>ot"] = {
         action = function()
           return require("obsidian").util.toggle_checkbox()
         end,
         opts = { buffer = true },
       },
-      -- Create a new newsletter issue
-      ["<leader>onn"] = {
-        action = function()
-          return require("obsidian").commands.new_note("Newsletter-Issue")
-        end,
-        opts = { buffer = true },
-      },
-      ["<leader>ont"] = {
-        action = function()
-          return require("obsidian").util.insert_template("Newsletter-Issue")
-        end,
-        opts = { buffer = true },
-      },
+      -- ["<leader>onn"] = {
+      --   action = function()
+      --     return require("obsidian").commands.new_note "Newsletter-Issue"
+      --   end,
+      --   opts = { buffer = true },
+      -- },
+      -- ["<leader>ont"] = {
+      --   action = function()
+      --     return require("obsidian").util.insert_template "Newsletter-Issue"
+      --   end,
+      --   opts = { buffer = true },
+      -- },
     },
     note_frontmatter_func = function(note)
       -- This is equivalent to the default frontmatter function.
