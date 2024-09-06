@@ -3,10 +3,10 @@ return {
   version = "*", -- recommended, use latest release instead of latest commit
   ft = "markdown",
   keys = {
-    { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "Obsidian New note" },
-    { "<leader>;os", "<cmd>ObsidianSearch<cr>", desc = "Obsidian Search note" },
+    { "<leader>on",  "<cmd>ObsidianNew<cr>",         desc = "Obsidian New note" },
+    { "<leader>;os", "<cmd>ObsidianSearch<cr>",      desc = "Obsidian Search note" },
     { "<leader>;of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Obsidian Files" },
-    { "<leader>oc", "<cmd>ObsidianTOC<cr>", desc = "Obsidian Content" },
+    { "<leader>oc",  "<cmd>ObsidianTOC<cr>",         desc = "Obsidian Content" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -22,6 +22,7 @@ return {
       nvim_cmp = true,
       min_chars = 2,
     },
+    ui = { enable = false },
     notes_subdir = "limbo",
     new_notes_location = "limbo",
     attachments = {
