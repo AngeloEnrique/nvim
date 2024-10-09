@@ -1,21 +1,35 @@
 return {
+  -- {
+  --   "nvim-tree/nvim-web-devicons",
+  --   event = "BufRead",
+  --   opts = {
+  --     override = {},
+  --     default = true,
+  --   },
+  -- }, -- File icons
   {
-    "nvim-tree/nvim-web-devicons",
-    event = "BufRead",
-    opts = {
-      override = {},
-      default = true,
+    "echasnovski/mini.icons",
+    opts = {},
+    lazy = true,
+    specs = {
+      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
     },
-  }, -- File icons
-  { "mbbill/undotree",   keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+  { "mbbill/undotree",      keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
   {
     "tpope/vim-dispatch",
     cmd = { "Make", "Dispatch" },
   },
-  { "tpope/vim-repeat",  event = "BufRead" },
-  { "tpope/vim-rhubarb", event = "BufRead" },
-  { "tpope/vim-dotenv",  event = "BufRead" },
-  { "tpope/vim-eunuch",  event = "BufRead" },
+  { "tpope/vim-repeat",     event = "BufRead" },
+  { "tpope/vim-rhubarb",    event = "BufRead" },
+  { "tpope/vim-dotenv",     event = "BufRead" },
+  { "tpope/vim-eunuch",     event = "BufRead" },
   { "kevinhwang91/nvim-bqf" },
   {
     "axelvc/template-string.nvim",
@@ -39,5 +53,5 @@ return {
       vim.keymap.set("n", "<leader>ta", "<cmd>ToggleAlternate<cr>")
     end,
   },
-  { "SmiteshP/nvim-navic", lazy = true }, -- Breadcrumb
+  { "SmiteshP/nvim-navic",      lazy = true }, -- Breadcrumb
 }

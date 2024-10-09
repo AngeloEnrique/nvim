@@ -104,6 +104,12 @@ local servers = {
       capabilities = capabilities,
     }
   end,
+  ["kulala_ls"] = function()
+    return {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end,
   ["dockerls"] = function()
     return {
       on_attach = on_attach,

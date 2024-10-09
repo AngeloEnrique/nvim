@@ -94,9 +94,9 @@ end
 M.setup = function(_)
   require "sixzen.lsp.servers"
   require "sixzen.lsp.mapping"
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    silent = true,
-  })
+  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  --   silent = true,
+  -- })
 end
 
 return M

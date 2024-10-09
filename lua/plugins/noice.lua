@@ -1,6 +1,5 @@
 return {
   "folke/noice.nvim",
-  enabled = false,
   event = "UIEnter",
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -39,19 +38,29 @@ return {
         lsp_doc_border = false,
       },
       throttle = 42,
+      routes = {
+        {
+          filter = {
+            event = "notify",
+            find = "No information available",
+          },
+          opts = { skip = true },
+        },
+      },
       views = {
         split = {
           enter = true,
           size = "25%",
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
-        popup = {
-          border = "rounded",
-        },
-        -- hover = {
-        --   border = "rounded",
-        --   position = { row = 2, col = 2 },
+        -- popup = {
+        -- border = "rounded",
         -- },
+        hover = {
+          -- border = "rounded",
+          -- position = { row = 2, col = 2 },
+          silent = true,
+        },
         mini = {
           timeout = 3000,
           position = { row = -2 },
@@ -64,9 +73,9 @@ return {
         confirm = {
           border = "none",
         },
-        cmdline = {
-          win_options = { winblend = 10 },
-        },
+        -- cmdline = {
+        --   win_options = { winblend = 10 },
+        -- },
       },
     }
   end,

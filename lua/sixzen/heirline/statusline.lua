@@ -236,7 +236,7 @@ local LSPActive = {
               return providers_for_methods
             end
 
-            for _, server in pairs(vim.lsp.get_clients{ bufnr = 0 }) do
+            for _, server in pairs(vim.lsp.get_clients { bufnr = 0 }) do
               if server.name ~= "null-ls" and server.name ~= "GitHub Copilot" and server.name ~= "emmet_ls" then
                 table.insert(names, server.name)
               end
@@ -291,14 +291,22 @@ local Ruler = {
 
 Ruler = utils.surround(surround_delimeter, "cyan", Ruler)
 
--- local ShowMode = {
---   condition = require("noice").api.status.mode.has,
+local ShowMode = {
+  condition = require("noice").api.status.mode.has,
+  {
+    condition = require("noice").api.status.mode.has,
+    utils.surround(surround_delimeter, "purple", {
+      provider = require("noice").api.status.mode.get,
+    }),
+    hl = { fg = "black" },
+  },
+}
+
+-- local ShowCommand = {
+--   condition = require("noice").api.status.command.has,
 --   {
---     condition = require("noice").api.status.mode.has,
---     utils.surround(surround_delimeter, "purple", {
---       provider = require("noice").api.status.mode.get,
---     }),
---     hl = { fg = "black" },
+--     provider = require("noice").api.status.command.get,
+--     hl = { fg = "purple" },
 --   },
 -- }
 
@@ -344,7 +352,9 @@ local GitDiff = {
       init = function(self)
         ---@diagnostic disable-next-line: undefined-field
         self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = (self.status_dict.added ~= 0 and self.status_dict.added ~= nil) or (self.status_dict.removed ~= 0 and self.status_dict.removed ~= nil) or (self.status_dict.changed ~= 0 and self.status_dict.changed ~= nil)
+        self.has_changes = (self.status_dict.added ~= 0 and self.status_dict.added ~= nil)
+            or (self.status_dict.removed ~= 0 and self.status_dict.removed ~= nil)
+            or (self.status_dict.changed ~= 0 and self.status_dict.changed ~= nil)
       end,
       {
         condition = function(self)
@@ -404,7 +414,9 @@ local GitDiff = {
       init = function(self)
         ---@diagnostic disable-next-line: undefined-field
         self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = (self.status_dict.added ~= 0 and self.status_dict.added ~= nil) or (self.status_dict.removed ~= 0 and self.status_dict.removed ~= nil) or (self.status_dict.changed ~= 0 and self.status_dict.changed ~= nil)
+        self.has_changes = (self.status_dict.added ~= 0 and self.status_dict.added ~= nil)
+            or (self.status_dict.removed ~= 0 and self.status_dict.removed ~= nil)
+            or (self.status_dict.changed ~= 0 and self.status_dict.changed ~= nil)
       end,
       {
         condition = function(self)
@@ -625,9 +637,11 @@ local DefaultStatusline = {
   Space,
   Diagnostics,
   Align,
+  -- ShowCommand,
+  -- Space,
   LSPActive,
   Space,
-  -- ShowMode,
+  ShowMode,
   Space,
   FileType,
   Space,
@@ -644,7 +658,9 @@ local InactiveStatusline = {
   Space,
   FileName,
   Align,
-  -- ShowMode,
+  -- ShowCommand,
+  -- Space,
+  ShowMode,
 }
 
 local SpecialStatusline = {
@@ -658,7 +674,9 @@ local SpecialStatusline = {
   Space,
   HelpFileName,
   Align,
-  -- ShowMode,
+  -- ShowCommand,
+  -- Space,
+  ShowMode,
 }
 
 M.StatusLines = {

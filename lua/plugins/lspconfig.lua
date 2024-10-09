@@ -23,20 +23,20 @@ return {
     --     vim.keymap.set("", "<leader>ls", require("lsp_lines").toggle, opts)
     --   end,
     -- },
-    {
-      "j-hui/fidget.nvim", -- LSP progress
-      dependencies = {
-        "rcarriga/nvim-notify",
-      },
-      opts = {
-        progress = {
-          notification_group = function(msg)
-            return msg.lsp_client.name
-          end,
-          ignore = { "null-ls", "copilot" }, -- List of LSP servers to ignore
-        },
-      },
-    },
+    -- {
+    --   "j-hui/fidget.nvim", -- LSP progress
+    --   dependencies = {
+    --     "rcarriga/nvim-notify",
+    --   },
+    --   opts = {
+    --     progress = {
+    --       notification_group = function(msg)
+    --         return msg.lsp_client.name
+    --       end,
+    --       ignore = { "null-ls", "copilot" }, -- List of LSP servers to ignore
+    --     },
+    --   },
+    -- },
   },
   main = "sixzen.lsp",
   config = true,

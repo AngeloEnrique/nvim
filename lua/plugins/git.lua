@@ -1,7 +1,35 @@
 return {
   {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader><leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader><leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+      { "<leader><leader>dc", "<cmd>DiffviewClose<cr>", desc = "Open Diffview" },
+    },
+  },
+  {
     "NeogitOrg/neogit",
-    enabled = true,
+    enabled = false,
     keys = { { "<leader><leader>ng", "<cmd>Neogit<CR>" } },
     dependencies = {
       {
