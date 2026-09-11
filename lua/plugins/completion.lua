@@ -328,7 +328,15 @@ return {
   {
     -- inspired by https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/blink-cmp.lua
     "saghen/blink.cmp",
-    dependencies = { "L3MON4D3/LuaSnip", "moyiz/blink-emoji.nvim", "Kaiser-Yang/blink-cmp-avante" },
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "moyiz/blink-emoji.nvim",
+      "Kaiser-Yang/blink-cmp-avante",
+      {
+        "mikavilpas/blink-ripgrep.nvim",
+        version = "*", -- use the latest stable version
+      },
+    },
     enabled = true,
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
@@ -359,7 +367,7 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "buffer", "snippets", "emoji",  "avante" },
+        default = { "lsp", "path", "buffer", "ripgrep", "snippets", "emoji", "avante" },
         per_filetype = {
           sql = { "dadbod" },
           -- optionally inherit from the `default` sources
@@ -367,6 +375,14 @@ return {
         },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+            opts = {},
+            max_items = 3,
+            min_keyword_length = 3,
+            score_offset = 3,
+          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
